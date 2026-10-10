@@ -4,6 +4,7 @@ import { siteMetadata } from '@/data/siteConfig'
 interface NodeFs {
   readFileSync: (filePath: string, encoding: string) => string
   existsSync: (filePath: string) => boolean
+  readdirSync: (dirPath: string, options?: { withFileTypes?: boolean }) => Array<{ name: string; isDirectory: () => boolean }>
 }
 
 interface NodePath {
@@ -151,6 +152,39 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
     return {
       passed: false,
       message: 'index.html must NOT include og:image or twitter:image until a suitable 1200x630 asset exists',
+    }
+  }
+
+  // 4. Grep src for forbidden person-title phrases: "Systems Builder" and "Systems & AI Engineer"
+  // (project category label "Systems & AI" is allowed)
+  const srcDir = path.resolve(cwd, 'src')
+  function scanDir(dir: string): string[] {
+    const hits: string[] = []
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+    for (const entry of entries) {
+      const fullPath = path.resolve(dir, entry.name)
+      if (entry.isDirectory()) {
+        hits.push(...scanDir(fullPath))
+      } else if (/\.(tsx?|jsx?|html|css)$/.test(entry.name)) {
+        if (entry.name === 'productionDeployment.test.ts') continue
+
+        const content = fs.readFileSync(fullPath, 'utf-8')
+        if (content.includes('Systems Builder')) {
+          hits.push(`Found "Systems Builder" in ${entry.name}`)
+        }
+        if (content.includes('Systems & AI Engineer')) {
+          hits.push(`Found "Systems & AI Engineer" in ${entry.name}`)
+        }
+      }
+    }
+    return hits
+  }
+
+  const forbiddenHits = scanDir(srcDir)
+  if (forbiddenHits.length > 0) {
+    return {
+      passed: false,
+      message: `Found forbidden person-title phrases in src: ${forbiddenHits.join(', ')}`,
     }
   }
 

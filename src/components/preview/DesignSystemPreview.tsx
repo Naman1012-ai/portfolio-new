@@ -52,7 +52,7 @@ export function DesignSystemPreview() {
             </div>
             <div>
               <Text variant="caption" tone="muted" className="mb-2">With Subtitle</Text>
-              <BrandLockup subtitle="Software Engineer · Systems & AI" />
+              <BrandLockup subtitle={siteProfile.title} />
             </div>
             <div>
               <Text variant="caption" tone="muted" className="mb-2">Minimal (No Monogram)</Text>

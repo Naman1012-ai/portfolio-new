@@ -62,7 +62,7 @@ export const aboutData: AboutData = {
     'My long-term ambition is to build useful, enduring software products and eventually found technology ventures grounded in rigorous engineering.',
   portrait: {
     assetFilename: 'profile.webp',
-    alt: 'Naman Prajapati — Software Engineer & Systems Builder',
+    alt: 'Naman Prajapati — Software & AI Engineer',
     caption: 'Computer Science & Engineering (AI & ML) · The NorthCap University',
   },
 }

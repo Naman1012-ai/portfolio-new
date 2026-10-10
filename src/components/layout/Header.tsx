@@ -6,7 +6,7 @@ import {
 import { BrandLockup } from '@/components/common/BrandLockup'
 import { Container } from '@/components/common/Container'
 import { ResumeAction } from '@/components/common/ResumeAction'
-import { navigationItems } from '@/data'
+import { navigationItems, siteProfile } from '@/data'
 import { useScrollCompact } from '@/hooks'
 import { useRouter } from '@/router'
 import { MobileMenu } from './MobileMenu'
@@ -71,7 +71,7 @@ export function Header() {
           <BrandLockup
             href="/"
             onClick={(e) => handleNavClick('#hero', e)}
-            subtitle="Systems & AI Engineer"
+            subtitle={siteProfile.title}
             className="shrink-0"
           />
 
@@ -120,7 +120,6 @@ export function Header() {
                   ? 'md:opacity-0 md:scale-95 md:pointer-events-none md:invisible md:absolute md:right-0'
                   : 'md:opacity-100 md:scale-100 md:pointer-events-auto md:visible'
               }`}
-              aria-hidden={!isCompact ? true : undefined}
             >
               <MobileMenu
                 isOpen={isMenuOpen}

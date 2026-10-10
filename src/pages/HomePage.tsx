@@ -27,7 +27,7 @@ import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { Link } from '@/router'
 
 export function HomePage() {
-  useDocumentTitle('Naman Prajapati — Software Engineer & Systems Builder')
+  useDocumentTitle(`${siteProfile.name} — ${siteProfile.title}`)
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
@@ -468,11 +468,11 @@ export function HomePage() {
             </div>
 
             <Heading as="h2" variant="h2" className="text-2xl sm:text-3xl font-bold text-neutral-950 mb-3">
-              Let&apos;s build something rigorous and impactful.
+              Let&apos;s talk about what you&apos;re building.
             </Heading>
 
             <Text variant="body" tone="secondary" className="max-w-xl mx-auto mb-8 text-neutral-600 leading-relaxed text-sm sm:text-base">
-              Available for software engineering internships, technical collaborations, and ambitious systems engineering projects. Feel free to reach out directly.
+              I&apos;m looking for software engineering internships and open to collaborating on product and AI projects. Email is the fastest way to reach me.
             </Text>
 
             {/* Primary Contact Actions */}

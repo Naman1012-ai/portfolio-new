@@ -3,7 +3,7 @@ import { Card } from '@/components/common/Card'
 import { Heading } from '@/components/common/Heading'
 import { Section } from '@/components/common/Section'
 import { Text } from '@/components/common/Text'
-import { aboutData, technicalCapabilities } from '@/data'
+import { aboutData, siteProfile, technicalCapabilities } from '@/data'
 import { resolveSafeAssetUrl } from '@/utils'
 
 export interface AboutSectionProps {
@@ -121,7 +121,7 @@ export function AboutSection({ className = '' }: AboutSectionProps) {
                     Naman Prajapati
                   </span>
                   <span className="text-xs text-neutral-500 font-mono block mt-0.5">
-                    Software & Systems Builder
+                    {siteProfile.title}
                   </span>
                 </div>
               </div>
