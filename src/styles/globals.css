@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-subdued: #f4f4f5;
+  --color-surface-hover: #f5f5f7;
+
+  --color-ink-primary: #09090b;
+  --color-ink-secondary: #52525b;
+  --color-ink-muted: #71717a;
+  --color-ink-faint: #a1a1aa;
+
+  --color-line-subtle: #f4f4f5;
+  --color-line-default: #e4e4e7;
+  --color-line-strong: #d4d4d8;
+
+  --color-accent: #0f172a;
+  --color-accent-subtle: #f1f5f9;
+  --color-focus: #0f172a;
+
+  --color-brand-lavender: #7c3aed;
+  --color-brand-lavender-subtle: #f5f3ff;
+  --color-brand-lavender-border: #ddd6fe;
+  --color-brand-lavender-muted: #6d28d9;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  --shadow-micro: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-subtle: 0 2px 4px -1px rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.02);
+  --shadow-cinematic: 0 20px 25px -5px rgba(0, 0, 0, 0.07), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  --shadow-cinematic-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px -3px rgba(15, 23, 42, 0.06);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-canvas);
+  color: var(--color-ink-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Accessibility: respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 3D Perspective & Spatial Depth utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Entrance reveal animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out both;
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Restrained horizontal shelf scrollbar */
+.shelf-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #e4e4e7 transparent;
+}
+
+.shelf-scrollbar::-webkit-scrollbar {
+  height: 5px;
+}
+
+.shelf-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.shelf-scrollbar::-webkit-scrollbar-thumb {
+  background: #e4e4e7;
+  border-radius: 9999px;
+}
+
+.shelf-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d8;
+}
+
