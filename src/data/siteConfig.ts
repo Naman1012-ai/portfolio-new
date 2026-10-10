@@ -5,7 +5,7 @@ export const siteMetadata: SiteMetadata = {
   description:
     'Personal portfolio of Naman Prajapati — Computer Science undergraduate building web platforms, practical AI applications, and embedded systems.',
   author: 'Naman Prajapati',
-  siteUrl: 'https://localhost:5173',
+  siteUrl: 'https://portfolio-new-one-liart.vercel.app',
 }
 
 export const navigationItems: NavItem[] = [

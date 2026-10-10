@@ -9,7 +9,7 @@
     "typecheck": "tsc -b --noEmit",
     "type-check": "tsc -b --noEmit",
     "lint": "oxlint",
-    "test": "tsx -e \"import { verifyContentAndAssetSystem, verifyDesignSystemTokens, verifyAssetPathResolution, verifyProjectUniverseAndCaseStudies, verifyExperienceAndCredentials, verifyCinematicMotionAnd3D, verifyArchetypePreviewSystem, verifyShelfSystem, verifyPersonalNarrativeAndCredibility, verifyContactFooterAndResume } from './src/tests'; const r = [verifyContentAndAssetSystem(), verifyDesignSystemTokens(), verifyAssetPathResolution(), verifyProjectUniverseAndCaseStudies(), verifyExperienceAndCredentials(), verifyCinematicMotionAnd3D(), verifyArchetypePreviewSystem(), verifyShelfSystem(), verifyPersonalNarrativeAndCredibility(), verifyContactFooterAndResume()]; console.log(r); if (r.some(x => !x.passed)) process.exit(1);\"",
+    "test": "tsx -e \"import { verifyContentAndAssetSystem, verifyDesignSystemTokens, verifyAssetPathResolution, verifyProjectUniverseAndCaseStudies, verifyExperienceAndCredentials, verifyCinematicMotionAnd3D, verifyArchetypePreviewSystem, verifyShelfSystem, verifyPersonalNarrativeAndCredibility, verifyContactFooterAndResume, verifyStickyHeaderAndMobileMenu, verifyProductionDeployment } from './src/tests'; const r = [verifyContentAndAssetSystem(), verifyDesignSystemTokens(), verifyAssetPathResolution(), verifyProjectUniverseAndCaseStudies(), verifyExperienceAndCredentials(), verifyCinematicMotionAnd3D(), verifyArchetypePreviewSystem(), verifyShelfSystem(), verifyPersonalNarrativeAndCredibility(), verifyContactFooterAndResume(), verifyStickyHeaderAndMobileMenu(), verifyProductionDeployment()]; console.log(r); if (r.some(x => !x.passed)) process.exit(1);\"",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -6,7 +6,7 @@ import type { SiteProfile } from '@/types'
 export const siteProfile: SiteProfile = {
   name: 'Naman Prajapati',
   preferredName: 'Naman',
-  title: 'Software Engineer & Systems Builder',
+  title: 'Software & AI Engineer',
   tagline: 'Building robust web platforms, practical AI systems, and embedded firmware prototypes.',
   bio: 'Computer Science & Engineering undergraduate at The NorthCap University specializing in AI/ML, full-stack web platforms, and embedded systems prototyping. Driven by product thinking, disciplined testing, and turning software ideas into real execution.',
   location: 'Gurugram, Haryana, India',
