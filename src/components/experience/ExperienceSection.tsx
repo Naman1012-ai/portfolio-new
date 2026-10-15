@@ -20,7 +20,7 @@ export function ExperienceSection({ className = '' }: ExperienceSectionProps) {
   const primaryExperience = experienceList[0]
 
   return (
-    <Section id="experience" spacing="lg" bordered className={className}>
+    <Section id="experience" spacing="lg" bordered reveal className={className}>
 
       {/* Section Header */}
       <div className="w-full max-w-3xl min-w-0 mb-10">

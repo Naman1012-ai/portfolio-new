@@ -8,110 +8,93 @@ export interface CredentialsCardProps {
 }
 
 /**
- * Editorial card highlighting verified academic foundations,
- * performance milestones, and completed industry internship.
- *
- * Prominently presents:
- * - B.Tech CSE (AI & ML), The NorthCap University
- * - First-year CGPA: 9.4
- * - Completed Web Development internship at InAmigos Foundation
+ * Compact, evidence-oriented summary card identifying primary verification sources
+ * backing academic standing, internship experience, and codebase implementations.
  */
 export function CredentialsCard({ className = '' }: CredentialsCardProps) {
   return (
     <Card
       variant="outlined"
       padding="md"
-      className={`border-neutral-200/90 bg-linear-to-b from-white to-neutral-50/50 shadow-micro space-y-5 ${className}`}
+      className={`border-neutral-200/90 bg-white shadow-micro space-y-4 ${className}`}
     >
       {/* Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-200/80 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 pb-3">
         <div className="flex items-center gap-2">
-          <Badge variant="lavender" size="sm">
-            VERIFIED FOUNDATIONS
+          <Badge variant="subtle" size="sm">
+            DOCUMENTATION
           </Badge>
           <span className="text-[11px] font-mono font-medium text-neutral-600 bg-neutral-100 px-2 py-0.5 rounded-xs border border-neutral-200/60">
-            ACADEMIC & INDUSTRY
+            PRIMARY EVIDENCE
           </span>
         </div>
-        <span className="text-xs font-mono text-neutral-500">
-          The NorthCap University · InAmigos Foundation
+        <span className="text-xs font-mono text-neutral-400">
+          The NorthCap University · InAmigos Foundation · Source Repositories
         </span>
       </div>
 
-      {/* Narrative Headline */}
+      {/* Narrative Header */}
       <div className="space-y-1">
         <Heading as="h4" variant="h4" className="text-base font-bold text-neutral-900">
-          Academic Foundations & Applied Engineering
+          Verification Records & Sources
         </Heading>
         <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-relaxed max-w-3xl">
-          Core computer science fundamentals, artificial intelligence specialization, and real-world web platform development grounded in verified institutional milestones.
+          Academic performance, internship experience, and engineering claims are grounded in institutional records, verified organization profiles, and inspectable codebases.
         </Text>
       </div>
 
-      {/* Prominent Verified Milestones Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-        {/* 1. Academic Program */}
-        <div className="p-4 bg-white border border-neutral-200/90 rounded-sm shadow-micro space-y-2 hover:border-neutral-300 transition-colors">
+      {/* Verification Standards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+        {/* 1. Academic Record */}
+        <div className="p-3.5 bg-neutral-50/70 border border-neutral-200/80 rounded-sm space-y-1.5">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
-              Degree Program
+              01 / Academic
             </span>
-            <Badge variant="subtle" size="sm">UNDERGRADUATE</Badge>
+            <Badge variant="subtle" size="sm">TRANSCRIPT</Badge>
           </div>
           <div>
-            <span className="text-sm font-bold text-neutral-950 block">
-              B.Tech CSE (AI & ML)
-            </span>
-            <span className="text-xs font-medium text-neutral-700 block mt-0.5">
+            <span className="text-xs font-bold text-neutral-950 block">
               The NorthCap University
             </span>
-            <span className="text-[11px] text-neutral-500 block mt-1 leading-normal">
-              Computer Science & Engineering specializing in Artificial Intelligence and Machine Learning
+            <span className="text-[11px] text-neutral-600 block mt-0.5 leading-normal">
+              Official university semester grade documentation and enrollment records confirming 9.4 first-year CGPA.
             </span>
           </div>
         </div>
 
-        {/* 2. Academic Performance */}
-        <div className="p-4 bg-white border border-neutral-200/90 rounded-sm shadow-micro space-y-2 hover:border-neutral-300 transition-colors">
+        {/* 2. Industry Experience */}
+        <div className="p-3.5 bg-neutral-50/70 border border-neutral-200/80 rounded-sm space-y-1.5">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
-              Academic Standing
+              02 / Internship
             </span>
-            <Badge variant="lavender" size="sm">FIRST YEAR</Badge>
+            <Badge variant="subtle" size="sm">VERIFIED</Badge>
           </div>
           <div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-xl font-bold font-mono text-neutral-950">
-                9.4
-              </span>
-              <span className="text-xs font-mono text-neutral-500">CGPA</span>
-            </div>
-            <span className="text-xs font-medium text-neutral-700 block mt-0.5">
-              First-Year Academic Performance
-            </span>
-            <span className="text-[11px] text-neutral-500 block mt-1 leading-normal">
-              Top-tier standing in computational logic, procedural programming, mathematics, and data structures
-            </span>
-          </div>
-        </div>
-
-        {/* 3. Completed Internship */}
-        <div className="p-4 bg-white border border-neutral-200/90 rounded-sm shadow-micro space-y-2 hover:border-neutral-300 transition-colors">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
-              Industry Experience
-            </span>
-            <Badge variant="success" size="sm">COMPLETED</Badge>
-          </div>
-          <div>
-            <span className="text-sm font-bold text-neutral-950 block">
-              Web Development Intern
-            </span>
-            <span className="text-xs font-medium text-neutral-700 block mt-0.5">
+            <span className="text-xs font-bold text-neutral-950 block">
               InAmigos Foundation
             </span>
-            <span className="text-[11px] text-neutral-500 block mt-1 leading-normal">
-              Delivered production web features, frontend integrations, and responsive interface workflows
+            <span className="text-[11px] text-neutral-600 block mt-0.5 leading-normal">
+              Completed Web Development internship verified through registered organization documentation.
+            </span>
+          </div>
+        </div>
+
+        {/* 3. Codebase Evidence */}
+        <div className="p-3.5 bg-neutral-50/70 border border-neutral-200/80 rounded-sm space-y-1.5">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
+              03 / Codebases
+            </span>
+            <Badge variant="subtle" size="sm">REPOSITORIES</Badge>
+          </div>
+          <div>
+            <span className="text-xs font-bold text-neutral-950 block">
+              Source Code & Test Suites
+            </span>
+            <span className="text-[11px] text-neutral-600 block mt-0.5 leading-normal">
+              Public GitHub repositories with automated test suites, commit histories, and laboratory bench test harnesses.
             </span>
           </div>
         </div>

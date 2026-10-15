@@ -8,7 +8,7 @@ export const howIBuildData: HowIBuildData = {
   badge: 'ENGINEERING JUDGMENT',
   heading: 'How I Build: Real Problems & Architectural Decisions',
   subheading:
-    'Concrete technical trade-offs, rejected alternatives, and lessons from genuine software and hardware projects.',
+    'Concrete technical trade-offs, rejected alternatives, and verified outcomes from genuine software and hardware projects.',
   entries: [
     {
       id: 'convia-idea-provenance',
@@ -39,6 +39,36 @@ export const howIBuildData: HowIBuildData = {
       outcome:
         'Fast, in-context message and discussion retrieval with zero layout jumps and strict membership privacy boundaries.',
       tags: ['State Management', 'Privacy Boundaries', 'UX Flow'],
+    },
+    {
+      id: 'docframe-local-vector-engine',
+      projectSlug: 'docframe',
+      projectTitle: 'DocFrame',
+      context: 'Developer Tool · Local-First Text-to-PDF Engine',
+      problem:
+        'Converting web documents to PDFs via browser window.print() breaks pagination control and header placement, while server-side conversion services introduce latency and transmit proprietary document text to external hosts.',
+      decision:
+        'Engineered an in-browser vector rendering pipeline utilizing jsPDF and virtual paper dimensions, calculating explicit pagination break coordinates and margin bleed in client-side memory without external network calls.',
+      rejectedAlternative:
+        'Server-side headless Chrome generation was rejected due to cold-start delay and data privacy risks; HTML canvas rasterization was rejected because it produces bloated, non-selectable pixelated PDFs.',
+      outcome:
+        'Zero-latency, 100% private document generation producing crisp, high-DPI vector PDFs entirely on the user device.',
+      tags: ['Local-First', 'PDF Geometry', 'Client-Side'],
+    },
+    {
+      id: 'resumetrices-schema-enforcement',
+      projectSlug: 'resumetrices',
+      projectTitle: 'ResumeTrices',
+      context: 'AI Workflow · Candidate Competency Parsing',
+      problem:
+        'Comparing raw resume text against vacancy criteria requires deterministic skill scoring and gap identification, but raw LLM generation is non-deterministic and prone to formatting variations.',
+      decision:
+        'Enforced structured JSON output schemas directly within Google Gemini prompt orchestrations, piping results through strict Pydantic/TypeScript validation models before passing extracted competencies to the scoring calculator.',
+      rejectedAlternative:
+        'Free-form natural language generation coupled with regex parsing was rejected because phrasing variations caused silent parsing drops, corrupted scoring matrices, and unhandled runtime exceptions.',
+      outcome:
+        'Deterministic, type-safe scoring pipelines with predictable data models, graceful fallback handling, and zero downstream parsing failures.',
+      tags: ['AI Prompt Schema', 'Type Safety', 'Robust Parsing'],
     },
     {
       id: 'nidar-bench-vs-spec',

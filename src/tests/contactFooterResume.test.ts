@@ -194,6 +194,29 @@ export function verifyContactFooterAndResume(): { passed: boolean; message: stri
     return { passed: false, message: 'Footer must preserve copyright and build metadata' }
   }
 
+  // 8. Task 5: Footer BrandLockup routing behavior (Phase 02.1 regression check)
+  if (typeof window !== 'undefined') {
+    window.location.pathname = '/projects/convia'
+  }
+  const footerDetailMarkup = renderToStaticMarkup(Footer())
+  if (!footerDetailMarkup.includes('href="/#hero"')) {
+    return {
+      passed: false,
+      message: 'Footer BrandLockup must link to "/#hero" when rendered on a project-detail route',
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.location.pathname = '/'
+  }
+  const footerHomeMarkup = renderToStaticMarkup(Footer())
+  if (!footerHomeMarkup.includes('href="#hero"')) {
+    return {
+      passed: false,
+      message: 'Footer BrandLockup must link to "#hero" when rendered on the home route',
+    }
+  }
+
   return {
     passed: true,
     message: 'All Contact, Footer, and Resume cleanup verification checks passed',

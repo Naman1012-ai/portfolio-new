@@ -145,3 +145,14 @@ export function getProjectPreviewUrl(project: Project): string | null {
   if (!filename) return null
   return resolveSafeAssetUrl(filename)
 }
+
+/**
+ * Safely resolves the optimized WebP asset URL for a project if available.
+ * Returns null if no verified WebP variant exists.
+ */
+export function getProjectWebpUrl(project: Project): string | null {
+  const filename = getProjectPreviewFilename(project)
+  if (!filename) return null
+  const webpFilename = filename.replace(/\.png$/i, '.webp')
+  return resolveSafeAssetUrl(webpFilename)
+}

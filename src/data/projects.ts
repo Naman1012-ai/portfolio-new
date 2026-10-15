@@ -26,7 +26,7 @@ export const projects: Project[] = [
     id: 'project-convia',
     slug: 'convia',
     title: 'Convia',
-    tagline: 'Collaborative Workspace — Where Ideas Converge into Action',
+    tagline: 'Collaborative Ideation & Technical Blueprint Platform',
     summary:
       'A structured collaborative workspace designed to help teams transition from scattered ideation to clear direction, MVP selection, and actionable execution.',
     description:
@@ -58,15 +58,24 @@ export const projects: Project[] = [
       approachArchitecture:
         'Convia employs a decoupled full-stack architecture. The frontend is built on React 19 and TypeScript with Tailwind CSS for high-density editorial interfaces. State synchronization utilizes Firebase Realtime Database with optimistic client updates for zero-lag collaboration. The backend Express service coordinates blueprint compilation and session orchestration.',
       keyFeatures: [
-        'Real-time collaborative idea submission and categorisation',
+        'Real-time collaborative idea submission, tagging, and category mapping',
         'Multi-criteria team voting mechanisms to surface high-leverage concepts',
-        'Threaded deliberation discussions tied directly to proposal nodes',
-        'Structured technical blueprint generator compiling ideas into implementation tasks',
+        'Context-scoped threaded deliberation tied directly to specific proposal nodes',
+        'Structured technical blueprint generator compiling prioritized ideas into sprint tasks',
       ],
+      technicalDecisions: [
+        'Selected Firebase Realtime Database over REST polling to achieve instantaneous multi-user vote synchronization and optimistic client feedback.',
+        'Scoped in-channel discussion history to active membership boundaries in Firebase Realtime Database, preventing pre-join message leakage and preserving privacy.',
+        'Preserved creator provenance metadata (author ID, creation timestamp, source proposal reference) on imported ideas to protect attribution across shared workspaces.',
+      ],
+      challengesTradeoffs:
+        'Handling concurrent state modifications when multiple team members vote on proposals simultaneously required transactional database operations rather than naive increments to prevent race conditions and vote count drift.',
       verificationTesting:
         'Active development repository with modular component separation, comprehensive TypeScript typing, and responsive layout testing.',
       currentStatusNote:
         'In active development in the local workspace. Core ideation, discussion threads, and blueprint generation workflows are operational.',
+      lessonsLearned:
+        'Designing real-time collaborative applications requires planning for eventual consistency, optimistic UI updates, and clear data provenance boundaries before scaling feature complexity.',
       previewAssetFilename: 'convia-preview.png',
     },
   },
@@ -76,7 +85,7 @@ export const projects: Project[] = [
     id: 'project-biolynk',
     slug: 'biolynk',
     title: 'BioLynk',
-    tagline: 'Healthcare Donor Coordination & Bio-Network Platform',
+    tagline: 'Healthcare Donor Coordination & Directory Platform',
     summary:
       'A healthcare networking platform prototype for donor coordination, profile management, and verified communication.',
     description:
@@ -109,13 +118,22 @@ export const projects: Project[] = [
         'Engineered with Next.js and TypeScript, utilizing Tailwind CSS and Radix UI primitives for accessible component states. Employs Firebase for backend authentication and real-time medical donor record indexing.',
       keyFeatures: [
         'Role-based donor and recipient profile registration workflows',
-        'Structured donor availability and category indexing',
+        'Structured donor availability and biological category indexing',
         'Accessible interface components with keyboard and screen reader support',
+        'Direct verified communication initiation for urgent clinical matches',
       ],
+      technicalDecisions: [
+        'Built interface components on Radix UI primitives to ensure strict WCAG compliance, keyboard focus trapping, and screen reader announcements for critical alerts.',
+        'Structured Firestore collections with explicit security rules separating sensitive personal identifiers from public availability indexes.',
+      ],
+      challengesTradeoffs:
+        'Balancing donor privacy with urgent contact speed: direct phone numbers are protected behind verified account requests rather than displayed in unauthenticated directory searches.',
       verificationTesting:
         'Prototype workflows validated through role registration, mock donor profile queries, and responsive layout verification across desktop and mobile devices.',
       currentStatusNote:
         'Functional platform prototype with public repository on GitHub.',
+      lessonsLearned:
+        'Healthcare software demands higher accessibility and defensive data modeling standards because interfaces are frequently operated under stress on mobile networks.',
       previewAssetFilename: 'biolynk-preview.png',
     },
   },
@@ -125,7 +143,7 @@ export const projects: Project[] = [
     id: 'project-resumetrices',
     slug: 'resumetrices',
     title: 'ResumeTrices',
-    tagline: 'AI-Powered Resume Analysis & ATS Intelligence Platform',
+    tagline: 'AI Resume Parser & ATS Competency Evaluation Engine',
     summary:
       'Full-stack candidate resume evaluation platform parsing PDF CVs and analyzing candidate competence against job descriptions.',
     description:
@@ -156,14 +174,25 @@ export const projects: Project[] = [
       approachArchitecture:
         'Full-stack architecture with a Node.js and Express backend. Employs pdf-parse for text extraction, coupled with Google Gemini API and OpenAI API orchestrations to extract and compare competencies.',
       keyFeatures: [
-        'Client-side PDF upload with backend text extraction and normalization',
+        'Client-side PDF upload with backend stream parsing and text normalization',
         'Role compatibility scoring based on structured requirement extraction',
         'Actionable skill gap analysis highlighting missing technical prerequisites',
+        'Side-by-side keyword relevance breakdown against target job postings',
       ],
+      technicalDecisions: [
+        'Enforced structured JSON output schemas in LLM prompts to guarantee deterministic score extraction without fragile regular expressions.',
+        'Implemented dual-provider fallback between Google Gemini and OpenAI compatibility endpoints to prevent service disruptions from API rate limits.',
+      ],
+      challengesTradeoffs:
+        'Multi-column PDF resumes often produce jumbled text streams in basic extractors; added bounding-box normalization routines to reconstruct logical reading order before prompt assembly.',
       verificationTesting:
         'Parsing pipeline tested with structured sample PDF resumes, vacancy descriptions, and API prompt response validations.',
       currentStatusNote:
         'Prototype system with verified public GitHub repository.',
+      demoNotice:
+        'Hosted on Render free tier. The service spins down after inactivity, so the initial request may take a moment to wake up.',
+      lessonsLearned:
+        'LLM responses in user-facing pipelines must be strictly schema-validated: prompt engineering alone cannot guarantee type-safe downstream execution without defensive parser guards.',
       previewAssetFilename: 'resumetrices-preview.png',
     },
   },
@@ -173,7 +202,7 @@ export const projects: Project[] = [
     id: 'project-energy-risk',
     slug: 'global-energy-risk-monitor',
     title: 'Global Energy Risk Monitor',
-    tagline: 'Geopolitical Energy Risk Analytics & Intelligence Platform',
+    tagline: 'Energy Security Vulnerability & Trade Dependency Analytics',
     summary:
       'An intelligence platform analyzing geopolitical energy-security risks, supply-chain vulnerabilities, and trade dependencies across countries and regions.',
     description:
@@ -204,13 +233,22 @@ export const projects: Project[] = [
         'High-performance computational modules written in C++ for processing energy trade graphs and computing dependency coefficients, integrated with Node.js data processing pipelines for structured analytics.',
       keyFeatures: [
         'Geopolitical risk modeling based on trade flow dependency indices',
-        'Infrastructure vulnerability tracking across regional corridors',
+        'Infrastructure vulnerability tracking across regional transit corridors',
+        'Simulation of supply disruption scenarios and strategic reserve depletion curves',
         'Structured analytical summaries for energy security assessment',
       ],
+      technicalDecisions: [
+        'Delegated high-throughput graph calculations and vulnerability coefficients to compiled C++ for maximum computational performance.',
+        'Used Node.js for ingestion, JSON formatting, and report orchestration, keeping computational logic cleanly decoupled from I/O.',
+      ],
+      challengesTradeoffs:
+        'Harmonizing disparate international datasets with incompatible volume metrics (barrels of oil equivalent vs cubic meters of natural gas) required developing uniform conversion constants.',
       verificationTesting:
         'Data ingestion and risk index computations verified against test trade dependency datasets and pipeline incident scenario matrices.',
       currentStatusNote:
         'Analytical software prototype with verified public GitHub repository.',
+      lessonsLearned:
+        'Splitting computational tasks between compiled languages (C++) and runtime environments (Node.js) yields both execution speed and developer agility when modeling complex systems.',
       previewAssetFilename: 'energy-risk-preview.png',
     },
   },
@@ -220,7 +258,7 @@ export const projects: Project[] = [
     id: 'project-docframe',
     slug: 'docframe',
     title: 'DocFrame',
-    tagline: 'High-Performance Local-First Text-to-PDF Engine',
+    tagline: 'Local-First Browser Document Editor & Vector PDF Engine',
     summary:
       'Client-side document rendering and PDF export web application converting Markdown, DOCX, and HTML into structured, printable vector documents.',
     description:
@@ -252,14 +290,22 @@ export const projects: Project[] = [
         'Client-side rendering pipeline utilizing React 19, TypeScript, and Vite. Leverages jsPDF and PDF.js to build vector page representations directly in browser memory without sending document data to external servers.',
       keyFeatures: [
         'Local-first client-side architecture with zero remote document transmission',
-        'Discrete-sheet pagination with print bleed and margin controls',
-        'Multi-column layout support for technical documentation and reports',
+        'Discrete-sheet pagination with print bleed, header/footer, and margin controls',
+        'Multi-column layout support for technical documentation and research briefs',
         'Client-side AI document transformation support with configurable providers',
       ],
+      technicalDecisions: [
+        'Adopted pure vector rendering with jsPDF rather than canvas rasterization, producing crisp selectable text, small file sizes, and high-DPI print clarity.',
+        'Architected a custom virtual pagination engine that calculates element heights and split boundaries directly against target paper dimensions.',
+      ],
+      challengesTradeoffs:
+        'Splitting complex DOM subtrees (such as nested tables and syntax-highlighted code blocks) across page boundaries without clipping content or breaking styling required custom tree-slicing logic.',
       verificationTesting:
         'Production-ready codebase with unit tests, strict TypeScript types, and verified public repository.',
       currentStatusNote:
         'Production release maintained with verified public repository on GitHub.',
+      lessonsLearned:
+        'Local-first software eliminates server latency and privacy concerns, but shifts layout calculation and memory management entirely into client-side engineering.',
       previewAssetFilename: 'docframe-preview.png',
     },
   },
@@ -269,7 +315,7 @@ export const projects: Project[] = [
     id: 'project-quiz-master',
     slug: 'quiz-master',
     title: 'Quiz Master',
-    tagline: 'Modular CLI Quiz Engine with Real-Time Timer',
+    tagline: 'Modular Terminal Quiz Engine with Non-Blocking Timer',
     summary:
       'A modular command-line interface quiz application written in C with an asynchronous countdown timer and persistent file-based data storage.',
     description:
@@ -300,14 +346,22 @@ export const projects: Project[] = [
         'Modular procedural C architecture cleanly separating authentication routines, question bank parsers, asynchronous timer interrupt loops, and file I/O operations.',
       keyFeatures: [
         'Multi-user authentication and account record management',
-        'Non-blocking real-time countdown timer per question',
+        'Non-blocking real-time countdown timer per question with live terminal updates',
         'Persistent high-score leaderboard tracking via formatted file storage',
-        'Subject-specific question categorisation',
+        'Subject-specific question categorisation and randomized selection',
       ],
+      technicalDecisions: [
+        'Decoupled procedural routines into distinct compilation units (auth, quiz, timer, file I/O) with header contracts to avoid monolithic code sprawl.',
+        'Implemented non-blocking keyboard polling loops to detect user keypresses without halting the elapsed time display.',
+      ],
+      challengesTradeoffs:
+        'Handling terminal input buffer modes across different operating systems required configuring terminal attributes carefully to avoid blocking stdin during active timers.',
       verificationTesting:
         'Console-level boundary testing for non-blocking timer interrupts, question file parsers, and persistent user score serialization.',
       currentStatusNote:
         'Completed console engineering project with verified public GitHub repository.',
+      lessonsLearned:
+        'Procedural systems programming in C instills rigorous discipline regarding memory layout, manual buffer management, and platform-specific terminal I/O.',
       previewAssetFilename: 'quiz-master-preview.png',
     },
   },
@@ -317,7 +371,7 @@ export const projects: Project[] = [
     id: 'project-atm-machine',
     slug: 'atm-machine',
     title: 'ATM Machine',
-    tagline: 'Terminal-Based Banking & Transaction Simulation',
+    tagline: 'Terminal Banking Simulation & Transaction Audit System',
     summary:
       'A robust terminal-based Automated Teller Machine simulation built in C with secure PIN masking and persistent file-based transaction logging.',
     description:
@@ -348,14 +402,22 @@ export const projects: Project[] = [
         'Procedural C system utilizing terminal escape handling for masked credential input, strict balance boundary validation, and structured file I/O for account balance persistence.',
       keyFeatures: [
         'Automated 6-digit unique account number generation',
-        'Deposit, withdrawal, and transfer validation with boundary checks',
-        'Masked PIN entry for terminal-based privacy',
-        'Persistent transaction audit history logging',
+        'Deposit, withdrawal, and transfer validation with balance boundary guards',
+        'Masked PIN entry for terminal-based privacy protection',
+        'Persistent transaction audit history logging to sequential records',
       ],
+      technicalDecisions: [
+        'Enforced atomic account updates: account files are validated and flushed to disk only when transactions pass balance and authorization guards.',
+        'Constructed custom input sanitizers to prevent buffer overflow and input loop locks when non-numeric values are passed to numeric prompts.',
+      ],
+      challengesTradeoffs:
+        'Preventing race conditions or file corruption during rapid balance updates required strict open-read-modify-write-close cycles on record files.',
       verificationTesting:
         'Simulated transaction test suite evaluating balance boundary guards, PIN masking escape characters, and audit log file formatting.',
       currentStatusNote:
         'Completed educational engineering project with verified public GitHub repository.',
+      lessonsLearned:
+        'Transactional stability in stateful software is fundamentally governed by input sanitization at the interface and atomic commit semantics at the storage layer.',
       previewAssetFilename: 'atm-machine-preview.png',
     },
   },
@@ -392,14 +454,23 @@ export const projects: Project[] = [
       approachArchitecture:
         'Standard C++ implementation structured around Book, IssuedBook, and Customer classes, utilizing standard library sequence containers and stream I/O.',
       keyFeatures: [
-        'Book cataloging, search, and availability tracking',
+        'Book cataloging, search, and real-time availability tracking',
         'Customer registration and circulation record association',
-        'Book checkout and return validation with date recording',
+        'Book checkout and return validation with date recording and overdue logic',
+        'Clean separation between data entities and user interface menus',
       ],
+      technicalDecisions: [
+        'Encapsulated domain entities into distinct classes with strict accessor/mutator validation to prevent invalid state transitions (e.g. issuing an already-borrowed book).',
+        'Utilized STL sequence containers for in-memory record storage, ensuring type safety and clean iterator semantics.',
+      ],
+      challengesTradeoffs:
+        'Managing cross-entity relationships (associating specific customer records with borrowed book instances) in memory without introducing dangling pointers or circular references.',
       verificationTesting:
         'OOP model verification testing member circulation limits, container insertions, and stream-based book serialization.',
       currentStatusNote:
         'Completed console application in verified local codebase.',
+      lessonsLearned:
+        'Sound object-oriented design requires drawing clear boundaries between domain state, relational associations, and input/output formatting.',
       previewAssetFilename: 'library-system-preview.png',
     },
   },
@@ -430,14 +501,23 @@ export const projects: Project[] = [
       approachArchitecture:
         'FastAPI asynchronous backend service in Python. Leverages Google Gemini API for natural language understanding and SQLAlchemy ORM for conversation session and message persistence.',
       keyFeatures: [
-        'Asynchronous conversational endpoints with FastAPI',
+        'Asynchronous conversational REST endpoints implemented in FastAPI',
         'Relational chat session history and message storage with SQLAlchemy',
         'Multilingual prompt engineering pipeline with Google Gemini API',
+        '241 automated unit and integration tests covering sessions, persistence, and error handling',
       ],
+      technicalDecisions: [
+        'Designed stateless conversation endpoints that reconstruct conversational context dynamically from SQLAlchemy records, enabling server horizontal scaling.',
+        'Separated language detection from reasoning logic to ensure prompt instructions retain consistent context regardless of input language.',
+      ],
+      challengesTradeoffs:
+        'Managing external API latency during multi-turn exchanges: built asynchronous request pipelines to prevent thread blocking during model inference.',
       verificationTesting:
         '241 automated unit and integration tests written with Pytest validating endpoint response formats, session persistence, and error handling.',
       currentStatusNote:
         'Tested backend prototype validated with 241 automated unit test suites.',
+      lessonsLearned:
+        'Reliable AI engineering requires treating external model providers as unpredictable third-party dependencies, validating inputs with strict Pydantic schemas and mocking API responses in automated test suites.',
     },
   },
 
@@ -477,12 +557,20 @@ export const projects: Project[] = [
         'Dual-core RP2040 firmware task allocation for deterministic timing',
         'ELRS / CRSF telemetry protocol decoding and packet verification',
         'I2C/SPI sensor acquisition pipeline for inertial measurement units',
-        'Custom hardware pinout mapping and bench test harnesses',
+        'Custom hardware pinout mapping and laboratory bench test harnesses',
       ],
+      technicalDecisions: [
+        'Allocated low-latency PID sensor reading loops strictly to Core 0 while isolating serial communication and telemetry decoding to Core 1, eliminating loop jitter.',
+        'Implemented CRC checksum validation on all CRSF packets to discard corrupted serial bytes before triggering flight command updates.',
+      ],
+      challengesTradeoffs:
+        'High electrical noise from motor speed controllers on test benches caused I2C bus lockups; resolved with hardware pull-up tuning and software bus recovery timeouts.',
       verificationTesting:
         'Bench testing and hardware-in-the-loop validation conducted on physical RP2040 breadboards and quadcopter frames.',
       currentStatusNote:
         'Hardware prototype in active testing. Firmware stabilization and receiver communication logic verified on test bench.',
+      lessonsLearned:
+        'Embedded development demands strict separation between hard real-time control loops and asynchronous I/O to guarantee deterministic system safety.',
     },
   },
 ]

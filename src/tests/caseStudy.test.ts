@@ -8,12 +8,31 @@
  * - Category filter integrity across all project categories
  * - Truthfulness & evidence consistency (Convia stack, Chatbot 32 tests, etc.)
  */
+import * as React from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import {
   getAdjacentProjects,
   getProjectBySlug,
   projects,
 } from '@/data'
-import { parsePath } from '@/router'
+import { ProjectDetailPage } from '@/pages'
+import { parsePath, RouterProvider } from '@/router'
+
+;(globalThis as unknown as { React: typeof React }).React = React
+
+if (typeof (globalThis as unknown as { window?: unknown }).window === 'undefined') {
+  ;(globalThis as unknown as { window: unknown }).window = {
+    location: { pathname: '/', hash: '' },
+    history: { pushState: () => {}, replaceState: () => {} },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    scrollTo: () => {},
+    requestAnimationFrame: (cb: (time: number) => void) => setTimeout(cb, 0),
+    cancelAnimationFrame: (id: number) => clearTimeout(id),
+    innerWidth: 1280,
+    scrollY: 0,
+  }
+}
 
 export function verifyProjectUniverseAndCaseStudies(): { passed: boolean; message: string } {
   // 1. Verify 10 approved projects exist
@@ -259,6 +278,88 @@ export function verifyProjectUniverseAndCaseStudies(): { passed: boolean; messag
   const notFoundRoute = parsePath('/unknown-path', '')
   if (notFoundRoute.route !== 'not-found') {
     return { passed: false, message: 'parsePath failed for unknown route' }
+  }
+
+  // 11. Cold-start latency disclosure for ResumeTrices
+  const resumetricesCaseStudy = resumetrices?.caseStudy
+  if (!resumetricesCaseStudy?.demoNotice) {
+    return {
+      passed: false,
+      message: 'ResumeTrices case study must define demoNotice explaining free-tier spin-down behavior',
+    }
+  }
+  if (!resumetricesCaseStudy.demoNotice.includes('Render') || !resumetricesCaseStudy.demoNotice.includes('free tier')) {
+    return {
+      passed: false,
+      message: 'ResumeTrices demoNotice must identify hosting on Render free tier',
+    }
+  }
+  if (resumetricesCaseStudy.demoNotice.includes('50s') || resumetricesCaseStudy.demoNotice.includes('50 second')) {
+    return {
+      passed: false,
+      message: 'ResumeTrices demoNotice must not promise an unverified 50-second delay',
+    }
+  }
+
+  // 12. Render regression tests: adjacent navigation and subordinate demo notice
+  const nidarMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(ProjectDetailPage, { slug: 'nidar-vegapilot' })
+    )
+  )
+  if (nidarMarkup.includes('Adjacent project navigation')) {
+    return {
+      passed: false,
+      message: 'NIDAR / VegaPilot must not render an empty adjacent project navigation container',
+    }
+  }
+  if (nidarMarkup.includes('Previous Case Study') || nidarMarkup.includes('Next Case Study')) {
+    return {
+      passed: false,
+      message: 'NIDAR / VegaPilot must not render previous or next case study links',
+    }
+  }
+
+  const resumetricesMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(ProjectDetailPage, { slug: 'resumetrices' })
+    )
+  )
+  if (!resumetricesMarkup.includes('Adjacent project navigation')) {
+    return {
+      passed: false,
+      message: 'ResumeTrices must render adjacent project navigation',
+    }
+  }
+  if (!resumetricesMarkup.includes(resumetricesCaseStudy.demoNotice)) {
+    return {
+      passed: false,
+      message: 'ResumeTrices case study must render the verified demo notice below the live demo button',
+    }
+  }
+
+  const conviaMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(ProjectDetailPage, { slug: 'convia' })
+    )
+  )
+  if (!conviaMarkup.includes('Adjacent project navigation')) {
+    return {
+      passed: false,
+      message: 'Convia must render adjacent project navigation',
+    }
+  }
+  if (!conviaMarkup.includes('Next Case Study') || conviaMarkup.includes('Previous Case Study')) {
+    return {
+      passed: false,
+      message: 'Convia must render Next Case Study and omit Previous Case Study',
+    }
   }
 
   return {

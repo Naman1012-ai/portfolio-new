@@ -30,7 +30,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
   const existingSlugs = new Set(projects.map((p) => p.slug))
 
   return (
-    <Section id="how-i-build" spacing="lg" bordered className={className}>
+    <Section id="how-i-build" spacing="lg" bordered reveal className={className}>
       {/* Section Header */}
       <div className="w-full max-w-3xl min-w-0 mb-10">
         <div className="inline-flex items-center mb-3">

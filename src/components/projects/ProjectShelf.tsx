@@ -110,7 +110,7 @@ export function ProjectShelf({
 
   const isFlagship = cardVariant === 'flagship'
   const cardWidthClass = isFlagship
-    ? 'w-[320px] sm:w-[480px] lg:w-[540px] shrink-0'
+    ? 'w-[320px] sm:w-[480px] lg:w-[calc(50%-12px)] shrink-0'
     : 'w-[300px] sm:w-[350px] md:w-[390px] lg:w-[420px] shrink-0'
 
   return (
@@ -147,7 +147,13 @@ export function ProjectShelf({
 
         {/* Shelf Navigation Controls (Previous & Next) */}
         {projects.length > 0 && (
-          <div className="flex items-center gap-2 self-end sm:self-auto shrink-0" aria-label={`${title} navigation controls`}>
+          <div
+            className={`flex items-center gap-2 self-end sm:self-auto shrink-0 transition-opacity duration-150 ${
+              !canScrollLeft && !canScrollRight ? 'lg:opacity-0 lg:pointer-events-none' : 'opacity-100'
+            }`}
+            aria-label={`${title} navigation controls`}
+            aria-hidden={!canScrollLeft && !canScrollRight}
+          >
             <button
               type="button"
               onClick={() => scrollByDirection('left')}

@@ -51,11 +51,15 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                 Project Not Found
               </Heading>
               <Text variant="body" tone="secondary" className="text-sm text-neutral-600">
-                The project slug <code className="px-1.5 py-0.5 font-mono text-xs bg-neutral-100 rounded-xs text-neutral-800">{slug}</code> does not match any verified record in this portfolio.
+                {slug ? (
+                  <>The project slug <code className="px-1.5 py-0.5 font-mono text-xs bg-neutral-100 rounded-xs text-neutral-800">{slug}</code> does not match any verified record in this portfolio.</>
+                ) : (
+                  <>The requested project does not match any verified record in this portfolio.</>
+                )}
               </Text>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button
                 variant="primary"
                 size="md"
@@ -63,6 +67,13 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                 onClick={() => navigate('/#projects')}
               >
                 Return to All Projects
+              </Button>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => navigate('/')}
+              >
+                Return to Homepage
               </Button>
             </div>
 
@@ -121,7 +132,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             aria-label={project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems track' : 'Back to projects overview'}
           >
             <Icon name="arrow-left" size="xs" className="transition-transform duration-150 group-hover:-translate-x-0.5 motion-reduce:transform-none" />
-            <span>{project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems' : 'Back to Project Universe'}</span>
+            <span>{project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems' : 'Back to Selected Work'}</span>
           </Link>
         </div>
 
@@ -302,18 +313,74 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
               </section>
             )}
 
-            {/* 5. Verification & Testing Rigor */}
+            {/* 5. Key Technical Decisions */}
+            {caseStudy?.technicalDecisions && caseStudy.technicalDecisions.length > 0 && (
+              <section aria-labelledby="section-decisions">
+                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block">
+                  05 / TECHNICAL DECISIONS
+                </Text>
+                <Heading as="h2" variant="h2" id="section-decisions" className="text-2xl font-bold text-neutral-950 mb-4">
+                  Architectural Choices & Rationale
+                </Heading>
+                <ul className="space-y-2.5">
+                  {caseStudy.technicalDecisions.map((decision, idx) => (
+                    <li key={idx} className="flex items-start gap-3 p-3.5 rounded-sm bg-neutral-50/70 border border-neutral-200/80 text-xs sm:text-sm text-neutral-800 leading-relaxed">
+                      <span className="font-mono text-[10px] font-semibold text-neutral-600 bg-neutral-200/60 px-1.5 py-0.5 rounded-xs mt-0.5 shrink-0">
+                        DECISION 0{idx + 1}
+                      </span>
+                      <span>{decision}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/* 6. Challenges & Engineering Trade-Offs */}
+            {caseStudy?.challengesTradeoffs && (
+              <section aria-labelledby="section-challenges">
+                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block">
+                  06 / CHALLENGES & TRADE-OFFS
+                </Text>
+                <Heading as="h2" variant="h2" id="section-challenges" className="text-2xl font-bold text-neutral-950 mb-4">
+                  Technical Constraints & Compromises
+                </Heading>
+                <div className="p-4 bg-amber-50/40 border border-amber-200/70 rounded-sm">
+                  <Text variant="bodySm" tone="secondary" className="text-neutral-800 text-sm leading-relaxed">
+                    {caseStudy.challengesTradeoffs}
+                  </Text>
+                </div>
+              </section>
+            )}
+
+            {/* 7. Verification & Testing Rigor */}
             {caseStudy?.verificationTesting && (
               <section aria-labelledby="section-verification">
                 <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block">
-                  05 / VERIFICATION & TESTING
+                  07 / VERIFICATION & TESTING
                 </Text>
                 <Heading as="h2" variant="h2" id="section-verification" className="text-2xl font-bold text-neutral-950 mb-4">
                   Validation & Reliability
                 </Heading>
                 <div className="p-4 bg-emerald-50/50 border border-emerald-200/80 rounded-sm">
-                  <Text variant="bodySm" tone="secondary" className="text-emerald-900 text-sm leading-relaxed">
+                  <Text variant="bodySm" tone="secondary" className="text-emerald-950 text-sm leading-relaxed">
                     {caseStudy.verificationTesting}
+                  </Text>
+                </div>
+              </section>
+            )}
+
+            {/* 8. What I Learned */}
+            {caseStudy?.lessonsLearned && (
+              <section aria-labelledby="section-lessons">
+                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block">
+                  08 / WHAT I LEARNED
+                </Text>
+                <Heading as="h2" variant="h2" id="section-lessons" className="text-2xl font-bold text-neutral-950 mb-4">
+                  Key Engineering Takeaways
+                </Heading>
+                <div className="p-4 bg-neutral-50/80 border border-neutral-200/90 rounded-sm">
+                  <Text variant="bodySm" tone="secondary" className="text-neutral-800 text-sm leading-relaxed">
+                    {caseStudy.lessonsLearned}
                   </Text>
                 </div>
               </section>
@@ -366,22 +433,29 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             {/* Direct Action Links */}
             <div className="space-y-2 pt-2">
               {project.links?.live && (
-                <a
-                  href={project.links.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full"
-                >
-                  <Button
-                    variant="primary"
-                    size="md"
-                    rightIcon={<Icon name="arrow-up-right" size="xs" />}
-                    className="w-full justify-center"
-                    aria-label={`Open ${project.title} live deployment (opens in new tab)`}
+                <div className="space-y-1.5">
+                  <a
+                    href={project.links.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full"
                   >
-                    Open Live Demo
-                  </Button>
-                </a>
+                    <Button
+                      variant="primary"
+                      size="md"
+                      rightIcon={<Icon name="arrow-up-right" size="xs" />}
+                      className="w-full justify-center"
+                      aria-label={`Open ${project.title} live deployment (opens in new tab)`}
+                    >
+                      Open Live Demo
+                    </Button>
+                  </a>
+                  {caseStudy?.demoNotice && (
+                    <Text variant="caption" tone="muted" className="text-[11px] leading-relaxed block text-neutral-500 px-0.5">
+                      {caseStudy.demoNotice}
+                    </Text>
+                  )}
+                </div>
               )}
 
               {hasRepo && (
@@ -413,7 +487,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                   leftIcon={<Icon name="arrow-left" size="xs" />}
                   className="w-full justify-center"
                 >
-                  {project.track === 'robotics-autonomous' ? 'Robotics Track' : 'All Projects'}
+                  {project.track === 'robotics-autonomous' ? 'Robotics Track' : 'Selected Work'}
                 </Button>
               </Link>
             </div>
@@ -421,49 +495,51 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
         </div>
 
         {/* Previous & Next Project Navigation */}
-        <nav aria-label="Adjacent project navigation" className="mt-16 pt-8 border-t border-neutral-200">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {previous ? (
-              <Link
-                to={`/projects/${previous.slug}`}
-                className="group p-4 border border-neutral-200 hover:border-neutral-300 rounded-md transition-all duration-200 bg-white hover:shadow-subtle hover:-translate-y-0.5 motion-reduce:transform-none"
-                aria-label={`Previous project: ${previous.title}`}
-              >
-                <span className="text-[11px] font-mono uppercase text-neutral-400 block mb-1 flex items-center gap-1.5">
-                  <Icon name="arrow-left" size="xs" className="transition-transform duration-150 group-hover:-translate-x-0.5 motion-reduce:transform-none" />
-                  <span>Previous Case Study</span>
-                </span>
-                <span className="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700 transition-colors">
-                  {previous.title}
-                </span>
-                <span className="text-xs text-neutral-500 block mt-0.5 line-clamp-1 font-mono">
-                  {previous.category.replace('-', ' ')}
-                </span>
-              </Link>
-            ) : (
-              <div className="hidden sm:block" />
-            )}
+        {(previous || next) && (
+          <nav aria-label="Adjacent project navigation" className="mt-16 pt-8 border-t border-neutral-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {previous ? (
+                <Link
+                  to={`/projects/${previous.slug}`}
+                  className="group p-4 border border-neutral-200 hover:border-neutral-300 rounded-md transition-all duration-200 bg-white hover:shadow-subtle hover:-translate-y-0.5 motion-reduce:transform-none"
+                  aria-label={`Previous project: ${previous.title}`}
+                >
+                  <span className="text-[11px] font-mono uppercase text-neutral-400 block mb-1 flex items-center gap-1.5">
+                    <Icon name="arrow-left" size="xs" className="transition-transform duration-150 group-hover:-translate-x-0.5 motion-reduce:transform-none" />
+                    <span>Previous Case Study</span>
+                  </span>
+                  <span className="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700 transition-colors">
+                    {previous.title}
+                  </span>
+                  <span className="text-xs text-neutral-500 block mt-0.5 line-clamp-1 font-mono">
+                    {previous.category.replace('-', ' ')}
+                  </span>
+                </Link>
+              ) : (
+                <div className="hidden sm:block" />
+              )}
 
-            {next && (
-              <Link
-                to={`/projects/${next.slug}`}
-                className="group p-4 border border-neutral-200 hover:border-neutral-300 rounded-md transition-all duration-200 bg-white hover:shadow-subtle hover:-translate-y-0.5 motion-reduce:transform-none text-left sm:text-right"
-                aria-label={`Next project: ${next.title}`}
-              >
-                <span className="text-[11px] font-mono uppercase text-neutral-400 block mb-1 flex items-center justify-start sm:justify-end gap-1.5">
-                  <span>Next Case Study</span>
-                  <Icon name="arrow-right" size="xs" className="transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transform-none" />
-                </span>
-                <span className="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700 transition-colors">
-                  {next.title}
-                </span>
-                <span className="text-xs text-neutral-500 block mt-0.5 line-clamp-1 font-mono">
-                  {next.category.replace('-', ' ')}
-                </span>
-              </Link>
-            )}
-          </div>
-        </nav>
+              {next && (
+                <Link
+                  to={`/projects/${next.slug}`}
+                  className="group p-4 border border-neutral-200 hover:border-neutral-300 rounded-md transition-all duration-200 bg-white hover:shadow-subtle hover:-translate-y-0.5 motion-reduce:transform-none text-left sm:text-right"
+                  aria-label={`Next project: ${next.title}`}
+                >
+                  <span className="text-[11px] font-mono uppercase text-neutral-400 block mb-1 flex items-center justify-start sm:justify-end gap-1.5">
+                    <span>Next Case Study</span>
+                    <Icon name="arrow-right" size="xs" className="transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transform-none" />
+                  </span>
+                  <span className="text-sm font-semibold text-neutral-900 group-hover:text-neutral-700 transition-colors">
+                    {next.title}
+                  </span>
+                  <span className="text-xs text-neutral-500 block mt-0.5 line-clamp-1 font-mono">
+                    {next.category.replace('-', ' ')}
+                  </span>
+                </Link>
+              )}
+            </div>
+          </nav>
+        )}
       </Container>
     </article>
   )

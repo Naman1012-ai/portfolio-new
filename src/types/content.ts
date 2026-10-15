@@ -48,9 +48,13 @@ export interface ProjectCaseStudy {
   problemContext?: string
   approachArchitecture?: string
   keyFeatures?: string[]
+  technicalDecisions?: string[]
+  challengesTradeoffs?: string
   verificationTesting?: string
   currentStatusNote?: string
+  lessonsLearned?: string
   previewAssetFilename?: string
+  demoNotice?: string
 }
 
 export interface Project {

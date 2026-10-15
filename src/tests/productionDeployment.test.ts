@@ -1,5 +1,26 @@
+import * as React from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import { siteProfile } from '@/data/profile'
 import { siteMetadata } from '@/data/siteConfig'
+import { NotFoundPage, ProjectDetailPage } from '@/pages'
+import { RouterProvider } from '@/router'
+import { parsePath } from '@/router/context'
+
+;(globalThis as unknown as { React: typeof React }).React = React
+
+if (typeof (globalThis as unknown as { window?: unknown }).window === 'undefined') {
+  ;(globalThis as unknown as { window: unknown }).window = {
+    location: { pathname: '/', hash: '' },
+    history: { pushState: () => {}, replaceState: () => {} },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    scrollTo: () => {},
+    requestAnimationFrame: (cb: (time: number) => void) => setTimeout(cb, 0),
+    cancelAnimationFrame: (id: number) => clearTimeout(id),
+    innerWidth: 1280,
+    scrollY: 0,
+  }
+}
 
 interface NodeFs {
   readFileSync: (filePath: string, encoding: string) => string
@@ -31,11 +52,11 @@ function getNodeModules(): { fs: NodeFs; path: NodePath } | null {
  * 2. vercel.json exists, is valid JSON, and defines single SPA rewrite "/(.*)" -> "/index.html".
  * 3. index.html contains all required production SEO, OG, Twitter, canonical, and theme-color tags.
  * 4. index.html strictly excludes og:image and twitter:image.
- * 5. siteConfig siteUrl equals "https://portfolio-new-one-liart.vercel.app".
+ * 5. siteConfig siteUrl equals "https://namanprajapati-07.vercel.app".
  */
 export function verifyProductionDeployment(): { passed: boolean; message: string } {
   // 1. Check siteConfig.siteUrl
-  const expectedSiteUrl = 'https://portfolio-new-one-liart.vercel.app'
+  const expectedSiteUrl = 'https://namanprajapati-07.vercel.app'
   if (siteMetadata.siteUrl !== expectedSiteUrl) {
     return {
       passed: false,
@@ -143,19 +164,89 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
   }
 
   // Check Twitter tags
-  if (!indexHtml.includes('name="twitter:card" content="summary"')) {
-    return { passed: false, message: 'index.html must include meta name="twitter:card" content="summary"' }
+  if (!indexHtml.includes('name="twitter:card" content="summary_large_image"')) {
+    return { passed: false, message: 'index.html must include meta name="twitter:card" content="summary_large_image"' }
   }
 
-  // Exclude og:image and twitter:image
-  if (indexHtml.includes('og:image') || indexHtml.includes('twitter:image')) {
+  // Check Open Graph and Twitter image tags
+  const expectedImageUrl = `${expectedSiteUrl}/assets/convia-preview.png`
+  if (!indexHtml.includes(`property="og:image" content="${expectedImageUrl}"`)) {
     return {
       passed: false,
-      message: 'index.html must NOT include og:image or twitter:image until a suitable 1200x630 asset exists',
+      message: `index.html must include meta property="og:image" content="${expectedImageUrl}"`,
+    }
+  }
+  if (!indexHtml.includes(`name="twitter:image" content="${expectedImageUrl}"`)) {
+    return {
+      passed: false,
+      message: `index.html must include meta name="twitter:image" content="${expectedImageUrl}"`,
+    }
+  }
+  if (!indexHtml.includes('property="og:image:width" content="1618"') || !indexHtml.includes('property="og:image:height" content="972"')) {
+    return {
+      passed: false,
+      message: 'index.html must include og:image:width and og:image:height matching verified asset dimensions',
     }
   }
 
-  // 4. Grep src for forbidden person-title phrases: "Systems Builder" and "Systems & AI Engineer"
+  // 4. Verify 404 Routing and Unknown Route Parsing
+  const unknownRouteResult = parsePath('/some-unknown-path')
+  if (unknownRouteResult.route !== 'not-found' || unknownRouteResult.path !== '/some-unknown-path') {
+    return {
+      passed: false,
+      message: `parsePath('/some-unknown-path') must return route="not-found" with clean path, got ${JSON.stringify(unknownRouteResult)}`,
+    }
+  }
+
+  const invalidSlugResult = parsePath('/projects/non-existent-project')
+  if (invalidSlugResult.route !== 'project-detail' || invalidSlugResult.slug !== 'non-existent-project') {
+    return {
+      passed: false,
+      message: `parsePath('/projects/non-existent-project') must return route="project-detail" with slug, got ${JSON.stringify(invalidSlugResult)}`,
+    }
+  }
+
+  // 5. Verify Component Exports for 404 and Project Detail
+  if (typeof NotFoundPage !== 'function') {
+    return { passed: false, message: 'NotFoundPage component must be exported as a function' }
+  }
+  if (typeof ProjectDetailPage !== 'function') {
+    return { passed: false, message: 'ProjectDetailPage component must be exported as a function' }
+  }
+
+  // 6. Verify NotFoundPage and ProjectDetailPage static rendering & recovery actions
+  const notFoundMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(NotFoundPage, null)
+    )
+  )
+  if (!notFoundMarkup.includes('Page Not Found')) {
+    return { passed: false, message: 'NotFoundPage must render "Page Not Found"' }
+  }
+  if (!notFoundMarkup.includes('Return to Homepage')) {
+    return { passed: false, message: 'NotFoundPage must provide a "Return to Homepage" action' }
+  }
+
+  const invalidProjectMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(ProjectDetailPage, { slug: 'ghost-slug-test' })
+    )
+  )
+  if (!invalidProjectMarkup.includes('Project Not Found')) {
+    return { passed: false, message: 'Invalid project slug must render "Project Not Found"' }
+  }
+  if (!invalidProjectMarkup.includes('ghost-slug-test')) {
+    return { passed: false, message: 'Invalid project slug must display the specific invalid slug' }
+  }
+  if (!invalidProjectMarkup.includes('Return to All Projects') || !invalidProjectMarkup.includes('Return to Homepage')) {
+    return { passed: false, message: 'Invalid project detail must provide Return to All Projects and Return to Homepage actions' }
+  }
+
+  // 7. Grep src for forbidden person-title phrases: "Systems Builder" and "Systems & AI Engineer"
   // (project category label "Systems & AI" is allowed)
   const srcDir = path.resolve(cwd, 'src')
   function scanDir(dir: string): string[] {
@@ -190,6 +281,6 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
 
   return {
     passed: true,
-    message: 'All production deployment, index.html title/metadata, and vercel.json SPA rewrite checks passed',
+    message: 'All production deployment, social metadata, 404 routing, and vercel.json SPA rewrite checks passed',
   }
 }

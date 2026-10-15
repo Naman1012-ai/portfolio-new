@@ -58,18 +58,18 @@ export function useTilt3D<T extends HTMLElement = HTMLDivElement>(
   const containerRef = useRef<T | null>(null)
   const [state, setState] = useState<Tilt3DState>(DEFAULT_STATE)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
-    typeof window !== 'undefined'
+    typeof window !== 'undefined' && typeof window.matchMedia === 'function'
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false
   )
   const [isTouchDevice, setIsTouchDevice] = useState(() =>
-    typeof window !== 'undefined'
+    typeof window !== 'undefined' && typeof window.matchMedia === 'function'
       ? window.matchMedia('(pointer: coarse)').matches
       : false
   )
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     const handleMotionChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches)

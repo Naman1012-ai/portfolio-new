@@ -1,5 +1,5 @@
 import { Layout } from '@/components'
-import { HomePage, ProjectDetailPage } from '@/pages'
+import { HomePage, NotFoundPage, ProjectDetailPage } from '@/pages'
 import { RouterProvider, useRouter } from '@/router'
 
 function AppContent() {
@@ -7,8 +7,10 @@ function AppContent() {
 
   return (
     <Layout>
-      {route === 'project-detail' || route === 'not-found' ? (
+      {route === 'project-detail' ? (
         <ProjectDetailPage />
+      ) : route === 'not-found' ? (
+        <NotFoundPage />
       ) : (
         <HomePage />
       )}

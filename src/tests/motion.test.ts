@@ -1,7 +1,10 @@
 import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
+import { Section } from '@/components/common/Section'
 import { ConviaFlagshipCard } from '@/components/projects/ConviaFlagshipCard'
 import { ProjectCard } from '@/components/projects/ProjectCard'
+import { useParallaxDepth } from '@/hooks/useParallaxDepth'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { useTilt3D } from '@/hooks/useTilt3D'
 import { tokens } from '@/styles/tokens'
 
@@ -34,9 +37,17 @@ export function verifyCinematicMotionAnd3D(): VerificationResult {
     return { passed: false, message: 'transitionCinematic does not guard against prefers-reduced-motion' }
   }
 
-  // 4. Verify useTilt3D hook export
+  // 4. Verify hooks exports
   if (typeof useTilt3D !== 'function') {
     return { passed: false, message: 'useTilt3D is not exported as a functional hook' }
+  }
+
+  if (typeof useParallaxDepth !== 'function') {
+    return { passed: false, message: 'useParallaxDepth is not exported as a functional hook' }
+  }
+
+  if (typeof useScrollReveal !== 'function') {
+    return { passed: false, message: 'useScrollReveal is not exported as a functional hook' }
   }
 
   // 5. Verify component exports
@@ -46,6 +57,10 @@ export function verifyCinematicMotionAnd3D(): VerificationResult {
 
   if (typeof Card !== 'function') {
     return { passed: false, message: 'Card is not exported as a functional component' }
+  }
+
+  if (typeof Section !== 'function') {
+    return { passed: false, message: 'Section is not exported as a functional component' }
   }
 
   if (typeof ConviaFlagshipCard !== 'function') {
@@ -61,3 +76,4 @@ export function verifyCinematicMotionAnd3D(): VerificationResult {
     message: 'All Phase 06 Cinematic Motion, 3D Perspective & Micro-Interaction checks passed',
   }
 }
+

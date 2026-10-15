@@ -14,7 +14,8 @@ import {
   Section,
   Text,
 } from '@/components/common'
-import { AboutSection } from '@/components/about'
+import { HeroCinematicComposition } from '@/components/hero'
+import { AboutSection, CapabilityLedger } from '@/components/about'
 import { HowIBuildSection } from '@/components/howIBuild'
 import { ExperienceSection } from '@/components/experience'
 import { ProjectShelf } from '@/components/projects'
@@ -73,10 +74,14 @@ export function HomePage() {
 
   return (
     <div className="py-8 sm:py-12 md:py-16">
-      {/* 1. Hero Section */}
+      {/* 1. Hero Section — Cinematic Editorial Split */}
       <Container size="lg">
-        <Section id="hero" spacing="md" className="pt-2 sm:pt-4">
-          <div className="flex flex-col items-start w-full max-w-4xl min-w-0">
+        <Section id="hero" spacing="md" className="pt-2 sm:pt-4 overflow-hidden">
+          {/* Outer split grid: content left | composition right */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_44%] gap-8 lg:gap-12 items-center w-full">
+
+            {/* ── Left Column: editorial content ───────────────────────── */}
+            <div className="flex flex-col items-start w-full min-w-0 relative z-10">
             {/* Status Indicator */}
             <div className="inline-flex items-center mb-6 max-w-full animate-fade-in">
               <Badge variant="subtle" size="md" dot dotColor="bg-emerald-500" className="max-w-full text-left whitespace-normal shadow-micro">
@@ -88,24 +93,23 @@ export function HomePage() {
 
             {/* Core Positioning Headline */}
             <Heading as="h1" variant="display" className="tracking-tight text-neutral-950 font-bold mb-6 animate-fade-in-up animation-delay-100">
-              Product-minded engineer building at the intersection of software and AI.
+              Building full-stack web platforms, practical AI tools, and systems prototypes.
             </Heading>
 
             {/* Concise Supporting Introduction */}
             <Text variant="lead" tone="secondary" className="max-w-2xl text-neutral-600 mb-8 leading-relaxed animate-fade-in-up animation-delay-200">
-              Computer Science & Engineering undergraduate at The NorthCap University specializing in
-              full-stack web platforms, practical AI systems, and embedded prototyping.
+              Computer Science & Engineering undergraduate at The NorthCap University. Focused on end-to-end web architecture, structured LLM workflows, and test-validated software execution.
             </Text>
 
             {/* Calls to Action */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-1 w-full sm:w-auto animate-fade-in-up animation-delay-300">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-1 w-full sm:w-auto animate-fade-in-up animation-delay-300">
               <Button
                 variant="primary"
                 size="lg"
                 rightIcon={<Icon name="arrow-down" size="sm" />}
                 onClick={() => scrollToSection('projects')}
                 aria-label="Scroll to featured projects section"
-                className="w-full sm:w-auto justify-center"
+                className="w-full sm:w-auto shrink-0 justify-center whitespace-nowrap"
               >
                 Explore Selected Work
               </Button>
@@ -116,76 +120,33 @@ export function HomePage() {
                 rightIcon={<Icon name="arrow-right" size="sm" />}
                 onClick={() => scrollToSection('contact')}
                 aria-label="Scroll to contact section"
-                className="w-full sm:w-auto justify-center"
+                className="w-full sm:w-auto shrink-0 justify-center whitespace-nowrap"
               >
                 Get in Touch
               </Button>
 
-              <ResumeAction variant="hero" />
+              <ResumeAction variant="hero" className="inline-flex w-full sm:w-auto shrink-0" />
             </div>
 
-            {/* Engineering Capabilities Banner */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full mt-12 pt-8 border-t border-neutral-200 animate-fade-in-up animation-delay-400">
-              <div className="p-3 -m-3 rounded-sm border border-transparent hover:border-neutral-200/80 hover:bg-neutral-50/50 transition-all duration-200 space-y-1">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px]">
-                  01 / Web & Products
-                </Text>
-                <Heading as="h4" variant="h4" className="text-sm font-semibold text-neutral-900">
-                  Software & Products
-                </Heading>
-                <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-normal">
-                  React 19, TypeScript, Next.js, and accessible Tailwind UI applications.
-                </Text>
-              </div>
+            </div>{/* end left column */}
 
-              <div className="p-3 -m-3 rounded-sm border border-transparent hover:border-neutral-200/80 hover:bg-neutral-50/50 transition-all duration-200 space-y-1">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px]">
-                  02 / Practical AI
-                </Text>
-                <Heading as="h4" variant="h4" className="text-sm font-semibold text-neutral-900">
-                  AI-Assisted Tools
-                </Heading>
-                <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-normal">
-                  Gemini API integrations, prompt orchestration, and resume scoring.
-                </Text>
-              </div>
-
-              <div className="p-3 -m-3 rounded-sm border border-transparent hover:border-neutral-200/80 hover:bg-neutral-50/50 transition-all duration-200 space-y-1">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px]">
-                  03 / Backends & Data
-                </Text>
-                <Heading as="h4" variant="h4" className="text-sm font-semibold text-neutral-900">
-                  Backend & Data Systems
-                </Heading>
-                <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-normal">
-                  Python/FastAPI services, Node/Express, relational schemas, and C/C++ I/O.
-                </Text>
-              </div>
-
-              <div className="p-3 -m-3 rounded-sm border border-transparent hover:border-neutral-200/80 hover:bg-neutral-50/50 transition-all duration-200 space-y-1">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px]">
-                  04 / Systems Exploration
-                </Text>
-                <Heading as="h4" variant="h4" className="text-sm font-semibold text-neutral-900">
-                  Embedded Prototypes
-                </Heading>
-                <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-normal">
-                  RP2040 firmware and ELRS/CRSF telemetry bench-tested with university peers.
-                </Text>
-              </div>
+            {/* ── Right Column: cinematic visual composition (desktop) ───── */}
+            <div className="relative w-full hidden lg:block animate-fade-in animation-delay-200">
+              <HeroCinematicComposition />
             </div>
+
+          </div>{/* end split grid */}
+
+          {/* Mobile composition — below content, simplified static */}
+          <div className="relative w-full mt-6 lg:hidden overflow-hidden rounded-xl animate-fade-in animation-delay-300">
+            <HeroCinematicComposition />
           </div>
         </Section>
       </Container>
 
-      {/* 1.5. About Section */}
-      <Container size="lg">
-        <AboutSection />
-      </Container>
-
       {/* 2. Selected Projects Section — Netflix-Inspired Project Shelves */}
       <Container size="lg">
-        <Section id="projects" spacing="lg" bordered>
+        <Section id="projects" spacing="lg" bordered reveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 w-full min-w-0">
             <div className="w-full min-w-0 md:max-w-xl">
               <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2">
@@ -196,7 +157,7 @@ export function HomePage() {
               </Heading>
             </div>
             <Text variant="bodySm" tone="secondary" className="w-full min-w-0 md:max-w-md text-xs sm:text-sm">
-              Cinematic horizontal shelves featuring verified web platforms, systems analytics, and developer tooling in canonical sequence.
+              Full-stack platforms, practical AI integrations, and developer tools built with TypeScript, Python, and C/C++.
             </Text>
           </div>
 
@@ -301,7 +262,7 @@ export function HomePage() {
       {/* 2.5. Dedicated Track: Robotics & Autonomous Systems */}
       {nidarProject && (
         <Container size="lg">
-          <Section id="robotics" spacing="lg" bordered>
+          <Section id="robotics" spacing="lg" bordered reveal>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 w-full min-w-0">
               <div className="w-full min-w-0 md:max-w-xl">
                 <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2">
@@ -443,19 +404,29 @@ export function HomePage() {
         </Container>
       )}
 
-      {/* 2.8. How I Build — Real Problems & Architectural Decisions */}
+      {/* 3. About Section — Personal Narrative & Engineering Philosophy */}
+      <Container size="lg">
+        <AboutSection />
+      </Container>
+
+      {/* 4. Engineering Judgement — How I Build: Real Problems & Architectural Decisions */}
       <Container size="lg">
         <HowIBuildSection />
       </Container>
 
-      {/* 3. Experience, Academic Foundations & Credential Ledger */}
+      {/* 5. Capability Ledger — Verified Technical Proficiencies */}
+      <Container size="lg">
+        <CapabilityLedger />
+      </Container>
+
+      {/* 6. Experience, Academic Foundations & Verification Records */}
       <Container size="lg">
         <ExperienceSection />
       </Container>
 
-      {/* 4. Purposeful Closing CTA & Contact Section */}
+      {/* 7. Purposeful Closing CTA & Contact Section */}
       <Container size="lg">
-        <Section id="contact" spacing="lg">
+        <Section id="contact" spacing="lg" reveal>
           <Card
             variant="elevated"
             padding="lg"

@@ -201,7 +201,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
           <div className="flex items-center gap-2">
             <Link to={`/projects/${project.slug}`}>
               <Button
-                variant="secondary"
+                variant={project.flagship ? 'primary' : 'secondary'}
                 size="sm"
                 rightIcon={<Icon name="arrow-right" size="xs" />}
                 aria-label={`View ${project.title} case study`}

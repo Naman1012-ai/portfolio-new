@@ -1,5 +1,27 @@
+import * as React from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import { getFeaturedProjects, getRoboticsTrackProject } from '@/data'
 import { ProjectShelf } from '@/components/projects'
+import { HomePage } from '@/pages'
+import { RouterProvider } from '@/router'
+
+// Ensure React is present on globalThis for tsx runtime evaluation of JSX in Node
+;(globalThis as unknown as { React: typeof React }).React = React
+
+if (typeof (globalThis as unknown as { window?: unknown }).window === 'undefined') {
+  ;(globalThis as unknown as { window: unknown }).window = {
+    location: { pathname: '/', hash: '' },
+    history: { pushState: () => {}, replaceState: () => {} },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    scrollTo: () => {},
+    requestAnimationFrame: (cb: (time: number) => void) => setTimeout(cb, 0),
+    cancelAnimationFrame: (id: number) => clearTimeout(id),
+    innerWidth: 1280,
+    scrollY: 0,
+    matchMedia: () => ({ matches: false, addEventListener: () => {}, removeEventListener: () => {} }),
+  }
+}
 
 /**
  * Automated test suite for Phase 06.6 Netflix-Inspired Project Shelves & Browsing.
@@ -120,6 +142,80 @@ export function verifyShelfSystem(): { passed: boolean; message: string } {
     return {
       passed: false,
       message: 'ProjectShelf component must be exported as a functional component',
+    }
+  }
+
+  // 7. Verify Phase 02.1 Flagship Shelf Layout: Responsive sizing without 16px desktop overflow
+  const flagshipMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(ProjectShelf, {
+        id: 'featured',
+        title: 'Featured Projects',
+        projects: flagshipProjects,
+        cardVariant: 'flagship',
+      })
+    )
+  )
+
+  if (!flagshipMarkup.includes('lg:w-[calc(50%-12px)]')) {
+    return {
+      passed: false,
+      message: 'Flagship shelf cards must use responsive desktop width lg:w-[calc(50%-12px)] to prevent 16px overflow',
+    }
+  }
+
+  if (flagshipMarkup.includes('lg:w-[540px]')) {
+    return {
+      passed: false,
+      message: 'Flagship shelf cards must not hardcode overflowing lg:w-[540px]',
+    }
+  }
+
+  // 8. Phase 03.3: Convia Flagship Architecture Verification
+  // 8a. Verify Convia metadata configuration
+  const convia = canonicalProjects.find((p) => p.slug === 'convia')
+  if (!convia || convia.featuredRank !== 1 || !convia.flagship) {
+    return {
+      passed: false,
+      message: 'Convia must be configured as flagship with featuredRank === 1',
+    }
+  }
+
+  // 8b. Verify Convia primary case-study links and test IDs in Featured shelf
+  if (!flagshipMarkup.includes('data-project-slug="convia"')) {
+    return {
+      passed: false,
+      message: 'Featured shelf must render Convia with data-project-slug="convia"',
+    }
+  }
+  if (!flagshipMarkup.includes('href="/projects/convia"')) {
+    return {
+      passed: false,
+      message: 'Convia flagship card must provide link to /projects/convia',
+    }
+  }
+  if (!flagshipMarkup.includes('aria-label="View Convia case study"')) {
+    return {
+      passed: false,
+      message: 'Convia flagship card must provide accessible Case Study CTA',
+    }
+  }
+
+  // 8c. Verify zero duplicate or orphaned Convia cards on full HomePage
+  const homeMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(HomePage, null)
+    )
+  )
+  const conviaOccurrences = homeMarkup.match(/data-project-slug="convia"/g)
+  if (!conviaOccurrences || conviaOccurrences.length !== 1) {
+    return {
+      passed: false,
+      message: `Convia flagship presentation must appear exactly once on HomePage to prevent duplication, found ${conviaOccurrences?.length ?? 0}`,
     }
   }
 

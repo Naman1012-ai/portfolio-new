@@ -47,7 +47,7 @@ export function Button({
     <button
       type={type}
       disabled={disabled}
-      className={`group inline-flex items-center justify-center font-medium transition-all duration-150 ease-out select-none cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-reduce:transition-none motion-reduce:active:scale-100 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`group inline-flex items-center justify-center font-medium whitespace-nowrap transition-all duration-150 ease-out select-none cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-reduce:transition-none motion-reduce:active:scale-100 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       {...props}
     >
       {leftIcon && (

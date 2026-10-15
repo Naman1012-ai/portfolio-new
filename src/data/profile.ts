@@ -1,14 +1,10 @@
 import type { SiteProfile } from '@/types'
-
-/**
- * Verified personal identity and professional profile for Naman Prajapati.
- */
 export const siteProfile: SiteProfile = {
   name: 'Naman Prajapati',
   preferredName: 'Naman',
   title: 'Software & AI Engineer',
-  tagline: 'Building robust web platforms, practical AI systems, and embedded firmware prototypes.',
-  bio: 'Computer Science & Engineering undergraduate at The NorthCap University specializing in AI/ML, full-stack web platforms, and embedded systems prototyping. Driven by product thinking, disciplined testing, and turning software ideas into real execution.',
+  tagline: 'Building full-stack web platforms, practical AI tools, and embedded firmware prototypes.',
+  bio: 'Computer Science & Engineering undergraduate at The NorthCap University specializing in full-stack web platforms, practical AI integrations, and embedded systems prototyping. Focused on architectural discipline, end-to-end implementation, and test-verified software execution.',
   location: 'Gurugram, Haryana, India',
   status: 'Open to engineering internships & collaborations',
   resume: {

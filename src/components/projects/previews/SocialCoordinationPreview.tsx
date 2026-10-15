@@ -1,5 +1,5 @@
 import type { Project } from '@/types'
-import { getProjectPreviewUrl } from '@/utils'
+import { getProjectPreviewUrl, getProjectWebpUrl } from '@/utils'
 
 export interface SocialCoordinationPreviewProps {
   project: Project
@@ -18,6 +18,7 @@ export function SocialCoordinationPreview({
   className = '',
 }: SocialCoordinationPreviewProps) {
   const previewUrl = getProjectPreviewUrl(project)
+  const webpUrl = getProjectWebpUrl(project)
   const isCaseStudy = variant === 'case-study' || variant === 'showcase'
 
   return (
@@ -47,14 +48,20 @@ export function SocialCoordinationPreview({
       <div className="relative flex-1 w-full h-full overflow-hidden bg-neutral-950">
         {previewUrl ? (
           <>
-            <img
-              src={previewUrl}
-              alt={project.evidence?.caption || `${project.title} interface walkthrough`}
-              className={`w-full h-full object-cover object-top transition-transform duration-500 ease-out motion-reduce:transform-none ${
-                isCaseStudy ? 'max-h-[500px]' : 'group-hover/thumb:scale-105'
-              }`}
-              loading={isCaseStudy ? 'eager' : 'lazy'}
-            />
+            <picture className="w-full h-full block">
+              {webpUrl && <source type="image/webp" srcSet={webpUrl} />}
+              <img
+                src={previewUrl}
+                alt={project.evidence?.caption || `${project.title} interface walkthrough`}
+                width={1262}
+                height={704}
+                className={`w-full h-full object-cover object-top transition-transform duration-500 ease-out motion-reduce:transform-none ${
+                  isCaseStudy ? 'max-h-[500px]' : 'group-hover/thumb:scale-105'
+                }`}
+                loading={isCaseStudy ? 'eager' : 'lazy'}
+                decoding={isCaseStudy ? 'sync' : 'async'}
+              />
+            </picture>
             {/* Subtle resting vignette */}
             <div className="absolute inset-0 bg-neutral-950/10 pointer-events-none group-hover/thumb:bg-neutral-950/20 transition-colors duration-300" />
           </>

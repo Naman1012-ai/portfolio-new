@@ -1,9 +1,8 @@
 import { Badge } from '@/components/common/Badge'
-import { Card } from '@/components/common/Card'
 import { Heading } from '@/components/common/Heading'
 import { Section } from '@/components/common/Section'
 import { Text } from '@/components/common/Text'
-import { aboutData, siteProfile, technicalCapabilities } from '@/data'
+import { aboutData, siteProfile } from '@/data'
 import { resolveSafeAssetUrl } from '@/utils'
 
 export interface AboutSectionProps {
@@ -11,8 +10,8 @@ export interface AboutSectionProps {
 }
 
 /**
- * Editorial About Section presenting personal narrative, engineering judgment,
- * verified capability groups, and asset-resolved portrait with graceful fallback.
+ * Editorial About Section presenting personal narrative, engineering identity,
+ * and asset-resolved portrait with graceful fallback.
  *
  * Grounded strictly in confirmed personal themes:
  * - CSE (AI & ML) at The NorthCap University to understand systems and turn ideas into products
@@ -25,7 +24,7 @@ export function AboutSection({ className = '' }: AboutSectionProps) {
   const profileUrl = resolveSafeAssetUrl(aboutData.portrait.assetFilename)
 
   return (
-    <Section id="about" spacing="lg" bordered className={className}>
+    <Section id="about" spacing="lg" bordered reveal className={className}>
       {/* Section Header */}
       <div className="w-full max-w-3xl min-w-0 mb-10">
         <div className="inline-flex items-center mb-3">
@@ -42,7 +41,7 @@ export function AboutSection({ className = '' }: AboutSectionProps) {
       </div>
 
       {/* Editorial Two-Column Layout: Story on Left, Portrait Slot on Right */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-14">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left Column: First-Person Personal Narrative */}
         <div className="lg:col-span-8 space-y-5">
           <div className="p-4 sm:p-5 rounded-sm bg-neutral-50/80 border border-neutral-200/90 text-neutral-800 text-sm sm:text-base leading-relaxed font-sans font-medium">
@@ -136,62 +135,6 @@ export function AboutSection({ className = '' }: AboutSectionProps) {
               </div>
             </div>
           )}
-        </div>
-      </div>
-
-      {/* Technical Capabilities: Meaningful Capability Groups */}
-      <div className="pt-8 border-t border-neutral-200">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
-          <div>
-            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-1 block">
-              CAPABILITY LEDGER
-            </Text>
-            <Heading as="h3" variant="h3" className="text-lg sm:text-xl font-bold text-neutral-900">
-              Verified Technical Proficiencies
-            </Heading>
-          </div>
-          <Text variant="caption" tone="muted" className="text-xs font-mono max-w-md">
-            Distinguishing actual project usage from ongoing academic learning.
-          </Text>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {technicalCapabilities.map((group) => (
-            <Card
-              key={group.id}
-              variant="outlined"
-              padding="sm"
-              className="bg-white border-neutral-200/90 shadow-micro space-y-3 hover:border-neutral-300 transition-colors"
-            >
-              <div className="flex items-center justify-between gap-2 border-b border-neutral-100 pb-2">
-                <Heading as="h4" variant="h4" className="text-sm font-semibold text-neutral-900">
-                  {group.title}
-                </Heading>
-                <span className="text-[10px] font-mono text-neutral-400">
-                  {group.technologies.length} Techs
-                </span>
-              </div>
-
-              <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-normal">
-                {group.description}
-              </Text>
-
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {group.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-0.5 text-[11px] font-mono text-neutral-700 bg-neutral-100/90 border border-neutral-200/70 rounded-xs"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="pt-2 border-t border-neutral-100 text-[11px] font-mono text-neutral-500">
-                {group.projectEvidence}
-              </div>
-            </Card>
-          ))}
         </div>
       </div>
     </Section>

@@ -16,8 +16,10 @@ export interface ConviaFlagshipCardProps {
  */
 export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCardProps) {
   const logoUrl = resolveSafeAssetUrl(project.evidence?.assetFilename)
+  const logoWebpUrl = resolveSafeAssetUrl('convia-logo.webp')
   const hasPreview = isAssetAvailable('convia-preview.png')
   const previewUrl = hasPreview ? resolveSafeAssetUrl('convia-preview.png') : null
+  const previewWebpUrl = hasPreview ? resolveSafeAssetUrl('convia-preview.webp') : null
 
   const {
     ref: tiltRef,
@@ -66,12 +68,18 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
         {/* Project Brand Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
           {logoUrl && (
-            <img
-              src={logoUrl}
-              alt="Convia Platform Logo"
-              className="w-12 h-12 rounded-sm border border-neutral-200/90 bg-white object-contain p-1 shadow-micro shrink-0 transition-transform duration-200 group-hover/convia:scale-105 motion-reduce:transform-none"
-              loading="lazy"
-            />
+            <picture className="shrink-0">
+              {logoWebpUrl && <source type="image/webp" srcSet={logoWebpUrl} />}
+              <img
+                src={logoUrl}
+                alt="Convia Platform Logo"
+                width={48}
+                height={48}
+                className="w-12 h-12 rounded-sm border border-neutral-200/90 bg-white object-contain p-1 shadow-micro shrink-0 transition-transform duration-200 group-hover/convia:scale-105 motion-reduce:transform-none"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           )}
           <div>
             <Heading as="h3" variant="h2" className="text-xl sm:text-2xl font-bold">
@@ -119,12 +127,18 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
             >
               <Link to={`/projects/${project.slug}`} className="block relative" aria-label="Open Convia flagship case study preview">
                 {/* Layer 1: Genuine Workspace Screenshot */}
-                <img
-                  src={previewUrl}
-                  alt="Convia workspace interface walkthrough"
-                  className="w-full h-auto max-h-[400px] object-cover object-top transition-transform duration-500 ease-out group-hover/preview:scale-[1.01] motion-reduce:transform-none"
-                  loading="lazy"
-                />
+                <picture className="w-full block">
+                  {previewWebpUrl && <source type="image/webp" srcSet={previewWebpUrl} />}
+                  <img
+                    src={previewUrl}
+                    alt="Convia workspace interface walkthrough"
+                    width={1618}
+                    height={972}
+                    className="w-full h-auto max-h-[400px] object-cover object-top transition-transform duration-500 ease-out group-hover/preview:scale-[1.01] motion-reduce:transform-none"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
 
                 {/* Layer 2: Dynamic Pointer-Responsive Radial Glare Spotlight */}
                 <div

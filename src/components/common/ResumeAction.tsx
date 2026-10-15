@@ -105,7 +105,7 @@ export function ResumeAction({
           size="lg"
           leftIcon={<Icon name="download" size="sm" />}
           aria-label="Download verified Curriculum Vitae PDF (opens in new tab)"
-          className="w-full sm:w-auto justify-center"
+          className="w-full sm:w-auto shrink-0 justify-center whitespace-nowrap"
         >
           {label || 'View Resume'}
         </Button>
@@ -152,7 +152,7 @@ export function ResumeAction({
       aria-disabled="true"
       data-testid="resume-action-fallback"
       data-variant="hero"
-      className={`inline-flex items-center justify-center h-11 px-5 text-base gap-2 rounded-md border border-neutral-200 bg-neutral-100/70 text-neutral-400 font-medium select-none cursor-not-allowed ${
+      className={`inline-flex items-center justify-center h-11 px-5 text-base gap-2 rounded-md border border-neutral-200 bg-neutral-100/70 text-neutral-400 font-medium whitespace-nowrap select-none cursor-not-allowed ${
         className || 'inline-flex w-full sm:w-auto'
       }`}
     >

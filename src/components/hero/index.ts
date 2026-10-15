@@ -1,0 +1,1 @@
+export { HeroCinematicComposition } from './HeroCinematicComposition'

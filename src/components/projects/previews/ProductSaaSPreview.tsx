@@ -1,5 +1,5 @@
 import type { Project } from '@/types'
-import { getProjectPreviewUrl } from '@/utils'
+import { getProjectPreviewUrl, getProjectWebpUrl } from '@/utils'
 
 export interface ProductSaaSPreviewProps {
   project: Project
@@ -18,7 +18,10 @@ export function ProductSaaSPreview({
   className = '',
 }: ProductSaaSPreviewProps) {
   const previewUrl = getProjectPreviewUrl(project)
+  const webpUrl = getProjectWebpUrl(project)
   const isCaseStudy = variant === 'case-study' || variant === 'showcase'
+  const imgWidth = project.slug === 'convia' ? 1618 : 1262
+  const imgHeight = project.slug === 'convia' ? 972 : 704
 
   // URL / Path simulated breadcrumb tailored to the verified project
   const appPath =
@@ -55,14 +58,20 @@ export function ProductSaaSPreview({
       <div className="relative flex-1 w-full h-full overflow-hidden bg-neutral-950">
         {previewUrl ? (
           <>
-            <img
-              src={previewUrl}
-              alt={project.evidence?.caption || `${project.title} interface walkthrough`}
-              className={`w-full h-full object-cover object-top transition-transform duration-500 ease-out motion-reduce:transform-none ${
-                isCaseStudy ? 'max-h-[500px]' : 'group-hover/thumb:scale-105'
-              }`}
-              loading={isCaseStudy ? 'eager' : 'lazy'}
-            />
+            <picture className="w-full h-full block">
+              {webpUrl && <source type="image/webp" srcSet={webpUrl} />}
+              <img
+                src={previewUrl}
+                alt={project.evidence?.caption || `${project.title} interface walkthrough`}
+                width={imgWidth}
+                height={imgHeight}
+                className={`w-full h-full object-cover object-top transition-transform duration-500 ease-out motion-reduce:transform-none ${
+                  isCaseStudy ? 'max-h-[500px]' : 'group-hover/thumb:scale-105'
+                }`}
+                loading={isCaseStudy ? 'eager' : 'lazy'}
+                decoding={isCaseStudy ? 'sync' : 'async'}
+              />
+            </picture>
             {/* Subtle resting vignette */}
             <div className="absolute inset-0 bg-neutral-950/10 pointer-events-none group-hover/thumb:bg-neutral-950/20 transition-colors duration-300" />
           </>
