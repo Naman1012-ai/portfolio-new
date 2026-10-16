@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-export type PerspectiveMode = 'all' | 'founder' | 'interviewer' | 'investor'
+export type PerspectiveMode = 'explore' | 'engineering' | 'product'
 
 export interface PerspectiveInfo {
   id: PerspectiveMode
@@ -14,45 +14,47 @@ export interface PerspectiveInfo {
 }
 
 export const PERSPECTIVES: Record<PerspectiveMode, PerspectiveInfo> = {
-  all: {
-    id: 'all',
-    label: 'All Perspectives',
-    shortLabel: 'Overview',
-    badge: 'Comprehensive',
-    focusHeadline: 'Full Portfolio Overview',
-    description: 'Balanced editorial view across web platforms, systems, AI workflows, and hardware research.',
-    highlightedSlugs: ['convia', 'biolynk', 'resumetrices'],
-    highlightedDecisions: ['convia-idea-provenance', 'resumetrices-schema-enforcement'],
-  },
-  founder: {
-    id: 'founder',
-    label: 'Founder & CTO',
-    shortLabel: 'Founder',
-    badge: 'Product & MVP Velocity',
-    focusHeadline: 'Fast Execution, Product Ownership & MVP Architecture',
-    description: 'Highlights Convia (collaborative workspace MVP), BioLynk (live health directory), and product conviction.',
-    highlightedSlugs: ['convia', 'biolynk', 'resumetrices'],
-    highlightedDecisions: ['convia-idea-provenance', 'convia-in-channel-search'],
-  },
-  interviewer: {
-    id: 'interviewer',
-    label: 'Engineering Interviewer',
-    shortLabel: 'Interviewer',
-    badge: 'Engineering Judgement & Rigor',
-    focusHeadline: 'Systems Thinking, Trade-offs, Type Safety & Real Constraints',
-    description: 'Highlights architectural decision logs, deterministic schema validation, local-first vector geometry, and bench firmware.',
-    highlightedSlugs: ['convia', 'resumetrices', 'docframe', 'nidar-vegapilot'],
-    highlightedDecisions: ['convia-idea-provenance', 'resumetrices-schema-enforcement', 'docframe-local-vector-engine', 'nidar-bench-vs-spec'],
-  },
-  investor: {
-    id: 'investor',
-    label: 'Venture Investor',
-    shortLabel: 'Investor',
-    badge: 'Builder Velocity & Scale',
-    focusHeadline: 'Builder Ambition, Full-Stack Execution & Technical Trajectory',
-    description: 'Highlights high-agency engineering trajectory, structured LLM pipelines, and long-term tech venture ambition.',
+  explore: {
+    id: 'explore',
+    label: 'Explore',
+    shortLabel: 'Explore',
+    badge: 'Balanced Overview',
+    focusHeadline: 'Projects, personal journey, capabilities & overall trajectory',
+    description:
+      'A balanced way to discover the portfolio: projects, personal story, capabilities, interesting work, and overall trajectory.',
     highlightedSlugs: ['convia', 'resumetrices', 'biolynk'],
     highlightedDecisions: ['convia-idea-provenance', 'resumetrices-schema-enforcement'],
+  },
+  engineering: {
+    id: 'engineering',
+    label: 'Engineering',
+    shortLabel: 'Engineering',
+    badge: 'Engineering Focus',
+    focusHeadline: 'Architecture, technical decisions, system flows & testing evidence',
+    description:
+      'For technically oriented visitors who want to understand how the work is built: Engineering Judgement, architecture, technical decisions, and system constraints.',
+    highlightedSlugs: ['convia', 'resumetrices', 'docframe', 'nidar-vegapilot'],
+    highlightedDecisions: [
+      'convia-idea-provenance',
+      'resumetrices-schema-enforcement',
+      'docframe-local-vector-engine',
+      'nidar-bench-vs-spec',
+    ],
+  },
+  product: {
+    id: 'product',
+    label: 'Product',
+    shortLabel: 'Product',
+    badge: 'Product Focus',
+    focusHeadline: 'Product ideas, problem selection, usability & outcome trajectory',
+    description:
+      'For visitors interested in what is being built, why it matters, and where it could go: product ideas, problem selection, usability, and future direction.',
+    highlightedSlugs: ['convia', 'resumetrices', 'biolynk'],
+    highlightedDecisions: [
+      'convia-idea-provenance',
+      'convia-in-channel-search',
+      'resumetrices-schema-enforcement',
+    ],
   },
 }
 
@@ -68,8 +70,8 @@ export interface PerspectiveContextValue {
 }
 
 export const PerspectiveContext = createContext<PerspectiveContextValue>({
-  perspective: 'all',
-  info: PERSPECTIVES.all,
+  perspective: 'explore',
+  info: PERSPECTIVES.explore,
   setPerspective: () => {},
   isHighlightedSlug: () => false,
   isHighlightedDecision: () => false,

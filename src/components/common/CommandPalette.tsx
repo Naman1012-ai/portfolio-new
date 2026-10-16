@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type KeyboardEvent } from 'react'
 import { Icon } from './Icon'
-import { usePerspective, type PerspectiveMode } from '@/context'
+import { usePerspective } from '@/context'
 import { useProjectTransition } from '@/components/projects'
 import { siteProfile } from '@/data'
 
@@ -139,45 +139,35 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
 
     // Perspectives
     {
-      id: 'perspective-founder',
-      title: 'Switch to Founder & CTO Perspective',
-      subtitle: 'Highlights MVP execution speed, Convia architecture, and product conviction',
+      id: 'perspective-explore',
+      title: 'Switch to Explore Perspective (Default)',
+      subtitle: 'Balanced discovery across projects, personal story, and capabilities',
       category: 'Perspectives',
-      badge: 'Founder',
+      badge: 'Explore',
       perform: () => {
-        setPerspective('founder' as PerspectiveMode)
+        setPerspective('explore')
         onClose()
       },
     },
     {
-      id: 'perspective-interviewer',
-      title: 'Switch to Engineering Interviewer Perspective',
-      subtitle: 'Highlights trade-offs, schema validation, and memory safety',
+      id: 'perspective-engineering',
+      title: 'Switch to Engineering Perspective',
+      subtitle: 'Deep focus on architecture, technical decisions, and system constraints',
       category: 'Perspectives',
-      badge: 'Interviewer',
+      badge: 'Engineering',
       perform: () => {
-        setPerspective('interviewer' as PerspectiveMode)
+        setPerspective('engineering')
         onClose()
       },
     },
     {
-      id: 'perspective-investor',
-      title: 'Switch to Venture Investor Perspective',
-      subtitle: 'Highlights builder velocity, systems architecture, and venture ambition',
+      id: 'perspective-product',
+      title: 'Switch to Product Perspective',
+      subtitle: 'Focus on product thinking, problem selection, and outcome trajectory',
       category: 'Perspectives',
-      badge: 'Investor',
+      badge: 'Product',
       perform: () => {
-        setPerspective('investor' as PerspectiveMode)
-        onClose()
-      },
-    },
-    {
-      id: 'perspective-all',
-      title: 'Reset to All Perspectives',
-      subtitle: 'Clear audience filtering and view full portfolio scope',
-      category: 'Perspectives',
-      perform: () => {
-        setPerspective('all' as PerspectiveMode)
+        setPerspective('product')
         onClose()
       },
     },
@@ -269,7 +259,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
             type="text"
             value={search}
             onChange={(e) => handleInputChange(e.target.value)}
-            placeholder="Type a command or search (e.g. Convia, Founder, Judgement)..."
+            placeholder="Type a command or search (e.g. Convia, Engineering, Product)..."
             className="w-full text-sm font-sans bg-transparent border-none text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
             aria-autocomplete="list"
           />

@@ -151,8 +151,8 @@ export function verifyStickyHeaderAndMobileMenu(): { passed: boolean; message: s
     return { passed: false, message: 'Open MobileMenu must render the dropdown panel with id="header-mobile-menu-panel"' }
   }
 
-  // C. Verify MobileMenu contains ONLY the perspective buttons (Overview, Founder, Interviewer, Investor)
-  const expectedPerspectiveButtons = ['Overview', 'Founder', 'Interviewer', 'Investor']
+  // C. Verify MobileMenu contains ONLY the perspective buttons (Explore, Engineering, Product)
+  const expectedPerspectiveButtons = ['Explore', 'Engineering', 'Product']
   for (const btn of expectedPerspectiveButtons) {
     if (!openMenuMarkup.includes(btn)) {
       return {

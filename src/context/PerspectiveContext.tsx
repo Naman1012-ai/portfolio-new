@@ -10,15 +10,20 @@ export function PerspectiveProvider({ children }: { children: ReactNode }) {
     if (typeof window !== 'undefined') {
       try {
         const params = new URLSearchParams(window.location.search)
-        const view = params.get('view') as PerspectiveMode
-        if (view && PERSPECTIVES[view]) {
+        let view = params.get('view') as string | null
+        // Normalize legacy aliases
+        if (view === 'all') view = 'explore'
+        if (view === 'founder' || view === 'investor') view = 'product'
+        if (view === 'interviewer') view = 'engineering'
+
+        if (view && (view === 'explore' || view === 'engineering' || view === 'product')) {
           return view
         }
       } catch {
         // Fallback for non-browser environments
       }
     }
-    return 'all'
+    return 'explore'
   })
 
   const [isCommandOpen, setIsCommandOpen] = useState(false)
@@ -43,7 +48,7 @@ export function PerspectiveProvider({ children }: { children: ReactNode }) {
     if (typeof window !== 'undefined') {
       try {
         const url = new URL(window.location.href)
-        if (mode === 'all') {
+        if (mode === 'explore') {
           url.searchParams.delete('view')
         } else {
           url.searchParams.set('view', mode)
@@ -58,12 +63,12 @@ export function PerspectiveProvider({ children }: { children: ReactNode }) {
   const info = PERSPECTIVES[perspective]
 
   const isHighlightedSlug = (slug: string) => {
-    if (perspective === 'all') return false
+    if (perspective === 'explore') return false
     return info.highlightedSlugs.includes(slug)
   }
 
   const isHighlightedDecision = (id: string) => {
-    if (perspective === 'all') return false
+    if (perspective === 'explore') return false
     return info.highlightedDecisions.includes(id)
   }
 
