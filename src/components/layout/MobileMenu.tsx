@@ -3,18 +3,14 @@ import {
   useRef,
   type MouseEvent,
 } from 'react'
-import { ResumeAction } from '@/components/common/ResumeAction'
-import { navigationItems } from '@/data'
+import { PerspectiveSwitcher } from '@/components/common/PerspectiveSwitcher'
 
 export interface MobileMenuProps {
   isOpen: boolean
   onToggle: () => void
   onClose: () => void
-  onNavClick: (href: string, e: MouseEvent<HTMLAnchorElement>) => void
-  currentRoute: string
-  /**
-   * Optional availability override for testing the resume state
-   */
+  onNavClick?: (href: string, e: MouseEvent<HTMLAnchorElement>) => void
+  currentRoute?: string
   isResumeAvailableOverride?: boolean
   className?: string
 }
@@ -23,9 +19,6 @@ export function MobileMenu({
   isOpen,
   onToggle,
   onClose,
-  onNavClick,
-  currentRoute,
-  isResumeAvailableOverride,
   className = '',
 }: MobileMenuProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -70,7 +63,7 @@ export function MobileMenu({
     if (isOpen) {
       const raf = requestAnimationFrame(() => {
         const firstFocusable = panelRef.current?.querySelector<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex="0"]'
+          'button:not([disabled]), a[href], [tabindex="0"]'
         )
         firstFocusable?.focus()
       })
@@ -88,7 +81,8 @@ export function MobileMenu({
         aria-expanded={isOpen}
         aria-controls="header-mobile-menu-panel"
         onClick={onToggle}
-        className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xs text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
+        className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xs text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 cursor-pointer"
+        title={isOpen ? 'Close perspective menu' : 'Open perspective menu'}
       >
         {isOpen ? (
           /* Close Icon */
@@ -124,40 +118,19 @@ export function MobileMenu({
         )}
       </button>
 
-      {/* Anchored Dropdown Panel */}
+      {/* Anchored Dropdown Panel containing ONLY the buttons from the image */}
       {isOpen && (
         <div
           id="header-mobile-menu-panel"
           ref={panelRef}
           role="region"
-          aria-label="Navigation Menu"
-          className="absolute right-0 top-full mt-2 w-56 sm:w-64 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-elevated rounded-md p-2 z-50 animate-fade-in motion-reduce:animate-none"
+          aria-label="Perspective Menu"
+          className="absolute right-0 top-full mt-2 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-elevated rounded-md p-1.5 z-50 animate-fade-in motion-reduce:animate-none"
         >
-          <ul className="flex flex-col gap-1 text-sm font-medium text-neutral-700">
-            {navigationItems.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={currentRoute === 'home' ? item.href : `/${item.href}`}
-                  onClick={(e) => {
-                    onNavClick(item.href, e)
-                    onClose()
-                  }}
-                  className="flex items-center w-full px-3 py-2 rounded-xs hover:bg-neutral-100 hover:text-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-
-            {/* Resume Action at end of list */}
-            <li className="pt-1 mt-1 border-t border-neutral-100">
-              <ResumeAction
-                variant="header"
-                isAvailableOverride={isResumeAvailableOverride}
-                className="w-full justify-between"
-              />
-            </li>
-          </ul>
+          <PerspectiveSwitcher
+            variant="header"
+            onSelect={onClose}
+          />
         </div>
       )}
     </div>

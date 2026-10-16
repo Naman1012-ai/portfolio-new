@@ -137,9 +137,7 @@ export function verifyStickyHeaderAndMobileMenu(): { passed: boolean; message: s
       isOpen: true,
       onToggle: () => {},
       onClose: () => {},
-      onNavClick: () => {},
       currentRoute: 'home',
-      isResumeAvailableOverride: true,
     })
   )
 
@@ -153,54 +151,28 @@ export function verifyStickyHeaderAndMobileMenu(): { passed: boolean; message: s
     return { passed: false, message: 'Open MobileMenu must render the dropdown panel with id="header-mobile-menu-panel"' }
   }
 
-  // C. Verify all navigationItems are present in the exact canonical order
-  let lastIndex = -1
+  // C. Verify MobileMenu contains ONLY the perspective buttons (Overview, Founder, Interviewer, Investor)
+  const expectedPerspectiveButtons = ['Overview', 'Founder', 'Interviewer', 'Investor']
+  for (const btn of expectedPerspectiveButtons) {
+    if (!openMenuMarkup.includes(btn)) {
+      return {
+        passed: false,
+        message: `MobileMenu dropdown panel is missing perspective button for ${btn}`,
+      }
+    }
+  }
+
+  // Verify MobileMenu does NOT contain page links (these are kept permanently in header nav)
   for (const item of navigationItems) {
-    const itemIndex = openMenuMarkup.indexOf(`href="${item.href}"`)
-    if (itemIndex === -1) {
+    if (openMenuMarkup.includes(`href="${item.href}"`)) {
       return {
         passed: false,
-        message: `MobileMenu dropdown panel is missing navigation link for ${item.label} (${item.href})`,
+        message: `MobileMenu dropdown panel must not contain page link for ${item.label}; nav links must be permanent in header`,
       }
     }
-    if (itemIndex < lastIndex) {
-      return {
-        passed: false,
-        message: `MobileMenu navigation items are out of order: ${item.label} appeared before previous item`,
-      }
-    }
-    lastIndex = itemIndex
   }
 
-  // D. Resume present in open state (available override = true)
-  if (!openMenuMarkup.includes('data-testid="resume-action"')) {
-    return { passed: false, message: 'Open MobileMenu must contain ResumeAction' }
-  }
-  const resumeIndex = openMenuMarkup.indexOf('data-testid="resume-action"')
-  if (resumeIndex < lastIndex) {
-    return { passed: false, message: 'Resume action must be positioned last in the MobileMenu list' }
-  }
-
-  // E. Resume unavailable in open state (available override = false)
-  const unavailableMenuMarkup = renderToStaticMarkup(
-    React.createElement(MobileMenu, {
-      isOpen: true,
-      onToggle: () => {},
-      onClose: () => {},
-      onNavClick: () => {},
-      currentRoute: 'home',
-      isResumeAvailableOverride: false,
-    })
-  )
-
-  if (!unavailableMenuMarkup.includes('Resume coming soon')) {
-    return { passed: false, message: 'When resume is unavailable, MobileMenu must render "Resume coming soon"' }
-  }
-  if (!unavailableMenuMarkup.includes('aria-disabled="true"')) {
-    return { passed: false, message: 'When resume is unavailable, element must have aria-disabled="true"' }
-  }
-
-  // --- 4. Task 4: Header sticky positioning & height preservation ---
+  // --- 4. Task 4: Header sticky positioning, height preservation & permanent nav links ---
   const headerMarkup = renderToStaticMarkup(
     React.createElement(RouterProvider, null, React.createElement(Header, null))
   )
@@ -212,8 +184,23 @@ export function verifyStickyHeaderAndMobileMenu(): { passed: boolean; message: s
     return { passed: false, message: 'Header must maintain fixed h-16 height' }
   }
 
+  // Verify all navigationItems are permanently present in Header
+  for (const item of navigationItems) {
+    if (!headerMarkup.includes(`href="${item.href}"`) || !headerMarkup.includes(item.label)) {
+      return {
+        passed: false,
+        message: `Header navigation must permanently include ${item.label} (${item.href})`,
+      }
+    }
+  }
+
+  // Verify ResumeAction is permanently present in Header
+  if (!headerMarkup.includes('data-testid="resume-action"')) {
+    return { passed: false, message: 'Header must permanently include ResumeAction' }
+  }
+
   return {
     passed: true,
-    message: 'All sticky header, useScrollCompact hysteresis, MobileMenu accessibility, and Layout regression checks passed',
+    message: 'All sticky header, permanent navigation, MobileMenu perspective buttons, and Layout regression checks passed',
   }
 }

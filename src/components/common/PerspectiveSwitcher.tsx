@@ -3,11 +3,13 @@ import { usePerspective, PERSPECTIVES, type PerspectiveMode } from '@/context'
 export interface PerspectiveSwitcherProps {
   variant?: 'header' | 'floating' | 'inline'
   className?: string
+  onSelect?: (mode: PerspectiveMode) => void
 }
 
 export function PerspectiveSwitcher({
   variant = 'inline',
   className = '',
+  onSelect,
 }: PerspectiveSwitcherProps) {
   const { perspective, info, setPerspective } = usePerspective()
 
@@ -28,7 +30,10 @@ export function PerspectiveSwitcher({
             <button
               key={mode}
               type="button"
-              onClick={() => setPerspective(mode)}
+              onClick={() => {
+                setPerspective(mode)
+                onSelect?.(mode)
+              }}
               className={`px-2 py-1 rounded-xs transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 ${
                 isActive
                   ? 'bg-neutral-950 text-white font-medium shadow-micro'
