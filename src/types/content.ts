@@ -116,6 +116,7 @@ export interface Experience {
   summary: string
   contributions?: string[]
   technologies?: string[]
+  projectRepoUrl?: string
   verification?: {
     documentAsset?: string // Filename strictly in public/assets/
     url?: string

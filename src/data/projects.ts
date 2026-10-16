@@ -586,18 +586,6 @@ export function getFeaturedProjects(): Project[] {
 }
 
 /**
- * Alias for getFeaturedProjects for clarity across discovery tracks.
- */
-export const getMainProjects = getFeaturedProjects
-
-/**
- * Returns all seeded projects across all tracks (including Robotics & Autonomous Systems).
- */
-export function getAllProjects(): Project[] {
-  return [...projects]
-}
-
-/**
  * Find project by its URL slug across all projects.
  */
 export function getProjectBySlug(slug: string): Project | undefined {

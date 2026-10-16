@@ -11,8 +11,10 @@ export const experienceList: Experience[] = [
     organization: 'InAmigos Foundation',
     role: 'Web Development Intern',
     type: 'internship',
-    summary: 'Completed web development internship task and received internship certificate.',
+    summary:
+      'Completed web development internship, structuring and building a responsive NGO website prototype and documentation using core HTML, CSS, and JavaScript.',
     technologies: ['Web Development', 'HTML', 'CSS', 'JavaScript'],
+    projectRepoUrl: 'https://github.com/Naman1012-ai/Foundation_dummy_website',
     verification: {
       url: 'https://inamigosfoundation.org.in',
     },

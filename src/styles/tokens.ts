@@ -7,26 +7,27 @@
 export const tokens = {
   colors: {
     // Canvas & Surfaces
-    canvas: '#fafafa', // Subtle warm off-white canvas
+    canvas: '#f8fafc', // Modern platinum/slate cool canvas
     surface: '#ffffff', // Crisp pure white elevated surface
-    surfaceSubdued: '#f4f4f5', // Neutral 100 for secondary backgrounds / code blocks
-    surfaceHover: '#f5f5f7', // Micro-state interaction hover
+    surfaceSubdued: '#f1f5f9', // Slate 100 for secondary backgrounds / code blocks
+    surfaceHover: '#f8fafc', // Micro-state interaction hover
+    surfaceObsidian: '#090d16', // Deep obsidian tech panel surface
 
     // Inks & Typography (WCAG AA & AAA compliant on canvas/surface)
-    inkPrimary: '#09090b', // Deep charcoal / rich black (> 18:1 contrast on white)
-    inkSecondary: '#52525b', // Balanced slate for secondary copy (7:1 contrast on white)
-    inkMuted: '#71717a', // Tertiary metadata & dates (4.6:1 contrast on white)
-    inkFaint: '#a1a1aa', // Subtle glyphs, inactive borders
+    inkPrimary: '#090d16', // Deep obsidian ink (> 18:1 contrast on white)
+    inkSecondary: '#475569', // Balanced slate for secondary copy (7:1 contrast on white)
+    inkMuted: '#64748b', // Tertiary metadata & dates (4.6:1 contrast on white)
+    inkFaint: '#94a3b8', // Subtle glyphs, inactive borders
 
     // Architectural Lines & Dividers
-    lineSubtle: '#f4f4f5', // Hairline dividers
-    lineDefault: '#e4e4e7', // Card outlines & table borders
-    lineStrong: '#d4d4d8', // High-contrast interactive borders
+    lineSubtle: '#f1f5f9', // Hairline dividers
+    lineDefault: '#e2e8f0', // Card outlines & table borders
+    lineStrong: '#cbd5e1', // High-contrast interactive borders
 
     // Restrained Accent & Focus
-    accent: '#0f172a', // Premium deep ink accent for primary buttons / badges
-    accentSubtle: '#f1f5f9', // Soft tint for tags and chip backgrounds
-    focus: '#0f172a', // High-visibility keyboard focus ring
+    accent: '#090d16', // Obsidian ink accent for primary buttons / badges
+    accentSubtle: '#f1f5f9', // Soft slate tint for tags and chip backgrounds
+    focus: '#090d16', // High-visibility keyboard focus ring
 
     // Restrained Lavender Brand Tokens (Anchors: #7C3AED and #F5F3FF)
     brandLavender: '#7C3AED', // Primary brand lavender anchor (WCAG AA compliant contrast)

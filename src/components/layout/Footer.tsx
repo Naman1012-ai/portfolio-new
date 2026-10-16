@@ -39,7 +39,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-neutral-200 bg-neutral-50 py-8 text-neutral-500 text-sm">
+    <footer className="border-t border-slate-200/80 bg-white/70 backdrop-blur-md py-10 text-slate-500 text-sm">
       <Container size="lg">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <BrandLockup
@@ -47,9 +47,11 @@ export function Footer() {
             onClick={handleBrandClick}
             showMonogram={true}
           />
-          <p className="text-xs text-neutral-500">
-            © {CURRENT_YEAR} {siteMetadata.author || 'Naman Prajapati'}. Built with React 19, TypeScript & Tailwind CSS v4.
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-xs text-slate-500">
+              © {CURRENT_YEAR} {siteMetadata.author || 'Naman Prajapati'}. Built with React 19, TypeScript & Tailwind CSS v4.
+            </p>
+          </div>
         </div>
       </Container>
     </footer>

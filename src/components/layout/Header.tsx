@@ -50,7 +50,7 @@ export function Header() {
   }
 
   return (
-    <header className="border-b border-neutral-200 bg-white/90 backdrop-blur-md sticky top-0 z-50">
+    <header className="border-b border-slate-200/80 bg-white/85 backdrop-blur-xl sticky top-0 z-50 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.03)] transition-colors">
       <Container size="lg">
         <div className="flex h-16 items-center justify-between gap-2 sm:gap-4 relative">
           <BrandLockup
@@ -66,7 +66,7 @@ export function Header() {
               aria-label="Main Navigation"
               className="flex items-center"
             >
-              <ul className="flex items-center gap-2 sm:gap-3 md:gap-5 text-xs sm:text-sm font-medium text-neutral-600">
+              <ul className="flex items-center gap-2 sm:gap-3 md:gap-5 text-xs sm:text-sm font-medium text-slate-600">
                 {navigationItems.map((item) => {
                   const resolvedHref = item.href.startsWith('/')
                     ? item.href
@@ -79,7 +79,7 @@ export function Header() {
                       <a
                         href={resolvedHref}
                         onClick={(e) => handleNavClick(item.href, e)}
-                        className="hover:text-neutral-900 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-xs px-1 py-0.5 whitespace-nowrap"
+                        className="hover:text-slate-950 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-xs px-1 py-0.5 whitespace-nowrap"
                       >
                         {item.label}
                       </a>
@@ -91,7 +91,7 @@ export function Header() {
                   <button
                     type="button"
                     onClick={openCommandPalette}
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded-xs text-[11px] font-mono text-neutral-600 hover:text-neutral-950 bg-neutral-100 hover:bg-neutral-200/80 border border-neutral-200/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono text-slate-700 hover:text-white bg-slate-100 hover:bg-neutral-900 border border-slate-200/90 hover:border-neutral-900 transition-all duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 cursor-pointer shadow-xs"
                     title="Open Command Palette (⌘K / Ctrl+K)"
                     aria-label="Open command palette"
                   >

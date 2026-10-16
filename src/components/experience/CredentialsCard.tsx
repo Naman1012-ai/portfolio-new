@@ -1,6 +1,7 @@
 import { Badge } from '@/components/common/Badge'
 import { Card } from '@/components/common/Card'
 import { Heading } from '@/components/common/Heading'
+import { Icon } from '@/components/common/Icon'
 import { Text } from '@/components/common/Text'
 
 export interface CredentialsCardProps {
@@ -8,91 +9,127 @@ export interface CredentialsCardProps {
 }
 
 /**
- * Compact, evidence-oriented summary card identifying primary verification sources
- * backing academic standing, internship experience, and codebase implementations.
+ * Compact Evidence & Records layer.
+ * Provides supporting source material and verification references for academic
+ * and professional experience without over-explaining or presenting fake links.
  */
 export function CredentialsCard({ className = '' }: CredentialsCardProps) {
   return (
     <Card
       variant="outlined"
       padding="md"
-      className={`border-neutral-200/90 bg-white shadow-micro space-y-4 ${className}`}
+      className={`border-slate-200/90 bg-white/95 shadow-xs rounded-2xl space-y-5 ${className}`}
     >
       {/* Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 pb-3">
-        <div className="flex items-center gap-2">
-          <Badge variant="subtle" size="sm">
-            DOCUMENTATION
-          </Badge>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <Badge variant="subtle" size="sm" className="font-mono text-[10px] tracking-wider uppercase">
+              EVIDENCE & RECORDS
+            </Badge>
+          </div>
+          <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Supporting records and source material for the academic and professional experience shown above.
+          </Text>
         </div>
-        <span className="text-xs font-mono text-neutral-400">
-          The NorthCap University · InAmigos Foundation · Source Repositories
-        </span>
       </div>
 
-      {/* Narrative Header */}
-      <div className="space-y-1">
-        <Heading as="h4" variant="h4" className="text-base font-bold text-neutral-900">
-          Institutional & Project Records
-        </Heading>
-        <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-relaxed max-w-3xl">
-          Academic performance, internship experience, and engineering projects are grounded in institutional coursework, industry internships, and inspectable codebases.
-        </Text>
-      </div>
-
-      {/* Verification Standards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+      {/* Evidence 3-Column Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
         {/* 1. Academic Record */}
-        <div className="p-3.5 bg-neutral-50/70 border border-neutral-200/80 rounded-sm space-y-1.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
-              01 / Academic
-            </span>
-            <Badge variant="subtle" size="sm">TRANSCRIPT</Badge>
-          </div>
+        <div className="flex flex-col justify-between p-4 bg-slate-50/80 border border-slate-200/80 rounded-xl space-y-3 transition-colors duration-200 hover:border-slate-300">
           <div>
-            <span className="text-xs font-bold text-neutral-950 block">
-              The NorthCap University
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1">
+              01 / Academic Record
             </span>
-            <span className="text-[11px] text-neutral-600 block mt-0.5 leading-normal">
-              Official university semester grade documentation and enrollment records confirming 9.4 first-year CGPA.
+            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-950">
+              The NorthCap University
+            </Heading>
+            <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+              9.4 first-year CGPA in Computer Science & Engineering (AI & ML).
+            </p>
+          </div>
+          <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between">
+            <span className="text-[11px] font-mono text-slate-500">
+              Record available on request
             </span>
           </div>
         </div>
 
-        {/* 2. Industry Experience */}
-        <div className="p-3.5 bg-neutral-50/70 border border-neutral-200/80 rounded-sm space-y-1.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
+        {/* 2. Industry Internship */}
+        <div className="flex flex-col justify-between p-4 bg-slate-50/80 border border-slate-200/80 rounded-xl space-y-3 transition-colors duration-200 hover:border-slate-300 group">
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1">
               02 / Internship
             </span>
-            <Badge variant="subtle" size="sm">ORGANIZATION</Badge>
-          </div>
-          <div>
-            <span className="text-xs font-bold text-neutral-950 block">
+            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-950">
               InAmigos Foundation
-            </span>
-            <span className="text-[11px] text-neutral-600 block mt-0.5 leading-normal">
-              Completed Web Development internship with registered organization documentation.
-            </span>
+            </Heading>
+            <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+              Web Development Internship: developed responsive NGO dummy portal and documentation.
+            </p>
+          </div>
+          <div className="pt-2 border-t border-slate-200/60 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <a
+              href="https://github.com/Naman1012-ai/Foundation_dummy_website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-slate-700 hover:text-slate-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-xs"
+              aria-label="View InAmigos Foundation website prototype repository (opens in new tab)"
+            >
+              <span>Deliverable code</span>
+              <Icon
+                name="arrow-up-right"
+                size="xs"
+                className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
+              />
+            </a>
+            <span className="text-slate-300 text-xs">·</span>
+            <a
+              href="https://inamigosfoundation.org.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-slate-700 hover:text-slate-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-xs"
+              aria-label="Visit InAmigos Foundation organization website (opens in new tab)"
+            >
+              <span>Organization website</span>
+              <Icon
+                name="arrow-up-right"
+                size="xs"
+                className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
+              />
+            </a>
           </div>
         </div>
 
-        {/* 3. Codebase Evidence */}
-        <div className="p-3.5 bg-neutral-50/70 border border-neutral-200/80 rounded-sm space-y-1.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
-              03 / Codebases
-            </span>
-            <Badge variant="subtle" size="sm">REPOSITORIES</Badge>
-          </div>
+        {/* 3. Source Repositories */}
+        <div className="flex flex-col justify-between p-4 bg-slate-50/80 border border-slate-200/80 rounded-xl space-y-3 transition-colors duration-200 hover:border-slate-300 group">
           <div>
-            <span className="text-xs font-bold text-neutral-950 block">
-              Source Code & Test Suites
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1">
+              03 / Source Code
             </span>
-            <span className="text-[11px] text-neutral-600 block mt-0.5 leading-normal">
-              Public GitHub repositories with automated test suites, commit histories, and laboratory bench test harnesses.
-            </span>
+            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-950">
+              GitHub Repositories
+            </Heading>
+            <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+              Public project repositories, commit histories, tests, and documentation.
+            </p>
+          </div>
+          <div className="pt-2 border-t border-slate-200/60">
+            <a
+              href="https://github.com/Naman1012-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-700 group-hover:text-slate-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-xs"
+              aria-label="View Naman Prajapati's GitHub repositories (opens in new tab)"
+            >
+              <span>View repositories</span>
+              <Icon
+                name="arrow-up-right"
+                size="xs"
+                className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
+              />
+            </a>
           </div>
         </div>
       </div>

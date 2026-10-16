@@ -10,11 +10,3 @@ export interface NavItem {
   href: string
 }
 
-export interface ProjectSummary {
-  id: string
-  slug: string
-  title: string
-  summary: string
-  tags: string[]
-  featuredAsset?: string // filename inside /assets/
-}

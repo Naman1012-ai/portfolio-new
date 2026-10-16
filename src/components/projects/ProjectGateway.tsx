@@ -123,10 +123,12 @@ export function ProjectGateway() {
       </div>
 
       {/* Intentional Transition Portal CTA */}
-      <div className="p-6 sm:p-8 rounded-md bg-linear-to-r from-neutral-950 via-neutral-900 to-neutral-950 text-white shadow-elevated border border-neutral-800">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#090D16] text-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] border border-white/10 ring-1 ring-white/5 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="max-w-xl space-y-2">
-            <div className="inline-flex items-center gap-2 px-2 py-0.5 rounded-xs bg-white/10 text-white/90 text-[11px] font-mono uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/90 text-[11px] font-mono uppercase tracking-wider border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
               <span>Dedicated Exploration Environment</span>
             </div>
             <Heading as="h3" variant="h2" className="text-xl sm:text-2xl font-bold tracking-tight text-white">

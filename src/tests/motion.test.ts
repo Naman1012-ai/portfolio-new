@@ -1,7 +1,6 @@
 import { Button } from '@/components/common/Button'
 import { Card } from '@/components/common/Card'
 import { Section } from '@/components/common/Section'
-import { ConviaFlagshipCard } from '@/components/projects/ConviaFlagshipCard'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { ProjectTransitionProvider } from '@/components/projects/ProjectTransitionContext'
 import { useProjectTransition } from '@/components/projects/useProjectTransition'
@@ -63,10 +62,6 @@ export function verifyCinematicMotionAnd3D(): VerificationResult {
 
   if (typeof Section !== 'function') {
     return { passed: false, message: 'Section is not exported as a functional component' }
-  }
-
-  if (typeof ConviaFlagshipCard !== 'function') {
-    return { passed: false, message: 'ConviaFlagshipCard is not exported as a functional component' }
   }
 
   if (typeof ProjectCard !== 'function') {

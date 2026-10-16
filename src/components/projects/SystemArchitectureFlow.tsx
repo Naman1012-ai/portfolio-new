@@ -142,20 +142,20 @@ export function SystemArchitectureFlow({
 
   return (
     <div
-      className={`rounded-sm border border-neutral-300 bg-linear-to-b from-neutral-50/90 to-white p-5 sm:p-6 shadow-micro ${className}`}
+      className={`rounded-2xl border border-slate-200/90 bg-white/95 p-5 sm:p-6 shadow-sm ${className}`}
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-5 border-b border-neutral-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-200/80">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Badge variant="subtle" size="sm" className="font-mono text-[10px] uppercase tracking-wider">
+            <Badge variant="subtle" size="sm" className="font-mono text-[10px] uppercase tracking-wider rounded-full">
               System Architecture Flow
             </Badge>
-            <span className="text-xs font-mono text-neutral-400">· Interactive Data Pipeline</span>
+            <span className="text-xs font-mono text-slate-400">· Interactive Data Pipeline</span>
           </div>
-          <h4 className="font-bold text-base text-neutral-950">{flow.title}</h4>
+          <h4 className="font-bold text-base text-slate-950">{flow.title}</h4>
         </div>
-        <span className="text-xs font-mono text-neutral-500 hidden md:inline max-w-xs text-right">
+        <span className="text-xs font-mono text-slate-500 hidden md:inline max-w-xs text-right">
           Click any stage node to inspect architectural constraints
         </span>
       </div>
@@ -169,25 +169,25 @@ export function SystemArchitectureFlow({
               key={node.id}
               type="button"
               onClick={() => setActiveNodeId(node.id)}
-              className={`p-3.5 rounded-sm border text-left transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 relative ${
+              className={`p-3.5 rounded-xl border text-left transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 relative ${
                 isActive
-                  ? 'border-neutral-950 bg-white shadow-subtle ring-1 ring-neutral-950/20'
-                  : 'border-neutral-200/90 bg-neutral-50/60 hover:bg-white hover:border-neutral-400/80'
+                  ? 'border-slate-900 bg-white shadow-md ring-1 ring-slate-900/10'
+                  : 'border-slate-200/80 bg-slate-50/60 hover:bg-white hover:border-slate-300 hover:shadow-xs'
               }`}
               aria-pressed={isActive}
             >
               <div className="flex items-center justify-between gap-1 mb-1.5">
-                <span className="font-mono text-[10px] text-neutral-400 uppercase tracking-wider">
+                <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider">
                   Stage 0{idx + 1}
                 </span>
                 {isActive && (
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" aria-hidden="true" />
                 )}
               </div>
-              <div className="font-bold text-xs sm:text-sm text-neutral-950 leading-tight mb-1">
+              <div className="font-bold text-xs sm:text-sm text-slate-950 leading-tight mb-1">
                 {node.label}
               </div>
-              <div className="text-[11px] font-mono text-neutral-500 truncate">
+              <div className="text-[11px] font-mono text-slate-500 truncate">
                 {node.role}
               </div>
             </button>
@@ -195,30 +195,31 @@ export function SystemArchitectureFlow({
         })}
       </div>
 
-      {/* Inspected Stage Details */}
+      {/* Inspected Stage Details - Obsidian Tech Panel */}
       {activeNode && (
-        <div className="p-4 bg-neutral-950 text-neutral-100 rounded-sm border border-neutral-800 text-xs font-mono space-y-3 animate-fade-in">
-          <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-neutral-800">
+        <div className="p-5 bg-[#090D16] text-slate-100 rounded-xl border border-white/10 ring-1 ring-white/5 text-xs font-mono space-y-3.5 shadow-xl relative overflow-hidden animate-fade-in">
+          <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-400/40 to-transparent pointer-events-none" />
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <span className="font-bold text-white text-sm">{activeNode.label}</span>
-              <span className="text-neutral-500">·</span>
-              <span className="text-emerald-400">{activeNode.tech}</span>
+              <span className="text-slate-500">·</span>
+              <span className="text-emerald-400 font-medium">{activeNode.tech}</span>
             </div>
-            <span className="text-[11px] text-neutral-400">{activeNode.role}</span>
+            <span className="text-[11px] text-slate-400 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">{activeNode.role}</span>
           </div>
 
-          <p className="text-neutral-300 font-sans text-xs sm:text-sm leading-relaxed">
+          <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">
             {activeNode.detail}
           </p>
 
           {activeNode.decisionId && (
-            <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-800/80">
-              <span className="text-[11px] text-neutral-400">
-                Connected Decision: <span className="text-neutral-200 font-medium">{activeNode.decisionTitle}</span>
+            <div className="pt-2.5 flex flex-wrap items-center justify-between gap-3 border-t border-white/10">
+              <span className="text-[11px] text-slate-400">
+                Connected Decision: <span className="text-slate-200 font-medium">{activeNode.decisionTitle}</span>
               </span>
               <a
                 href="#how-i-build"
-                className="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 underline"
+                className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 hover:underline"
               >
                 <span>Read Engineering Judgement Record</span>
                 <Icon name="arrow-right" size="xs" />

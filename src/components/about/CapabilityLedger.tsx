@@ -35,18 +35,18 @@ export function CapabilityLedger({ className = '' }: CapabilityLedgerProps) {
             key={group.id}
             variant="outlined"
             padding="sm"
-            className="bg-white border-neutral-200/90 shadow-micro space-y-3 hover:border-neutral-300 transition-colors"
+            className="bg-white/95 border-slate-200/90 shadow-[0_2px_8px_-2px_rgba(15,23,42,0.04)] space-y-3 hover:border-slate-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-xl"
           >
-            <div className="flex items-center justify-between gap-2 border-b border-neutral-100 pb-2">
-              <Heading as="h4" variant="h4" className="text-sm font-semibold text-neutral-900">
+            <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
+              <Heading as="h4" variant="h4" className="text-sm font-semibold text-slate-900">
                 {group.title}
               </Heading>
-              <span className="text-[10px] font-mono text-neutral-400">
+              <span className="text-[10px] font-mono text-slate-400">
                 {group.technologies.length} Techs
               </span>
             </div>
 
-            <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-normal">
+            <Text variant="bodySm" tone="secondary" className="text-xs text-slate-600 leading-normal">
               {group.description}
             </Text>
 
@@ -54,14 +54,14 @@ export function CapabilityLedger({ className = '' }: CapabilityLedgerProps) {
               {group.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-0.5 text-[11px] font-mono text-neutral-700 bg-neutral-100/90 border border-neutral-200/70 rounded-xs"
+                  className="px-2.5 py-0.5 text-[11px] font-mono text-slate-700 bg-slate-100/90 border border-slate-200/70 rounded-full shadow-xs"
                 >
                   {tech}
                 </span>
               ))}
             </div>
 
-            <div className="pt-2 border-t border-neutral-100 text-[11px] font-mono text-neutral-500">
+            <div className="pt-2 border-t border-slate-100 text-[11px] font-mono text-slate-500">
               {group.projectEvidence}
             </div>
           </Card>

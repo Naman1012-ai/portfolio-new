@@ -13,19 +13,19 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-linear-to-b from-neutral-800 to-neutral-950 text-white hover:from-neutral-700 hover:to-neutral-900 active:from-neutral-950 active:to-neutral-950 shadow-sm hover:shadow-subtle border border-neutral-700/60 active:border-neutral-950',
+    'bg-gradient-to-b from-neutral-800 to-neutral-950 text-white hover:from-neutral-700 hover:to-neutral-900 active:from-neutral-950 active:to-neutral-950 shadow-md hover:shadow-lg border border-neutral-700/60 active:border-neutral-950 ring-1 ring-white/10',
   secondary:
-    'bg-white text-neutral-900 border border-neutral-300/90 hover:bg-neutral-50 hover:border-neutral-400 active:bg-neutral-100 shadow-micro hover:shadow-subtle active:shadow-none',
+    'bg-white/95 text-slate-900 border border-slate-200/90 hover:bg-slate-50 hover:border-slate-300 active:bg-slate-100 shadow-xs hover:shadow-sm active:shadow-none backdrop-blur-xs',
   outline:
-    'bg-transparent text-neutral-800 border border-neutral-300 hover:bg-neutral-100/80 hover:border-neutral-400 active:bg-neutral-200/80',
+    'bg-transparent text-slate-800 border border-slate-300 hover:bg-slate-100/80 hover:border-slate-400 active:bg-slate-200/80',
   ghost:
-    'bg-transparent text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950 active:bg-neutral-200 border border-transparent',
+    'bg-transparent text-slate-700 hover:bg-slate-100/80 hover:text-slate-950 active:bg-slate-200 border border-transparent',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'h-8 px-3 text-xs gap-1.5 rounded-sm',
-  md: 'h-9 px-4 text-sm gap-2 rounded-sm',
-  lg: 'h-11 px-5 text-base gap-2.5 rounded-md',
+  sm: 'h-8 px-3.5 text-xs gap-1.5 rounded-full',
+  md: 'h-9 px-4.5 text-sm gap-2 rounded-full',
+  lg: 'h-11 px-6 text-base gap-2.5 rounded-full',
 }
 
 /**

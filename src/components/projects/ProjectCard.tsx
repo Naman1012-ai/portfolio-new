@@ -86,10 +86,10 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
       as="article"
       variant="outlined"
       padding="md"
-      className={`group group/card flex flex-col justify-between transition-all duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none relative ${
+      className={`group group/card flex flex-col justify-between transition-all duration-300 ease-out hover:-translate-y-1.5 motion-reduce:transform-none motion-reduce:transition-none relative ${
         isPerspectiveTarget
           ? 'border-neutral-900 ring-2 ring-neutral-950/20 shadow-elevated bg-white'
-          : 'border-neutral-200/90 bg-white hover:border-neutral-400/90 hover:shadow-cinematic'
+          : 'border-slate-200/90 bg-white/95 hover:border-slate-300 hover:shadow-[0_12px_32px_-6px_rgba(15,23,42,0.1),0_4px_12px_-2px_rgba(15,23,42,0.05)]'
       } ${
         isThisEntering
           ? 'ring-2 ring-neutral-900/20 shadow-cinematic-lg scale-[1.02] z-30'
@@ -164,7 +164,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
         >
           <div
             style={transformStyle}
-            className={`rounded-sm border border-neutral-200/90 overflow-hidden bg-neutral-950 aspect-video relative group/thumb shadow-micro transition-all duration-300 hover:shadow-cinematic ${
+            className={`rounded-xl border border-slate-200/90 overflow-hidden bg-neutral-950 aspect-video relative group/thumb shadow-sm transition-all duration-300 hover:shadow-md ${
               isThisEntering ? 'scale-105' : ''
             }`}
           >
@@ -240,7 +240,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="px-2 py-0.5 text-[11px] font-mono text-neutral-700 bg-neutral-100 rounded-xs transition-colors duration-150 hover:bg-neutral-200 hover:text-neutral-900 border border-neutral-200/40"
+              className="px-2.5 py-0.5 text-[11px] font-mono text-slate-700 bg-slate-100 rounded-full transition-colors duration-150 hover:bg-slate-200 hover:text-slate-950 border border-slate-200/60 shadow-xs"
             >
               {tech}
             </span>
@@ -248,7 +248,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
         </div>
 
         {/* Action Controls Bar — Permanently accessible on all devices */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-neutral-100 text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 text-xs">
           <div className="flex items-center gap-2">
             <Link to={`/projects/${project.slug}`} onClick={handleCardNavigation}>
               <Button
@@ -266,10 +266,10 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-mono text-[11px] font-medium text-emerald-800 hover:text-emerald-950 px-2 py-1 rounded-xs bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+                className="inline-flex items-center gap-1 font-mono text-[11px] font-medium text-emerald-800 hover:text-emerald-950 px-2.5 py-1 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 shadow-xs"
                 aria-label={`Open ${project.title} live demo (opens in new tab)`}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" aria-hidden="true" />
                 <span>Live Demo</span>
                 <Icon name="arrow-up-right" size="xs" />
               </a>

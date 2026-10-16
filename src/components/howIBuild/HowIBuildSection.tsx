@@ -100,7 +100,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
           <button
             type="button"
             onClick={isAllExpanded ? collapseAll : expandAll}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-mono font-medium text-neutral-600 hover:text-neutral-950 border border-neutral-200 bg-white hover:bg-neutral-50 shadow-micro transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-slate-700 hover:text-slate-950 border border-slate-200 bg-white hover:bg-slate-50 shadow-xs transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
             aria-label={isAllExpanded ? 'Collapse all decision records' : 'Expand all decision records'}
           >
             <Icon
@@ -117,7 +117,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
       <div className="relative">
         {/* Continuous Left Spine Connector */}
         <div
-          className="absolute left-[19px] sm:left-[23px] top-6 bottom-8 w-0.5 bg-neutral-200/80 -z-0"
+          className="absolute left-[19px] sm:left-[23px] top-6 bottom-8 w-0.5 bg-slate-200/80 -z-0"
           aria-hidden="true"
         />
 
@@ -144,8 +144,8 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                     isTargetedByPerspective
                       ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-neutral-200'
                       : isExpanded
-                        ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-neutral-100'
-                        : 'bg-white text-neutral-500 border border-neutral-300 hover:border-neutral-400 hover:text-neutral-900 shadow-micro'
+                        ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-slate-100'
+                        : 'bg-white text-slate-500 border border-slate-200/90 hover:border-slate-400 hover:text-slate-900 shadow-xs'
                   }`}
                   aria-label={`Toggle decision record 0${index + 1}: ${entry.decisionTitle || entry.projectTitle}`}
                 >
@@ -156,16 +156,16 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                 <Card
                   variant="outlined"
                   padding="none"
-                  className={`flex-1 bg-white transition-all duration-300 overflow-hidden ${
+                  className={`flex-1 bg-white/95 transition-all duration-300 overflow-hidden rounded-2xl ${
                     isTargetedByPerspective
                       ? 'border-neutral-900 ring-2 ring-neutral-950/20 shadow-elevated'
                       : isExpanded
-                        ? 'border-neutral-400/90 shadow-cinematic ring-1 ring-neutral-900/5'
-                        : 'border-neutral-200/90 shadow-subtle hover:border-neutral-300'
+                        ? 'border-slate-300/90 shadow-[0_12px_32px_-6px_rgba(15,23,42,0.1)] ring-1 ring-neutral-900/5'
+                        : 'border-slate-200/90 shadow-[0_2px_8px_-2px_rgba(15,23,42,0.05)] hover:border-slate-300'
                   }`}
                 >
                   {/* Collapsed/Header Action Trigger */}
-                  <div className="p-5 sm:p-7 border-b border-neutral-100">
+                  <div className="p-5 sm:p-7 border-b border-slate-100">
                     {/* Top Metadata Strip: Project Pill, Context, and Architectural Tags */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
                       <div className="flex flex-wrap items-center gap-2">
@@ -173,7 +173,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                           <Link
                             to={`/projects/${entry.projectSlug}`}
                             onClick={(e) => handleProjectLink(e, entry.projectSlug!)}
-                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-neutral-900 text-white text-xs font-mono font-medium hover:bg-neutral-800 transition-colors shadow-micro"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-white text-xs font-mono font-medium hover:bg-neutral-800 transition-colors shadow-xs"
                             aria-label={`Open ${entry.projectTitle} case study`}
                           >
                             <span>{entry.projectTitle}</span>

@@ -56,13 +56,14 @@ export function InteractiveFeatureInspector({
 
   if (projectSlug === 'resumetrices') {
     return (
-      <div className={`p-4 sm:p-5 rounded-sm border border-neutral-300 bg-neutral-900 text-neutral-100 font-mono text-xs ${className}`}>
-        <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-neutral-800">
+      <div className={`p-5 sm:p-6 rounded-2xl border border-white/10 bg-[#090D16] text-slate-100 font-mono text-xs shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden ${className}`}>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent" />
+        <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-neutral-800/80">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" aria-hidden="true" />
             <span className="font-bold text-white text-xs">Live Pipeline Sandbox: ResumeTrices</span>
           </div>
-          <Badge variant="subtle" size="sm" className="text-[10px] uppercase font-mono">
+          <Badge variant="obsidian" size="sm" className="text-[10px] uppercase font-mono">
             Deterministic Schema Runner
           </Badge>
         </div>
@@ -109,13 +110,14 @@ export function InteractiveFeatureInspector({
     const printableHeight = (pageHeight - margin * 2).toFixed(1)
 
     return (
-      <div className={`p-4 sm:p-5 rounded-sm border border-neutral-300 bg-neutral-900 text-neutral-100 font-mono text-xs ${className}`}>
-        <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-neutral-800">
+      <div className={`p-5 sm:p-6 rounded-2xl border border-white/10 bg-[#090D16] text-slate-100 font-mono text-xs shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] ring-1 ring-white/5 relative overflow-hidden ${className}`}>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+        <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-neutral-800/80">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]" aria-hidden="true" />
             <span className="font-bold text-white text-xs">Client-Side Vector Engine Simulator</span>
           </div>
-          <Badge variant="subtle" size="sm" className="text-[10px] uppercase font-mono">
+          <Badge variant="obsidian" size="sm" className="text-[10px] uppercase font-mono">
             Zero Server Calls
           </Badge>
         </div>

@@ -70,7 +70,7 @@ export function ProjectsPage() {
           <div className="flex items-center justify-between gap-4 mb-6">
             <Link
               to="/"
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500 hover:text-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 rounded-xs px-1 py-0.5"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-500 hover:text-slate-950 px-3 py-1 rounded-full bg-slate-100/90 hover:bg-slate-200/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 shadow-xs"
             >
               <Icon name="arrow-left" size="xs" />
               <span>Back to Home</span>
@@ -135,10 +135,10 @@ export function ProjectsPage() {
                   key={cat.value}
                   type="button"
                   onClick={() => setSelectedCategory(cat.value)}
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-sm text-xs font-mono font-medium transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
+                  className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
                     isActive
-                      ? 'bg-neutral-900 text-white shadow-micro'
-                      : 'bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-300 hover:text-neutral-900'
+                      ? 'bg-neutral-950 text-white shadow-xs'
+                      : 'bg-white/95 text-slate-600 hover:text-slate-950 hover:bg-slate-50 border border-slate-200/90 shadow-xs'
                   }`}
                   aria-pressed={isActive}
                 >
