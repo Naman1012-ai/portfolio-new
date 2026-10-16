@@ -1,4 +1,5 @@
 import { Layout } from '@/components'
+import { ProjectTransitionProvider } from '@/components/projects'
 import { HomePage, NotFoundPage, ProjectDetailPage } from '@/pages'
 import { RouterProvider, useRouter } from '@/router'
 
@@ -21,7 +22,9 @@ function AppContent() {
 export function App() {
   return (
     <RouterProvider>
-      <AppContent />
+      <ProjectTransitionProvider>
+        <AppContent />
+      </ProjectTransitionProvider>
     </RouterProvider>
   )
 }

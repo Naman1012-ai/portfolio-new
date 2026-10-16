@@ -1,8 +1,10 @@
+import { type MouseEvent } from 'react'
 import { Badge, Button, Card, Heading, Icon, Text, TextLink } from '@/components/common'
 import { useTilt3D } from '@/hooks'
 import { Link } from '@/router'
 import type { Project } from '@/types'
 import { isAssetAvailable, resolveSafeAssetUrl } from '@/utils'
+import { useProjectTransition } from './useProjectTransition'
 
 export interface ConviaFlagshipCardProps {
   project: Project
@@ -12,7 +14,8 @@ export interface ConviaFlagshipCardProps {
 /**
  * High-prominence flagship showcase card for Convia.
  * Demonstrates architectural scope, live ideation mechanics, and direct case study access
- * with real pointer-position-driven 3D spatial perspective and dynamic ambient lighting.
+ * with real pointer-position-driven 3D spatial perspective, dynamic ambient lighting,
+ * and cinematic "Discover → Focus → Enter" interaction.
  */
 export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCardProps) {
   const logoUrl = resolveSafeAssetUrl(project.evidence?.assetFilename)
@@ -20,6 +23,10 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
   const hasPreview = isAssetAvailable('convia-preview.png')
   const previewUrl = hasPreview ? resolveSafeAssetUrl('convia-preview.png') : null
   const previewWebpUrl = hasPreview ? resolveSafeAssetUrl('convia-preview.webp') : null
+
+  const { enteringSlug, isTransitioning, enterProject } = useProjectTransition()
+  const isThisEntering = enteringSlug === project.slug
+  const isOtherEntering = isTransitioning && !isThisEntering
 
   const {
     ref: tiltRef,
@@ -30,20 +37,34 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
     glareStyle,
     handlers: tiltHandlers,
   } = useTilt3D<HTMLDivElement>({
-    maxRotationX: 3.5,
-    maxRotationY: 4.5,
+    maxRotationX: 3.2,
+    maxRotationY: 4.2,
     scale: 1.006,
     perspective: 1200,
     glare: true,
     glareOpacity: 0.12,
   })
 
+  const handleCardNavigation = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+      return
+    }
+    e.preventDefault()
+    enterProject(project.slug)
+  }
+
   return (
     <Card
       as="article"
       variant="outlined"
       padding="none"
-      className={`group/convia overflow-hidden border-neutral-300/90 bg-linear-to-b from-white via-neutral-50/40 to-neutral-100/50 shadow-subtle hover:shadow-cinematic hover:border-neutral-400/80 transition-all duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none ${className}`}
+      className={`group/convia overflow-hidden border-neutral-300/90 bg-linear-to-b from-white via-neutral-50/40 to-neutral-100/50 shadow-subtle hover:shadow-cinematic hover:border-neutral-400/80 transition-all duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none ${
+        isThisEntering
+          ? 'ring-2 ring-neutral-900/20 shadow-cinematic-lg scale-[1.02] z-30'
+          : isOtherEntering
+            ? 'opacity-35 scale-[0.985] blur-[0.5px] pointer-events-none'
+            : ''
+      } ${className}`}
     >
       <div className="p-5 sm:p-8 md:p-10">
         {/* Top Metadata Strip */}
@@ -52,8 +73,8 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
             <Badge variant="accent" size="sm" className="shadow-micro tracking-wide">
               FLAGSHIP #{project.featuredRank || 1}
             </Badge>
-            <Badge variant="subtle" size="sm">
-              {project.category.replace('-', ' ').toUpperCase()}
+            <Badge variant="subtle" size="sm" className="font-mono text-[10px] tracking-wider uppercase">
+              {project.category.replace('-', ' ')}
             </Badge>
             <Badge variant="neutral" size="sm" dot dotColor="bg-amber-500">
               {project.maturity.replace('-', ' ').toUpperCase()}
@@ -85,6 +106,7 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
             <Heading as="h3" variant="h2" className="text-xl sm:text-2xl font-bold">
               <Link
                 to={`/projects/${project.slug}`}
+                onClick={handleCardNavigation}
                 className="hover:text-neutral-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 rounded-xs"
               >
                 {project.title}
@@ -113,7 +135,7 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
             ref={tiltRef}
             style={containerStyle}
             {...tiltHandlers}
-            className="mb-8 cursor-pointer select-none"
+            className="mb-8 cursor-pointer select-none perspective-project"
             data-testid="convia-3d-showcase"
             data-tilt-active={isTiltActive}
             data-rotate-x={tiltState.rotateX}
@@ -123,9 +145,16 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
           >
             <div
               style={transformStyle}
-              className="rounded-md border border-neutral-800/80 overflow-hidden bg-neutral-950 shadow-elevated group/preview relative transition-shadow duration-300 hover:shadow-cinematic-lg hover:border-neutral-700"
+              className={`rounded-md border border-neutral-800/80 overflow-hidden bg-neutral-950 shadow-elevated group/preview relative transition-all duration-300 hover:shadow-cinematic-lg hover:border-neutral-700 ${
+                isThisEntering ? 'scale-105' : ''
+              }`}
             >
-              <Link to={`/projects/${project.slug}`} className="block relative" aria-label="Open Convia flagship case study preview">
+              <Link
+                to={`/projects/${project.slug}`}
+                onClick={handleCardNavigation}
+                className="block relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+                aria-label="Open Convia flagship case study preview"
+              >
                 {/* Layer 1: Genuine Workspace Screenshot */}
                 <picture className="w-full block">
                   {previewWebpUrl && <source type="image/webp" srcSet={previewWebpUrl} />}
@@ -143,7 +172,7 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
                 {/* Layer 2: Dynamic Pointer-Responsive Radial Glare Spotlight */}
                 <div
                   style={glareStyle}
-                  className="absolute inset-0 z-10"
+                  className="absolute inset-0 z-10 pointer-events-none"
                   aria-hidden="true"
                 />
 
@@ -192,12 +221,12 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
         {/* Action Controls Bar */}
         <div className="pt-4 border-t border-neutral-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-3">
-            <Link to={`/projects/${project.slug}`}>
+            <Link to={`/projects/${project.slug}`} onClick={handleCardNavigation}>
               <Button
                 variant="primary"
                 size="md"
                 rightIcon={<Icon name="arrow-right" size="sm" />}
-                aria-label="Read Convia flagship case study"
+                aria-label="View Convia case study"
               >
                 Case Study
               </Button>

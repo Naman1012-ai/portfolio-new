@@ -3,6 +3,8 @@ import { Card } from '@/components/common/Card'
 import { Section } from '@/components/common/Section'
 import { ConviaFlagshipCard } from '@/components/projects/ConviaFlagshipCard'
 import { ProjectCard } from '@/components/projects/ProjectCard'
+import { ProjectTransitionProvider } from '@/components/projects/ProjectTransitionContext'
+import { useProjectTransition } from '@/components/projects/useProjectTransition'
 import { useParallaxDepth } from '@/hooks/useParallaxDepth'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { useTilt3D } from '@/hooks/useTilt3D'
@@ -69,6 +71,15 @@ export function verifyCinematicMotionAnd3D(): VerificationResult {
 
   if (typeof ProjectCard !== 'function') {
     return { passed: false, message: 'ProjectCard is not exported as a functional component' }
+  }
+
+  // 6. Verify Project Selection Transition exports
+  if (typeof ProjectTransitionProvider !== 'function') {
+    return { passed: false, message: 'ProjectTransitionProvider is not exported as a functional component' }
+  }
+
+  if (typeof useProjectTransition !== 'function') {
+    return { passed: false, message: 'useProjectTransition is not exported as a functional hook' }
   }
 
   return {

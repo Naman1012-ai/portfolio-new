@@ -1,141 +1,551 @@
+import { useState, type MouseEvent, type KeyboardEvent } from 'react'
 import { Badge } from '@/components/common/Badge'
 import { Heading } from '@/components/common/Heading'
+import { Icon } from '@/components/common/Icon'
 import { Section } from '@/components/common/Section'
 import { Text } from '@/components/common/Text'
-import { aboutData, siteProfile } from '@/data'
+import { useProjectTransition } from '@/components/projects'
+import { aboutData, aboutLenses, siteProfile } from '@/data'
+import { Link } from '@/router'
 import { resolveSafeAssetUrl } from '@/utils'
 
 export interface AboutSectionProps {
   className?: string
 }
 
+type LensId = 'building-toward' | 'how-i-learn' | 'whats-next'
+
 /**
- * Editorial About Section presenting personal narrative, engineering identity,
- * and asset-resolved portrait with graceful fallback.
+ * Editorial Interactive Identity + Evidence Hub.
  *
- * Grounded strictly in confirmed personal themes:
- * - CSE (AI & ML) at The NorthCap University to understand systems and turn ideas into products
- * - Investigative approach: inspecting existing code and root causes before modifying systems
- * - Disciplined validation using automated tests and actual application behavior
- * - Current learning areas: Python, Java, SQL, databases, AI/ML, and embedded systems
- * - Long-term ambition: building enduring products and technology ventures
+ * Bridges:
+ * PERSON → PROJECTS → ENGINEERING JUDGEMENT → CAPABILITIES
+ *
+ * Levels of interaction:
+ * 1. Interactive Hero Statement: Conceptual phrases subtly linked to identity lenses.
+ * 2. Three Identity Lenses: Selectable columns with active visual dominance.
+ * 3. Evidence Layer ("WHERE THIS SHOWS UP" / "SEE IT IN THE WORK"): Connects personal narrative
+ *    directly to verified repository implementations, architecture decisions, and active research.
+ * 4. Grounded Status Strip: Clean student context with current exploration topics.
+ *
+ * Fully keyboard accessible, responsive, and respectful of prefers-reduced-motion.
  */
 export function AboutSection({ className = '' }: AboutSectionProps) {
+  const [activeLensId, setActiveLensId] = useState<LensId>('building-toward')
+  const { enterProject } = useProjectTransition()
   const profileUrl = resolveSafeAssetUrl(aboutData.portrait.assetFilename)
+
+  const activeLens = aboutLenses.find((lens) => lens.id === activeLensId) || aboutLenses[0]
+
+  const handleEvidenceClick = (
+    e: MouseEvent<HTMLAnchorElement>,
+    slug?: string,
+    anchorHref?: string
+  ) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+      return
+    }
+
+    if (slug) {
+      e.preventDefault()
+      enterProject(slug)
+      return
+    }
+
+    if (anchorHref && anchorHref.startsWith('#')) {
+      e.preventDefault()
+      const target = document.querySelector(anchorHref)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
+
+  const handleLensKeyDown = (e: KeyboardEvent<HTMLDivElement>, lensId: LensId) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      setActiveLensId(lensId)
+    }
+  }
 
   return (
     <Section id="about" spacing="lg" bordered reveal className={className}>
-      {/* Section Header */}
-      <div className="w-full max-w-3xl min-w-0 mb-10">
-        <div className="inline-flex items-center mb-3">
-          <Badge variant="lavender" size="sm" className="font-mono tracking-wider text-[10px]">
+      {/* 1. Section Eyebrow & Status Strip */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div className="inline-flex items-center gap-2">
+          <Badge variant="lavender" size="sm" className="font-mono tracking-wider text-[10px] uppercase">
             {aboutData.badge}
           </Badge>
+          <span className="text-neutral-300 font-mono text-xs hidden sm:inline">·</span>
+          <span className="text-xs font-mono text-neutral-500">
+            Interactive Identity & Evidence Hub
+          </span>
         </div>
-        <Heading as="h2" variant="h1" className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mb-3">
-          {aboutData.heading}
+
+        <div className="inline-flex items-center gap-2 text-xs font-mono text-neutral-500">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+          <span>Undergraduate · Actively Building</span>
+        </div>
+      </div>
+
+      {/* 2. Interactive Hero Statement (Level 1) */}
+      <div className="max-w-3xl mb-8">
+        <Heading
+          as="h2"
+          variant="h1"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 tracking-tight leading-snug mb-3"
+        >
+          <button
+            type="button"
+            onClick={() => setActiveLensId('building-toward')}
+            className={`text-left inline transition-all duration-150 cursor-pointer rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 border-b-2 ${
+              activeLensId === 'building-toward'
+                ? 'border-neutral-950 text-neutral-950 pb-0.5'
+                : 'border-transparent text-neutral-800 hover:border-neutral-400'
+            }`}
+            aria-label="Building software (Select What I'm Building Toward lens)"
+          >
+            Building software
+          </button>
+          <span className="text-neutral-400 font-normal">, </span>
+          <button
+            type="button"
+            onClick={() => setActiveLensId('whats-next')}
+            className={`text-left inline transition-all duration-150 cursor-pointer rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 border-b-2 ${
+              activeLensId === 'whats-next'
+                ? 'border-neutral-950 text-neutral-950 pb-0.5'
+                : 'border-transparent text-neutral-800 hover:border-neutral-400'
+            }`}
+            aria-label="exploring AI/ML (Select What's Next lens)"
+          >
+            exploring AI/ML
+          </button>
+          <span className="text-neutral-400 font-normal">, and </span>
+          <button
+            type="button"
+            onClick={() => setActiveLensId('how-i-learn')}
+            className={`text-left inline transition-all duration-150 cursor-pointer rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 border-b-2 ${
+              activeLensId === 'how-i-learn'
+                ? 'border-neutral-950 text-neutral-950 pb-0.5'
+                : 'border-transparent text-neutral-800 hover:border-neutral-400'
+            }`}
+            aria-label="learning (Select How I Learn lens)"
+          >
+            learning
+          </button>
+          <span className="text-neutral-400 font-normal"> by working through </span>
+          <button
+            type="button"
+            onClick={() => setActiveLensId('building-toward')}
+            className={`text-left inline transition-all duration-150 cursor-pointer rounded-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 border-b-2 ${
+              activeLensId === 'building-toward'
+                ? 'border-neutral-950 text-neutral-950 pb-0.5'
+                : 'border-transparent text-neutral-800 hover:border-neutral-400'
+            }`}
+            aria-label="real problems (Select What I'm Building Toward lens)"
+          >
+            real problems.
+          </button>
         </Heading>
-        <Text variant="lead" tone="secondary" className="text-neutral-600 leading-relaxed text-sm sm:text-base">
+
+        <Text
+          variant="lead"
+          tone="secondary"
+          className="text-neutral-600 text-sm sm:text-base leading-relaxed"
+        >
           {aboutData.subheading}
         </Text>
       </div>
 
-      {/* Editorial Two-Column Layout: Story on Left, Portrait Slot on Right */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* Left Column: First-Person Personal Narrative */}
-        <div className="lg:col-span-8 space-y-5">
-          <div className="p-4 sm:p-5 rounded-sm bg-neutral-50/80 border border-neutral-200/90 text-neutral-800 text-sm sm:text-base leading-relaxed font-sans font-medium">
-            {aboutData.intro}
+      {/* Subtle Hairline Divider */}
+      <div className="w-full border-t border-neutral-200/80 mb-8" aria-hidden="true" />
+
+      {/* 3. Desktop: Three Interactive Lenses (Level 2) */}
+      <div
+        role="tablist"
+        aria-label="About Me identity lenses"
+        className="hidden md:grid grid-cols-3 gap-6 lg:gap-8 items-start mb-8"
+      >
+        {/* Column 01: What I'm Building Toward */}
+        <div
+          role="tab"
+          id="lens-tab-building-toward"
+          aria-selected={activeLensId === 'building-toward'}
+          aria-controls="about-evidence-panel"
+          tabIndex={0}
+          onClick={() => setActiveLensId('building-toward')}
+          onKeyDown={(e) => handleLensKeyDown(e, 'building-toward')}
+          className={`group cursor-pointer p-5 rounded-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
+            activeLensId === 'building-toward'
+              ? 'bg-neutral-50/90 border-t-2 border-neutral-950 shadow-subtle'
+              : 'border-t-2 border-transparent bg-transparent hover:bg-neutral-50/50 opacity-70 hover:opacity-100'
+          }`}
+        >
+          <div className="border-b border-neutral-200/80 pb-3 mb-3">
+            <div className="flex items-center justify-between gap-2 mb-1">
+              <span className="font-mono text-xs font-semibold text-neutral-400 tracking-wider uppercase block">
+                01 / About Me
+              </span>
+              {activeLensId === 'building-toward' && (
+                <span className="inline-flex items-center gap-1 text-[10px] font-mono text-neutral-900 bg-neutral-200/80 px-1.5 py-0.5 rounded-xs font-medium">
+                  Active Lens ↓
+                </span>
+              )}
+            </div>
+            <Heading as="h3" variant="h3" className="text-base sm:text-lg font-bold text-neutral-950">
+              What I&apos;m Building Toward
+            </Heading>
           </div>
 
-          <div className="space-y-4 text-neutral-600 text-sm leading-relaxed">
+          <Text variant="bodySm" tone="secondary" className="text-sm text-neutral-700 leading-relaxed font-normal mb-3">
+            {aboutData.intro}
+          </Text>
+
+          <p className="text-xs font-mono text-neutral-500 pt-1 border-t border-neutral-200/60">
+            CSE (AI & ML) student exploring full-stack web platforms and backend prototypes.
+          </p>
+        </div>
+
+        {/* Column 02: How I Learn */}
+        <div
+          role="tab"
+          id="lens-tab-how-i-learn"
+          aria-selected={activeLensId === 'how-i-learn'}
+          aria-controls="about-evidence-panel"
+          tabIndex={0}
+          onClick={() => setActiveLensId('how-i-learn')}
+          onKeyDown={(e) => handleLensKeyDown(e, 'how-i-learn')}
+          className={`group cursor-pointer p-5 rounded-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
+            activeLensId === 'how-i-learn'
+              ? 'bg-neutral-50/90 border-t-2 border-neutral-950 shadow-subtle'
+              : 'border-t-2 border-transparent bg-transparent hover:bg-neutral-50/50 opacity-70 hover:opacity-100'
+          }`}
+        >
+          <div className="border-b border-neutral-200/80 pb-3 mb-3">
+            <div className="flex items-center justify-between gap-2 mb-1">
+              <span className="font-mono text-xs font-semibold text-neutral-400 tracking-wider uppercase block">
+                02 / How I Learn
+              </span>
+              {activeLensId === 'how-i-learn' && (
+                <span className="inline-flex items-center gap-1 text-[10px] font-mono text-neutral-900 bg-neutral-200/80 px-1.5 py-0.5 rounded-xs font-medium">
+                  Active Lens ↓
+                </span>
+              )}
+            </div>
+            <Heading as="h3" variant="h3" className="text-base sm:text-lg font-bold text-neutral-950">
+              Build → Break → Understand → Improve
+            </Heading>
+          </div>
+
+          <div className="space-y-2.5 text-sm text-neutral-700 leading-relaxed mb-3">
             {aboutData.storyParagraphs.map((paragraph, idx) => (
               <p key={idx}>{paragraph}</p>
             ))}
           </div>
 
-          {/* Current Learning Focus */}
-          <div className="pt-2">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 block mb-2 font-semibold">
-              {aboutData.learningFocus.label}
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {aboutData.learningFocus.topics.map((topic) => (
-                <span
-                  key={topic}
-                  className="px-2.5 py-1 text-xs font-mono font-medium bg-white text-neutral-800 border border-neutral-200 rounded-xs shadow-micro"
-                >
-                  {topic}
+          <p className="text-xs font-mono text-neutral-500 pt-1 border-t border-neutral-200/60">
+            Learning through experimentation, reading documentation, and debugging real issues.
+          </p>
+        </div>
+
+        {/* Column 03: What's Next */}
+        <div
+          role="tab"
+          id="lens-tab-whats-next"
+          aria-selected={activeLensId === 'whats-next'}
+          aria-controls="about-evidence-panel"
+          tabIndex={0}
+          onClick={() => setActiveLensId('whats-next')}
+          onKeyDown={(e) => handleLensKeyDown(e, 'whats-next')}
+          className={`group cursor-pointer p-5 rounded-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
+            activeLensId === 'whats-next'
+              ? 'bg-neutral-50/90 border-t-2 border-neutral-950 shadow-subtle'
+              : 'border-t-2 border-transparent bg-transparent hover:bg-neutral-50/50 opacity-70 hover:opacity-100'
+          }`}
+        >
+          <div className="border-b border-neutral-200/80 pb-3 mb-3">
+            <div className="flex items-center justify-between gap-2 mb-1">
+              <span className="font-mono text-xs font-semibold text-neutral-400 tracking-wider uppercase block">
+                03 / What&apos;s Next
+              </span>
+              {activeLensId === 'whats-next' && (
+                <span className="inline-flex items-center gap-1 text-[10px] font-mono text-neutral-900 bg-neutral-200/80 px-1.5 py-0.5 rounded-xs font-medium">
+                  Active Lens ↓
                 </span>
-              ))}
+              )}
             </div>
+            <Heading as="h3" variant="h3" className="text-base sm:text-lg font-bold text-neutral-950">
+              Software, AI & Bigger Problems
+            </Heading>
           </div>
 
-          {/* Long-Term Venture Ambition Box */}
-          <div className="p-4 rounded-sm border-l-2 border-lavender-600 bg-lavender-50/50 border-neutral-200/80 text-xs sm:text-sm text-neutral-700 leading-normal">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-lavender-700 block mb-1 font-semibold">
-              Long-Term Ambition
-            </span>
+          <Text variant="bodySm" tone="secondary" className="text-sm text-neutral-700 leading-relaxed font-normal mb-3">
             {aboutData.longTermAmbition}
-          </div>
+          </Text>
+
+          <p className="text-xs font-mono text-neutral-500 pt-1 border-t border-neutral-200/60">
+            Currently exploring structured LLM workflows, API design, and practical systems engineering.
+          </p>
         </div>
+      </div>
 
-        {/* Right Column: Portrait Slot with Automatic Asset Resolution & NP Placeholder */}
-        <div className="lg:col-span-4 w-full">
-          {profileUrl ? (
+      {/* 3b. Mobile: Vertical Interactive Sequence (Level 2) */}
+      <div className="md:hidden space-y-4 mb-8">
+        {aboutLenses.map((lens) => {
+          const isActive = activeLensId === lens.id
+          return (
             <div
-              data-testid="about-portrait-image"
-              className="relative aspect-4/5 w-full max-w-sm mx-auto rounded-sm overflow-hidden border border-neutral-300 shadow-subtle bg-neutral-100 group"
+              key={lens.id}
+              className={`rounded-sm border transition-all duration-200 ${
+                isActive ? 'border-neutral-950 bg-neutral-50/80' : 'border-neutral-200/90 bg-white'
+              }`}
             >
-              <img
-                src={profileUrl}
-                alt={aboutData.portrait.alt}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-x-0 bottom-0 p-3 bg-neutral-900/80 backdrop-blur-xs text-white text-[11px] font-mono">
-                {aboutData.portrait.caption}
-              </div>
-            </div>
-          ) : (
-            <div
-              data-testid="about-portrait-placeholder"
-              className="relative aspect-4/5 w-full max-w-sm mx-auto rounded-sm border border-neutral-300 bg-linear-to-b from-neutral-50 via-white to-neutral-100/70 p-6 flex flex-col justify-between shadow-subtle select-none"
-            >
-              <div className="flex items-center justify-between border-b border-neutral-200/80 pb-3">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 font-semibold">
-                  Profile Portrait
-                </span>
-                <Badge variant="subtle" size="sm" className="font-mono text-[10px]">
-                  PENDING CAPTURE
-                </Badge>
-              </div>
-
-              <div className="my-auto flex flex-col items-center justify-center text-center space-y-3 py-6">
-                <div className="w-20 h-20 rounded-sm bg-neutral-900 text-white flex items-center justify-center text-2xl font-bold font-mono shadow-micro ring-4 ring-neutral-100">
-                  NP
-                </div>
+              <button
+                type="button"
+                onClick={() => setActiveLensId(lens.id)}
+                className="w-full text-left p-4 flex items-center justify-between gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 rounded-sm"
+              >
                 <div>
-                  <span className="text-sm font-bold text-neutral-950 block">
-                    Naman Prajapati
+                  <span className="font-mono text-[11px] text-neutral-400 uppercase tracking-wider block">
+                    {lens.indexLabel}
                   </span>
-                  <span className="text-xs text-neutral-500 font-mono block mt-0.5">
-                    {siteProfile.title}
+                  <span className="font-bold text-neutral-950 text-base block mt-0.5">
+                    {lens.title}
                   </span>
                 </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span
+                    className={`text-xs font-mono px-2 py-0.5 rounded-xs ${
+                      isActive ? 'bg-neutral-950 text-white' : 'bg-neutral-100 text-neutral-600'
+                    }`}
+                  >
+                    {isActive ? 'Active' : 'Tap to View'}
+                  </span>
+                </div>
+              </button>
+
+              {isActive && (
+                <div className="px-4 pb-4 pt-1 border-t border-neutral-200/70 text-sm text-neutral-700 space-y-3">
+                  {lens.id === 'building-toward' && (
+                    <Text variant="bodySm" tone="secondary" className="text-sm leading-relaxed">
+                      {aboutData.intro}
+                    </Text>
+                  )}
+                  {lens.id === 'how-i-learn' && (
+                    <div className="space-y-2 text-sm leading-relaxed">
+                      {aboutData.storyParagraphs.map((p, idx) => (
+                        <p key={idx}>{p}</p>
+                      ))}
+                    </div>
+                  )}
+                  {lens.id === 'whats-next' && (
+                    <Text variant="bodySm" tone="secondary" className="text-sm leading-relaxed">
+                      {aboutData.longTermAmbition}
+                    </Text>
+                  )}
+
+                  {/* Inline Mobile Evidence */}
+                  <div className="pt-3 border-t border-neutral-200/80 space-y-3">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-500 font-semibold block">
+                      {lens.evidenceLabel}
+                    </span>
+                    {lens.evidenceItems.map((item) => (
+                      <div
+                        key={item.id}
+                        className="p-3 bg-white rounded-xs border border-neutral-200 space-y-1.5"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[10px] font-mono uppercase text-neutral-500 font-medium">
+                            {item.badge}
+                          </span>
+                          {item.status && (
+                            <span className="text-[10px] font-mono text-neutral-400">
+                              {item.status}
+                            </span>
+                          )}
+                        </div>
+                        <h4 className="font-bold text-sm text-neutral-950">{item.title}</h4>
+                        <p className="text-xs text-neutral-600 leading-relaxed">{item.relevance}</p>
+                        <div className="pt-1">
+                          {item.projectSlug ? (
+                            <Link
+                              to={`/projects/${item.projectSlug}`}
+                              onClick={(e) => handleEvidenceClick(e, item.projectSlug, item.anchorHref)}
+                              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-neutral-900"
+                            >
+                              <span>{item.linkText}</span>
+                              <Icon name="arrow-right" size="xs" />
+                            </Link>
+                          ) : item.anchorHref ? (
+                            <a
+                              href={item.anchorHref}
+                              onClick={(e) => handleEvidenceClick(e, undefined, item.anchorHref)}
+                              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-neutral-900"
+                            >
+                              <span>{item.linkText}</span>
+                              <Icon name="arrow-right" size="xs" />
+                            </a>
+                          ) : null}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* 4. Desktop: Evidence Relationship Layer (Level 3 - "WHERE THIS SHOWS UP" / "SEE IT IN THE WORK") */}
+      <div
+        id="about-evidence-panel"
+        role="tabpanel"
+        aria-labelledby={`lens-tab-${activeLensId}`}
+        className="hidden md:block rounded-sm border border-neutral-200/90 bg-neutral-50/40 p-6 lg:p-8"
+      >
+        {/* Evidence Visual Relationship Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-6 border-b border-neutral-200/80">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="px-2 py-0.5 rounded-xs bg-neutral-900 text-white font-mono text-[10px] uppercase font-semibold tracking-wider">
+              {activeLens.evidenceLabel}
+            </span>
+            <span className="text-neutral-300 font-mono text-xs">→</span>
+            <span className="text-xs font-mono font-semibold text-neutral-900">
+              {activeLens.indexLabel} : {activeLens.title}
+            </span>
+          </div>
+
+          <span className="text-xs font-mono text-neutral-500">
+            {activeLens.evidenceSubtext}
+          </span>
+        </div>
+
+        {/* Evidence Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+          {activeLens.evidenceItems.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col justify-between p-5 bg-white rounded-sm border border-neutral-200/90 shadow-micro hover:shadow-subtle hover:border-neutral-400/80 transition-all duration-200 hover:-translate-y-0.5 motion-reduce:transform-none group"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <Badge
+                    variant={
+                      activeLensId === 'how-i-learn'
+                        ? 'neutral'
+                        : activeLensId === 'whats-next'
+                          ? 'subtle'
+                          : 'lavender'
+                    }
+                    size="sm"
+                    className="font-mono tracking-wide text-[11px]"
+                  >
+                    {item.badge}
+                  </Badge>
+                  {item.status && (
+                    <span className="text-[10px] font-mono text-neutral-400 font-medium">
+                      {item.status}
+                    </span>
+                  )}
+                </div>
+
+                {item.groundingLabel && (
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1">
+                    {item.groundingLabel}
+                  </span>
+                )}
+
+                <Heading
+                  as="h4"
+                  variant="h3"
+                  className="text-base font-bold text-neutral-950 mb-2 group-hover:text-neutral-700 transition-colors"
+                >
+                  {item.title}
+                </Heading>
+
+                <Text
+                  variant="bodySm"
+                  tone="secondary"
+                  className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-4 font-normal"
+                >
+                  {item.relevance}
+                </Text>
               </div>
 
-              <div className="border-t border-neutral-200/80 pt-3 text-center">
-                <span className="text-[11px] font-mono text-neutral-600 block leading-tight font-medium">
-                  The NorthCap University
-                </span>
-                <span className="text-[10px] text-neutral-400 font-mono block mt-0.5">
-                  B.Tech CSE (AI & ML)
-                </span>
+              <div className="pt-3 border-t border-neutral-100 mt-2">
+                {item.projectSlug ? (
+                  <Link
+                    to={`/projects/${item.projectSlug}`}
+                    onClick={(e) => handleEvidenceClick(e, item.projectSlug, item.anchorHref)}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-neutral-900 group-hover:text-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 rounded-xs"
+                  >
+                    <span>{item.linkText}</span>
+                    <Icon
+                      name="arrow-right"
+                      size="xs"
+                      className="transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
+                    />
+                  </Link>
+                ) : item.anchorHref ? (
+                  <a
+                    href={item.anchorHref}
+                    onClick={(e) => handleEvidenceClick(e, undefined, item.anchorHref)}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-neutral-900 group-hover:text-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 rounded-xs"
+                  >
+                    <span>{item.linkText}</span>
+                    <Icon
+                      name="arrow-right"
+                      size="xs"
+                      className="transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
+                    />
+                  </a>
+                ) : null}
               </div>
             </div>
-          )}
+          ))}
         </div>
+      </div>
+
+      {/* 5. Understated Personal Identity Note (Level 4) */}
+      <div className="mt-12 pt-6 border-t border-neutral-200/80">
+        {profileUrl ? (
+          <div
+            data-testid="about-portrait-image"
+            className="flex items-center gap-4 p-4 rounded-sm bg-neutral-50/70 border border-neutral-200/80 max-w-md"
+          >
+            <img
+              src={profileUrl}
+              alt={aboutData.portrait.alt}
+              className="w-12 h-12 rounded-sm object-cover border border-neutral-300"
+              loading="lazy"
+            />
+            <div className="text-xs font-mono">
+              <span className="font-semibold text-neutral-900 block">{siteProfile.name}</span>
+              <span className="text-neutral-500 block">{aboutData.portrait.caption}</span>
+            </div>
+          </div>
+        ) : (
+          <div
+            data-testid="about-portrait-placeholder"
+            className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-4 rounded-sm bg-neutral-50/70 border border-neutral-200/80 text-xs font-mono text-neutral-600 transition-colors duration-200 hover:border-neutral-300 hover:bg-neutral-50"
+          >
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" aria-hidden="true" />
+              <span className="font-semibold text-neutral-900">{siteProfile.name}</span>
+              <span className="text-neutral-300">·</span>
+              <span className="text-neutral-700">Student Developer based in Gurgaon, India</span>
+              <span className="hidden sm:inline text-neutral-300">·</span>
+              <span className="text-[11px] text-neutral-500">
+                Currently exploring: {aboutData.learningFocus.topics.join(' · ')}
+              </span>
+            </div>
+
+            <span className="text-[11px] text-neutral-500 shrink-0">
+              Computer Science & Engineering · The NorthCap University
+            </span>
+          </div>
+        )}
       </div>
     </Section>
   )

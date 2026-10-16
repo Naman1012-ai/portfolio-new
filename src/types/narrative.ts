@@ -29,15 +29,49 @@ export interface AboutData {
   }
 }
 
+export interface AboutLensEvidenceItem {
+  id: string
+  title: string
+  badge: string
+  status?: string
+  relevance: string
+  projectSlug?: string
+  anchorHref?: string
+  linkText: string
+  groundingLabel?: string
+}
+
+export interface AboutLens {
+  id: 'building-toward' | 'how-i-learn' | 'whats-next'
+  indexLabel: string
+  title: string
+  subtitle: string
+  associatedPhrases: string[]
+  evidenceLabel: string
+  evidenceSubtext: string
+  evidenceItems: AboutLensEvidenceItem[]
+}
+
+
+export interface HowIBuildTradeoff {
+  gained: string
+  sacrificed: string
+}
+
 export interface HowIBuildEntry {
   id: string
   projectSlug?: string // Linked to /projects/[slug] only when valid
   projectTitle: string
+  decisionTitle?: string // Concise architectural decision title
   context: string
   problem: string
+  constraints?: string
+  optionsConsidered?: string[]
   decision: string
   rejectedAlternative: string
+  tradeoff?: HowIBuildTradeoff
   outcome: string
+  lesson?: string
   tags?: string[]
 }
 

@@ -233,8 +233,8 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
         </Section>
 
         {/* Visual Evidence Showcase Frame — Cinematic Presentation */}
-        <div className="mb-14">
-          <div className="group/hero-preview rounded-md border border-neutral-300/90 overflow-hidden bg-neutral-950 shadow-subtle hover:shadow-cinematic transition-all duration-300">
+        <div className="mb-14 animate-cinematic-expand">
+          <div className="group/hero-preview rounded-md border border-neutral-300/90 overflow-hidden bg-neutral-950 shadow-elevated hover:shadow-cinematic-lg transition-all duration-300">
             <ProjectPreview project={project} variant="case-study" />
           </div>
         </div>

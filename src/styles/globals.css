@@ -228,3 +228,63 @@ body {
   background: #d4d4d8;
 }
 
+/* Project Selection Transition & Depth Utilities */
+@keyframes cinematicExpand {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-cinematic-expand {
+  animation: cinematicExpand 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.perspective-project {
+  perspective: 1200px;
+}
+
+.card-depth-layer {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.parallax-layer-back {
+  transform: translateZ(-8px) scale(0.98);
+}
+
+.parallax-layer-mid {
+  transform: translateZ(6px);
+}
+
+.parallax-layer-front {
+  transform: translateZ(14px);
+}
+
+/* Engineering Decision Record Expandable Grid */
+.decision-expand-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+}
+
+.decision-expand-grid.is-expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.decision-expand-content {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decision-expand-grid {
+    transition: none !important;
+  }
+}
+
