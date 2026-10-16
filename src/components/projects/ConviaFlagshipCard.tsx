@@ -2,6 +2,7 @@ import { type MouseEvent } from 'react'
 import { Badge, Button, Card, Heading, Icon, Text, TextLink } from '@/components/common'
 import { useTilt3D } from '@/hooks'
 import { Link } from '@/router'
+import { usePerspective } from '@/context'
 import type { Project } from '@/types'
 import { isAssetAvailable, resolveSafeAssetUrl } from '@/utils'
 import { useProjectTransition } from './useProjectTransition'
@@ -23,6 +24,9 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
   const hasPreview = isAssetAvailable('convia-preview.png')
   const previewUrl = hasPreview ? resolveSafeAssetUrl('convia-preview.png') : null
   const previewWebpUrl = hasPreview ? resolveSafeAssetUrl('convia-preview.webp') : null
+
+  const { isHighlightedSlug, info } = usePerspective()
+  const isPerspectiveTarget = isHighlightedSlug(project.slug)
 
   const { enteringSlug, isTransitioning, enterProject } = useProjectTransition()
   const isThisEntering = enteringSlug === project.slug
@@ -59,6 +63,10 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
       variant="outlined"
       padding="none"
       className={`group/convia overflow-hidden border-neutral-300/90 bg-linear-to-b from-white via-neutral-50/40 to-neutral-100/50 shadow-subtle hover:shadow-cinematic hover:border-neutral-400/80 transition-all duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none ${
+        isPerspectiveTarget
+          ? 'ring-2 ring-neutral-900/30 border-neutral-900 shadow-elevated'
+          : ''
+      } ${
         isThisEntering
           ? 'ring-2 ring-neutral-900/20 shadow-cinematic-lg scale-[1.02] z-30'
           : isOtherEntering
@@ -79,6 +87,11 @@ export function ConviaFlagshipCard({ project, className = '' }: ConviaFlagshipCa
             <Badge variant="neutral" size="sm" dot dotColor="bg-amber-500">
               {project.maturity.replace('-', ' ').toUpperCase()}
             </Badge>
+            {isPerspectiveTarget && (
+              <Badge variant="accent" size="sm" className="font-mono text-[10px] tracking-wide animate-fade-in">
+                ★ {info.shortLabel} Focus
+              </Badge>
+            )}
           </div>
 
           <span className="text-xs font-mono text-neutral-500">

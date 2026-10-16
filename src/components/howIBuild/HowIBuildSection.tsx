@@ -6,6 +6,7 @@ import { Icon } from '@/components/common/Icon'
 import { Section } from '@/components/common/Section'
 import { Text } from '@/components/common/Text'
 import { useProjectTransition } from '@/components/projects'
+import { usePerspective } from '@/context'
 import { howIBuildData, projects } from '@/data'
 import { Link } from '@/router'
 
@@ -35,6 +36,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
   )
 
   const { enterProject } = useProjectTransition()
+  const { isHighlightedDecision, info } = usePerspective()
 
   // If fewer than 2 verified entries exist, omit the entire section per specification
   if (!howIBuildData.entries || howIBuildData.entries.length < 2) {
@@ -124,6 +126,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
             const isExpanded = expandedIds.has(entry.id)
             const hasValidSlug = entry.projectSlug && existingSlugs.has(entry.projectSlug)
             const isDimmed = hasAnyExpanded && !isExpanded
+            const isTargetedByPerspective = isHighlightedDecision(entry.id)
 
             return (
               <div
@@ -138,9 +141,11 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                   type="button"
                   onClick={() => toggleRecord(entry.id)}
                   className={`shrink-0 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full font-mono text-xs font-semibold flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
-                    isExpanded
-                      ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-neutral-100'
-                      : 'bg-white text-neutral-500 border border-neutral-300 hover:border-neutral-400 hover:text-neutral-900 shadow-micro'
+                    isTargetedByPerspective
+                      ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-neutral-200'
+                      : isExpanded
+                        ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-neutral-100'
+                        : 'bg-white text-neutral-500 border border-neutral-300 hover:border-neutral-400 hover:text-neutral-900 shadow-micro'
                   }`}
                   aria-label={`Toggle decision record 0${index + 1}: ${entry.decisionTitle || entry.projectTitle}`}
                 >
@@ -152,9 +157,11 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                   variant="outlined"
                   padding="none"
                   className={`flex-1 bg-white transition-all duration-300 overflow-hidden ${
-                    isExpanded
-                      ? 'border-neutral-400/90 shadow-cinematic ring-1 ring-neutral-900/5'
-                      : 'border-neutral-200/90 shadow-subtle hover:border-neutral-300'
+                    isTargetedByPerspective
+                      ? 'border-neutral-900 ring-2 ring-neutral-950/20 shadow-elevated'
+                      : isExpanded
+                        ? 'border-neutral-400/90 shadow-cinematic ring-1 ring-neutral-900/5'
+                        : 'border-neutral-200/90 shadow-subtle hover:border-neutral-300'
                   }`}
                 >
                   {/* Collapsed/Header Action Trigger */}
@@ -185,6 +192,12 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                         <span className="text-xs font-mono text-neutral-600">
                           {entry.context}
                         </span>
+
+                        {isTargetedByPerspective && (
+                          <Badge variant="accent" size="sm" className="font-mono text-[10px] tracking-wide animate-fade-in">
+                            ★ {info.shortLabel} Focus
+                          </Badge>
+                        )}
                       </div>
 
                       {entry.tags && entry.tags.length > 0 && (

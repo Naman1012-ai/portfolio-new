@@ -1,10 +1,12 @@
-import { Layout } from '@/components'
+import { CommandPalette, Layout } from '@/components'
+import { PerspectiveProvider, usePerspective } from '@/context'
 import { ProjectTransitionProvider } from '@/components/projects'
 import { HomePage, NotFoundPage, ProjectDetailPage } from '@/pages'
 import { RouterProvider, useRouter } from '@/router'
 
 function AppContent() {
   const { route } = useRouter()
+  const { isCommandOpen, closeCommandPalette } = usePerspective()
 
   return (
     <Layout>
@@ -15,6 +17,7 @@ function AppContent() {
       ) : (
         <HomePage />
       )}
+      <CommandPalette isOpen={isCommandOpen} onClose={closeCommandPalette} />
     </Layout>
   )
 }
@@ -22,9 +25,11 @@ function AppContent() {
 export function App() {
   return (
     <RouterProvider>
-      <ProjectTransitionProvider>
-        <AppContent />
-      </ProjectTransitionProvider>
+      <PerspectiveProvider>
+        <ProjectTransitionProvider>
+          <AppContent />
+        </ProjectTransitionProvider>
+      </PerspectiveProvider>
     </RouterProvider>
   )
 }

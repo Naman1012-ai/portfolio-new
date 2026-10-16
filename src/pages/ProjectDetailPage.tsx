@@ -9,7 +9,11 @@ import {
   Text,
   TextLink,
 } from '@/components/common'
-import { ProjectPreview } from '@/components/projects'
+import {
+  InteractiveFeatureInspector,
+  ProjectPreview,
+  SystemArchitectureFlow,
+} from '@/components/projects'
 import { getAdjacentProjects, getFeaturedProjects, getProjectBySlug } from '@/data'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { Link, useRouter } from '@/router'
@@ -283,6 +287,9 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                 <Text variant="body" tone="secondary" className="leading-relaxed text-neutral-700 text-base mb-4">
                   {caseStudy?.approachArchitecture || project.description}
                 </Text>
+
+                {/* Interactive Data-Flow Architecture Visualizer */}
+                <SystemArchitectureFlow projectSlug={project.slug} className="mt-6" />
               </section>
             )}
 
@@ -310,6 +317,9 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                     </Card>
                   ))}
                 </div>
+
+                {/* Interactive Sandbox & Terminal Feature Inspector */}
+                <InteractiveFeatureInspector projectSlug={project.slug} className="mt-6" />
               </section>
             )}
 

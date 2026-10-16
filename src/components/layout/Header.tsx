@@ -5,7 +5,9 @@ import {
 } from 'react'
 import { BrandLockup } from '@/components/common/BrandLockup'
 import { Container } from '@/components/common/Container'
+import { PerspectiveSwitcher } from '@/components/common/PerspectiveSwitcher'
 import { ResumeAction } from '@/components/common/ResumeAction'
+import { usePerspective } from '@/context'
 import { navigationItems, siteProfile } from '@/data'
 import { useScrollCompact } from '@/hooks'
 import { useRouter } from '@/router'
@@ -13,6 +15,7 @@ import { MobileMenu } from './MobileMenu'
 
 export function Header() {
   const { route, navigate } = useRouter()
+  const { openCommandPalette } = usePerspective()
   const isCompact = useScrollCompact()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -105,6 +108,20 @@ export function Header() {
                 ))}
 
                 <li>
+                  <PerspectiveSwitcher variant="header" className="hidden xl:inline-flex" />
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={openCommandPalette}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-xs text-[11px] font-mono text-neutral-600 hover:text-neutral-950 bg-neutral-100 hover:bg-neutral-200/80 border border-neutral-200/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 cursor-pointer"
+                    title="Open Command Palette (⌘K / Ctrl+K)"
+                    aria-label="Open command palette"
+                  >
+                    <span className="font-semibold">⌘K</span>
+                  </button>
+                </li>
+                <li>
                   <ResumeAction variant="header" />
                 </li>
               </ul>
@@ -115,12 +132,21 @@ export function Header() {
                 - On desktop (>= 768px): visible when isCompact, smoothly hidden when expanded
             */}
             <div
-              className={`flex items-center transition-all duration-150 ease-out motion-reduce:transition-none ${
+              className={`flex items-center gap-1.5 transition-all duration-150 ease-out motion-reduce:transition-none ${
                 !isCompact
                   ? 'md:opacity-0 md:scale-95 md:pointer-events-none md:invisible md:absolute md:right-0'
                   : 'md:opacity-100 md:scale-100 md:pointer-events-auto md:visible'
               }`}
             >
+              <button
+                type="button"
+                onClick={openCommandPalette}
+                className="inline-flex items-center gap-1 px-2 py-1.5 rounded-xs text-[11px] font-mono text-neutral-600 hover:text-neutral-950 bg-neutral-100/90 hover:bg-neutral-200 border border-neutral-200/80 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 cursor-pointer"
+                aria-label="Open command palette"
+              >
+                <span className="font-semibold">⌘K</span>
+              </button>
+
               <MobileMenu
                 isOpen={isMenuOpen}
                 onToggle={() => setIsMenuOpen((prev) => !prev)}

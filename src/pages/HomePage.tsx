@@ -9,6 +9,7 @@ import {
   Icon,
   InstagramIcon,
   LinkedInIcon,
+  PerspectiveSwitcher,
   ProjectEvidenceFallback,
   ResumeAction,
   Section,
@@ -76,19 +77,23 @@ export function HomePage() {
     <div className="py-8 sm:py-12 md:py-16">
       {/* 1. Hero Section — Cinematic Editorial Split */}
       <Container size="lg">
-        <Section id="hero" spacing="md" className="pt-2 sm:pt-4 overflow-hidden">
+        <Section id="hero" spacing="md" className="pt-2 sm:pt-4 overflow-hidden rounded-xl bg-grid-subtle border border-neutral-200/60 p-4 sm:p-6 lg:p-8">
           {/* Outer split grid: content left | composition right */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_44%] gap-8 lg:gap-12 items-center w-full">
 
             {/* ── Left Column: editorial content ───────────────────────── */}
             <div className="flex flex-col items-start w-full min-w-0 relative z-10">
-            {/* Status Indicator */}
-            <div className="inline-flex items-center mb-6 max-w-full animate-fade-in">
+            {/* Status & Live Telemetry Strip */}
+            <div className="flex flex-wrap items-center gap-2.5 mb-6 max-w-full animate-fade-in">
               <Badge variant="subtle" size="md" dot dotColor="bg-emerald-500" className="max-w-full text-left whitespace-normal shadow-micro">
                 <span className="leading-tight">
                   {siteProfile.status}
                 </span>
               </Badge>
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs font-mono text-neutral-500 bg-white/90 border border-neutral-200/80 shadow-micro">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+                <span>Gurgaon, IN (IST) · Active Build Cycle</span>
+              </span>
             </div>
 
             {/* Core Positioning Headline */}
@@ -159,6 +164,11 @@ export function HomePage() {
             <Text variant="bodySm" tone="secondary" className="w-full min-w-0 md:max-w-md text-xs sm:text-sm">
               Full-stack platforms, practical AI integrations, and developer tools built with TypeScript, Python, and C/C++.
             </Text>
+          </div>
+
+          {/* Audience Perspective Lens Switcher */}
+          <div className="mb-6">
+            <PerspectiveSwitcher variant="inline" />
           </div>
 
           {/* Category Filter Discovery Tabs */}

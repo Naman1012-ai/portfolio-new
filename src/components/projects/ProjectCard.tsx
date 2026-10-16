@@ -3,6 +3,7 @@ import { Badge, Button, Card, Heading, Icon, Text, TextLink } from '@/components
 import { useTilt3D } from '@/hooks'
 import { Link } from '@/router'
 import type { Project } from '@/types'
+import { usePerspective } from '@/context'
 import { getArchetypeDefinition, getProjectArchetype, isAssetAvailable } from '@/utils'
 import { ProjectPreview } from './previews'
 import { useProjectTransition } from './useProjectTransition'
@@ -23,6 +24,9 @@ export interface ProjectCardProps {
  * - Strict prefers-reduced-motion and touch-device accessibility compliance.
  */
 export function ProjectCard({ project, className = '' }: ProjectCardProps) {
+  const { isHighlightedSlug, info } = usePerspective()
+  const isPerspectiveTarget = isHighlightedSlug(project.slug)
+
   const hasRepo = Boolean(project.links?.repo)
   const isTeam = project.teamProject && Boolean(project.teamAttribution)
 
@@ -82,7 +86,11 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
       as="article"
       variant="outlined"
       padding="md"
-      className={`group group/card flex flex-col justify-between border-neutral-200/90 bg-white hover:border-neutral-400/90 hover:shadow-cinematic transition-all duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none relative ${
+      className={`group group/card flex flex-col justify-between transition-all duration-300 ease-out hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none relative ${
+        isPerspectiveTarget
+          ? 'border-neutral-900 ring-2 ring-neutral-950/20 shadow-elevated bg-white'
+          : 'border-neutral-200/90 bg-white hover:border-neutral-400/90 hover:shadow-cinematic'
+      } ${
         isThisEntering
           ? 'ring-2 ring-neutral-900/20 shadow-cinematic-lg scale-[1.02] z-30'
           : isOtherEntering
@@ -114,6 +122,12 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
                 <span>Verified</span>
               </span>
+            )}
+
+            {isPerspectiveTarget && (
+              <Badge variant="accent" size="sm" className="font-mono text-[10px] tracking-wide animate-fade-in">
+                ★ {info.shortLabel} Focus
+              </Badge>
             )}
           </div>
 
