@@ -114,16 +114,6 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
               </Badge>
             )}
 
-            {hasGenuineEvidence && (
-              <span
-                className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-xs bg-emerald-50 text-[10px] font-mono text-emerald-800 border border-emerald-200/60"
-                title="Verified preview asset available in repository"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-                <span>Verified</span>
-              </span>
-            )}
-
             {isPerspectiveTarget && (
               <Badge variant="accent" size="sm" className="font-mono text-[10px] tracking-wide animate-fade-in">
                 ★ {info.shortLabel} Focus
@@ -206,7 +196,7 @@ export function ProjectCard({ project, className = '' }: ProjectCardProps) {
                     <span className="uppercase tracking-wider text-neutral-300 font-semibold">{archetypeDef.badgeText}</span>
                     <span className={hasGenuineEvidence ? 'text-emerald-400 font-medium' : 'text-neutral-400'}>
                       {hasGenuineEvidence
-                        ? (project.evidence?.type === 'schematic' ? 'Verified Schematic' : 'Verified Preview')
+                        ? (project.evidence?.type === 'schematic' ? 'Schematic Diagram' : 'Interface Preview')
                         : (project.category === 'embedded-robotics' ? 'Hardware Prototype' : 'Architecture Spec')}
                     </span>
                   </div>

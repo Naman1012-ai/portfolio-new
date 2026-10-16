@@ -185,7 +185,7 @@ export const aboutLenses: AboutLens[] = [
         badge: 'Backend Systems',
         status: 'Active Trajectory',
         relevance: 'Deepening work in relational database schemas (SQLAlchemy/PostgreSQL), asynchronous endpoints, and type-safe API contracts.',
-        anchorHref: '#projects',
+        anchorHref: '/projects',
         linkText: 'View Backend Systems in Projects',
         groundingLabel: 'Grounded in FastAPI Chatbot & Convia Express',
       },

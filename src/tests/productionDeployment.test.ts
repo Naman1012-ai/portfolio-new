@@ -2,7 +2,7 @@ import * as React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { siteProfile } from '@/data/profile'
 import { siteMetadata } from '@/data/siteConfig'
-import { NotFoundPage, ProjectDetailPage } from '@/pages'
+import { NotFoundPage, ProjectDetailPage, ProjectsPage } from '@/pages'
 import { RouterProvider } from '@/router'
 import { parsePath } from '@/router/context'
 
@@ -198,6 +198,14 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
     }
   }
 
+  const projectsRouteResult = parsePath('/projects')
+  if (projectsRouteResult.route !== 'projects' || projectsRouteResult.path !== '/projects') {
+    return {
+      passed: false,
+      message: `parsePath('/projects') must return route="projects" with clean path, got ${JSON.stringify(projectsRouteResult)}`,
+    }
+  }
+
   const invalidSlugResult = parsePath('/projects/non-existent-project')
   if (invalidSlugResult.route !== 'project-detail' || invalidSlugResult.slug !== 'non-existent-project') {
     return {
@@ -206,9 +214,12 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
     }
   }
 
-  // 5. Verify Component Exports for 404 and Project Detail
+  // 5. Verify Component Exports for 404, Projects, and Project Detail
   if (typeof NotFoundPage !== 'function') {
     return { passed: false, message: 'NotFoundPage component must be exported as a function' }
+  }
+  if (typeof ProjectsPage !== 'function') {
+    return { passed: false, message: 'ProjectsPage component must be exported as a function' }
   }
   if (typeof ProjectDetailPage !== 'function') {
     return { passed: false, message: 'ProjectDetailPage component must be exported as a function' }
@@ -229,6 +240,17 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
     return { passed: false, message: 'NotFoundPage must provide a "Return to Homepage" action' }
   }
 
+  const projectsMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(ProjectsPage, null)
+    )
+  )
+  if (!projectsMarkup.includes('PROJECT UNIVERSE')) {
+    return { passed: false, message: 'ProjectsPage must render "PROJECT UNIVERSE"' }
+  }
+
   const invalidProjectMarkup = renderToStaticMarkup(
     React.createElement(
       RouterProvider,
@@ -242,8 +264,8 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
   if (!invalidProjectMarkup.includes('ghost-slug-test')) {
     return { passed: false, message: 'Invalid project slug must display the specific invalid slug' }
   }
-  if (!invalidProjectMarkup.includes('Return to All Projects') || !invalidProjectMarkup.includes('Return to Homepage')) {
-    return { passed: false, message: 'Invalid project detail must provide Return to All Projects and Return to Homepage actions' }
+  if (!invalidProjectMarkup.includes('Return to Project Universe') && !invalidProjectMarkup.includes('Return to All Projects')) {
+    return { passed: false, message: 'Invalid project detail must provide Return to Project Universe action' }
   }
 
   // 7. Grep src for forbidden person-title phrases: "Systems Builder" and "Systems & AI Engineer"

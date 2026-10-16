@@ -2,6 +2,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type MouseEvent,
   type ReactNode,
@@ -26,32 +27,65 @@ export function RouterProvider({ children }: RouterProviderProps) {
     parsePath(window.location.pathname, window.location.hash)
   )
 
+  const scrollTimerRef = useRef<number | null>(null)
+
+  const scrollToHash = useCallback((hash: string) => {
+    const targetId = hash.replace('#', '')
+    if (!targetId) return
+
+    if (scrollTimerRef.current !== null) {
+      window.clearTimeout(scrollTimerRef.current)
+      scrollTimerRef.current = null
+    }
+
+    let attempts = 0
+    const maxAttempts = 25
+    const attemptScroll = () => {
+      const el = document.getElementById(targetId)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+        scrollTimerRef.current = null
+      } else if (attempts < maxAttempts) {
+        attempts++
+        scrollTimerRef.current = window.setTimeout(attemptScroll, 40)
+      } else {
+        scrollTimerRef.current = null
+      }
+    }
+
+    scrollTimerRef.current = window.setTimeout(attemptScroll, 10)
+  }, [])
+
   const handleLocationChange = useCallback(() => {
     const newState = parsePath(window.location.pathname, window.location.hash)
     setRouteState(newState)
 
-    // Handle scroll to hash if present on home page
-    if (window.location.hash && (newState.route === 'home' || newState.path === '/')) {
-      const targetId = window.location.hash.replace('#', '')
-      const el = document.getElementById(targetId)
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 50)
-        return
-      }
+    // Handle scroll to hash if present across any route transition
+    if (window.location.hash) {
+      scrollToHash(window.location.hash)
+      return
     }
 
     // Otherwise scroll to top on page change
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
+  }, [scrollToHash])
 
   useEffect(() => {
+    // If the page is loaded/reloaded with a hash, ensure we scroll to it once elements mount
+    if (window.location.hash) {
+      scrollToHash(window.location.hash)
+    }
+
     window.addEventListener('popstate', handleLocationChange)
     window.addEventListener('hashchange', handleLocationChange)
     return () => {
+      if (scrollTimerRef.current !== null) {
+        window.clearTimeout(scrollTimerRef.current)
+      }
       window.removeEventListener('popstate', handleLocationChange)
       window.removeEventListener('hashchange', handleLocationChange)
     }
-  }, [handleLocationChange])
+  }, [handleLocationChange, scrollToHash])
 
   const navigate = useCallback(
     (to: string, options: { replace?: boolean; preserveHash?: boolean } = {}) => {

@@ -414,7 +414,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                           <div className="p-4 rounded-sm bg-white border border-neutral-200/80 space-y-2.5 shadow-micro">
                             <div>
                               <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider block mb-1">
-                                Verified Result
+                                Outcome & Result
                               </span>
                               <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-800 leading-relaxed">
                                 {entry.outcome}

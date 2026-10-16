@@ -108,7 +108,7 @@ export function BackendAiPreview({
             Multilingual FastAPI backend architecture and relational context storage.
           </span>
           <span className="text-[10px] text-emerald-400 shrink-0 uppercase tracking-wider">
-            VERIFIED_TECHNICAL_BLUEPRINT
+            TECHNICAL_BLUEPRINT
           </span>
         </div>
       )}

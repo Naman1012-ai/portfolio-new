@@ -113,10 +113,25 @@ export function verifyContactFooterAndResume(): { passed: boolean; message: stri
         message: `ResumeAction [variant="${variant}"] when available must link to "/assets/resume-naman-prajapati.pdf"`,
       }
     }
-    if (!markupAvailable.includes('target="_blank"') || !markupAvailable.includes('rel="noopener noreferrer"')) {
-      return {
-        passed: false,
-        message: `ResumeAction [variant="${variant}"] when available must include target="_blank" and rel="noopener noreferrer"`,
+    if (variant === 'contact') {
+      if (!markupAvailable.includes('download="resume-naman-prajapati.pdf"')) {
+        return {
+          passed: false,
+          message: `ResumeAction [variant="contact"] when available must include download="resume-naman-prajapati.pdf" to download locally`,
+        }
+      }
+      if (markupAvailable.includes('target="_blank"')) {
+        return {
+          passed: false,
+          message: `ResumeAction [variant="contact"] when available must not include target="_blank" so it downloads locally instead of opening in a new tab`,
+        }
+      }
+    } else {
+      if (!markupAvailable.includes('target="_blank"') || !markupAvailable.includes('rel="noopener noreferrer"')) {
+        return {
+          passed: false,
+          message: `ResumeAction [variant="${variant}"] when available must include target="_blank" and rel="noopener noreferrer"`,
+        }
       }
     }
     if (markupAvailable.includes('Resume coming soon')) {
@@ -124,6 +139,17 @@ export function verifyContactFooterAndResume(): { passed: boolean; message: stri
         passed: false,
         message: `ResumeAction [variant="${variant}"] when available must not display "Resume coming soon"`,
       }
+    }
+  }
+
+  // Verify explicit download prop triggers local download even on hero variant
+  const heroDownloadMarkup = renderToStaticMarkup(
+    ResumeAction({ variant: 'hero', download: true, isAvailableOverride: true }),
+  )
+  if (!heroDownloadMarkup.includes('download="resume-naman-prajapati.pdf"') || heroDownloadMarkup.includes('target="_blank"')) {
+    return {
+      passed: false,
+      message: 'ResumeAction with download=true must render download attribute without target="_blank"',
     }
   }
 

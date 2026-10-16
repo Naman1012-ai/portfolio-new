@@ -26,12 +26,9 @@ export function EducationCard({ education, className = '' }: EducationCardProps)
           <Badge variant="subtle" size="sm">
             EDUCATION
           </Badge>
-          <span className="text-[11px] font-mono font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-xs border border-emerald-200/60">
-            VERIFIED
-          </span>
         </div>
         <span className="text-xs font-mono text-neutral-400">
-          Institutional Record
+          The NorthCap University
         </span>
       </div>
 

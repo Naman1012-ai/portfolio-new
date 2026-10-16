@@ -79,7 +79,7 @@ export function ProductSaaSPreview({
           <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center text-neutral-400">
             <span className="font-mono text-xs text-neutral-300 mb-1">{project.title}</span>
             <span className="font-mono text-[10px] text-neutral-500">
-              Verified SaaS Architecture · Preview Pending
+              SaaS Architecture · Preview Pending
             </span>
           </div>
         )}
@@ -90,7 +90,7 @@ export function ProductSaaSPreview({
         <div className="px-4 py-2 bg-neutral-900 border-t border-neutral-800 text-xs font-mono text-neutral-400 flex items-center justify-between">
           <span className="truncate mr-2">{project.evidence.caption}</span>
           <span className="text-[10px] text-emerald-400 shrink-0 uppercase tracking-wider">
-            VERIFIED_SAAS_INTERFACE
+            SAAS_INTERFACE
           </span>
         </div>
       )}

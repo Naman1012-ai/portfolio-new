@@ -30,6 +30,11 @@ export function Header() {
 
     e.preventDefault()
 
+    if (href.startsWith('/')) {
+      navigate(href)
+      return
+    }
+
     if (route !== 'home') {
       navigate('/' + href)
     } else {
@@ -62,17 +67,25 @@ export function Header() {
               className="flex items-center"
             >
               <ul className="flex items-center gap-2 sm:gap-3 md:gap-5 text-xs sm:text-sm font-medium text-neutral-600">
-                {navigationItems.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      href={route === 'home' ? item.href : `/${item.href}`}
-                      onClick={(e) => handleNavClick(item.href, e)}
-                      className="hover:text-neutral-900 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-xs px-1 py-0.5 whitespace-nowrap"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
+                {navigationItems.map((item) => {
+                  const resolvedHref = item.href.startsWith('/')
+                    ? item.href
+                    : route === 'home'
+                      ? item.href
+                      : `/${item.href}`
+
+                  return (
+                    <li key={item.label}>
+                      <a
+                        href={resolvedHref}
+                        onClick={(e) => handleNavClick(item.href, e)}
+                        className="hover:text-neutral-900 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-xs px-1 py-0.5 whitespace-nowrap"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  )
+                })}
 
                 <li>
                   <button

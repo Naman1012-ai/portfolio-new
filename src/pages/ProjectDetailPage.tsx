@@ -56,9 +56,9 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
               </Heading>
               <Text variant="body" tone="secondary" className="text-sm text-neutral-600">
                 {slug ? (
-                  <>The project slug <code className="px-1.5 py-0.5 font-mono text-xs bg-neutral-100 rounded-xs text-neutral-800">{slug}</code> does not match any verified record in this portfolio.</>
+                  <>The project slug <code className="px-1.5 py-0.5 font-mono text-xs bg-neutral-100 rounded-xs text-neutral-800">{slug}</code> does not match any project in this portfolio.</>
                 ) : (
-                  <>The requested project does not match any verified record in this portfolio.</>
+                  <>The requested project does not match any project in this portfolio.</>
                 )}
               </Text>
             </div>
@@ -68,9 +68,9 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                 variant="primary"
                 size="md"
                 leftIcon={<Icon name="arrow-left" size="sm" />}
-                onClick={() => navigate('/#projects')}
+                onClick={() => navigate('/projects')}
               >
-                Return to All Projects
+                Return to Project Universe
               </Button>
               <Button
                 variant="outline"
@@ -131,12 +131,12 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
         {/* Navigation Breadcrumb */}
         <div className="mb-8">
           <Link
-            to={project.track === 'robotics-autonomous' ? '/#robotics' : '/#projects'}
+            to={project.track === 'robotics-autonomous' ? '/projects#robotics' : '/projects'}
             className="group inline-flex items-center gap-2 text-xs font-mono font-medium text-neutral-600 hover:text-neutral-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 rounded-xs px-1 py-0.5"
-            aria-label={project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems track' : 'Back to projects overview'}
+            aria-label={project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems track' : 'Back to Project Universe'}
           >
             <Icon name="arrow-left" size="xs" className="transition-transform duration-150 group-hover:-translate-x-0.5 motion-reduce:transform-none" />
-            <span>{project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems' : 'Back to Selected Work'}</span>
+            <span>{project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems' : 'Back to Project Universe'}</span>
           </Link>
         </div>
 
@@ -202,7 +202,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
 
             <div>
               <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] block mb-1">
-                Verified Codebase
+                Repository & Source
               </Text>
               {hasRepo ? (
                 <TextLink
@@ -488,7 +488,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
               )}
 
               <Link
-                to={project.track === 'robotics-autonomous' ? '/#robotics' : '/#projects'}
+                to={project.track === 'robotics-autonomous' ? '/projects#robotics' : '/projects'}
                 className="block w-full"
               >
                 <Button
@@ -497,7 +497,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                   leftIcon={<Icon name="arrow-left" size="xs" />}
                   className="w-full justify-center"
                 >
-                  {project.track === 'robotics-autonomous' ? 'Robotics Track' : 'Selected Work'}
+                  {project.track === 'robotics-autonomous' ? 'Robotics Track' : 'Project Universe'}
                 </Button>
               </Link>
             </div>

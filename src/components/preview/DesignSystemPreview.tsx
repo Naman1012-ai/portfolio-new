@@ -337,7 +337,7 @@ export function DesignSystemPreview() {
               </div>
               <div className="flex items-center justify-between text-xs font-mono text-neutral-500 pt-1">
                 <span>Asset: {featuredProjects[0]?.evidence?.assetFilename}</span>
-                <span className="text-emerald-700 font-medium">✓ Verified in public/assets/</span>
+                <span className="text-emerald-700 font-medium">✓ Available in public/assets/</span>
               </div>
             </Card>
 
@@ -458,12 +458,12 @@ export function DesignSystemPreview() {
             {/* Credential Safety Rule */}
             <Card variant="outlined" padding="md" className="space-y-2">
               <Text variant="caption" tone="muted">CREDENTIAL INTEGRITY</Text>
-              <Heading as="h4" variant="h4">Zero Unverified Claims</Heading>
+              <Heading as="h4" variant="h4">Grounded Engineering Claims</Heading>
               <Text variant="caption" tone="secondary">
                 Achievements: {achievementsList.length} | Certifications: {certificationsList.length} | Resume Available: {isAssetAvailable(siteProfile.resume.filename) ? 'Yes' : 'Pending Document'}
               </Text>
               <p className="text-[11px] font-mono text-emerald-700 pt-1">
-                ✓ No ghost credentials or fabricated awards.
+                ✓ Grounded credentials and authentic portfolio documentation.
               </p>
             </Card>
           </div>

@@ -87,7 +87,7 @@ export const projects: Project[] = [
     title: 'BioLynk',
     tagline: 'Healthcare Donor Coordination & Directory Platform',
     summary:
-      'A healthcare networking platform prototype for donor coordination, profile management, and verified communication.',
+      'A healthcare networking platform prototype for donor coordination, profile management, and direct communication.',
     description:
       'Built with Next.js and Firebase, featuring role-based donor dashboards, donor profile setup, and healthcare network workflows.',
     category: 'web-platform',
@@ -111,7 +111,7 @@ export const projects: Project[] = [
     },
     caseStudy: {
       overview:
-        'BioLynk is a healthcare donor coordination and networking platform prototype designed to streamline donor profile management, discovery, and verified direct communication.',
+        'BioLynk is a healthcare donor coordination and networking platform prototype designed to streamline donor profile management, discovery, and direct communication.',
       problemContext:
         'Time-sensitive donor coordination frequently suffers from fragmented communication across informal channels, lacking structured verification and centralized availability tracking.',
       approachArchitecture:
@@ -120,14 +120,14 @@ export const projects: Project[] = [
         'Role-based donor and recipient profile registration workflows',
         'Structured donor availability and biological category indexing',
         'Accessible interface components with keyboard and screen reader support',
-        'Direct verified communication initiation for urgent clinical matches',
+        'Direct communication initiation for urgent clinical matches',
       ],
       technicalDecisions: [
         'Built interface components on Radix UI primitives to ensure strict WCAG compliance, keyboard focus trapping, and screen reader announcements for critical alerts.',
         'Structured Firestore collections with explicit security rules separating sensitive personal identifiers from public availability indexes.',
       ],
       challengesTradeoffs:
-        'Balancing donor privacy with urgent contact speed: direct phone numbers are protected behind verified account requests rather than displayed in unauthenticated directory searches.',
+        'Balancing donor privacy with urgent contact speed: direct phone numbers are protected behind authenticated account requests rather than displayed in unauthenticated directory searches.',
       verificationTesting:
         'Prototype workflows validated through role registration, mock donor profile queries, and responsive layout verification across desktop and mobile devices.',
       currentStatusNote:
@@ -188,7 +188,7 @@ export const projects: Project[] = [
       verificationTesting:
         'Parsing pipeline tested with structured sample PDF resumes, vacancy descriptions, and API prompt response validations.',
       currentStatusNote:
-        'Prototype system with verified public GitHub repository.',
+        'Prototype system with public GitHub repository.',
       demoNotice:
         'Hosted on Render free tier. The service spins down after inactivity, so the initial request may take a moment to wake up.',
       lessonsLearned:
@@ -246,7 +246,7 @@ export const projects: Project[] = [
       verificationTesting:
         'Data ingestion and risk index computations verified against test trade dependency datasets and pipeline incident scenario matrices.',
       currentStatusNote:
-        'Analytical software prototype with verified public GitHub repository.',
+        'Analytical software prototype with public GitHub repository.',
       lessonsLearned:
         'Splitting computational tasks between compiled languages (C++) and runtime environments (Node.js) yields both execution speed and developer agility when modeling complex systems.',
       previewAssetFilename: 'energy-risk-preview.png',
@@ -301,9 +301,9 @@ export const projects: Project[] = [
       challengesTradeoffs:
         'Splitting complex DOM subtrees (such as nested tables and syntax-highlighted code blocks) across page boundaries without clipping content or breaking styling required custom tree-slicing logic.',
       verificationTesting:
-        'Production-ready codebase with unit tests, strict TypeScript types, and verified public repository.',
+        'Production-ready codebase with unit tests, strict TypeScript types, and public repository.',
       currentStatusNote:
-        'Production release maintained with verified public repository on GitHub.',
+        'Production release maintained with public repository on GitHub.',
       lessonsLearned:
         'Local-first software eliminates server latency and privacy concerns, but shifts layout calculation and memory management entirely into client-side engineering.',
       previewAssetFilename: 'docframe-preview.png',
@@ -359,7 +359,7 @@ export const projects: Project[] = [
       verificationTesting:
         'Console-level boundary testing for non-blocking timer interrupts, question file parsers, and persistent user score serialization.',
       currentStatusNote:
-        'Completed console engineering project with verified public GitHub repository.',
+        'Completed console engineering project with public GitHub repository.',
       lessonsLearned:
         'Procedural systems programming in C instills rigorous discipline regarding memory layout, manual buffer management, and platform-specific terminal I/O.',
       previewAssetFilename: 'quiz-master-preview.png',
@@ -390,7 +390,7 @@ export const projects: Project[] = [
     evidence: {
       assetFilename: 'atm-machine-preview.png',
       type: 'image',
-      caption: 'ATM Machine verified user account details and transaction history audit ledger.',
+      caption: 'ATM Machine user account details and transaction history audit ledger.',
       fallbackText: 'ATM Machine banking simulation.',
     },
     caseStudy: {
@@ -415,7 +415,7 @@ export const projects: Project[] = [
       verificationTesting:
         'Simulated transaction test suite evaluating balance boundary guards, PIN masking escape characters, and audit log file formatting.',
       currentStatusNote:
-        'Completed educational engineering project with verified public GitHub repository.',
+        'Completed educational engineering project with public GitHub repository.',
       lessonsLearned:
         'Transactional stability in stateful software is fundamentally governed by input sanitization at the interface and atomic commit semantics at the storage layer.',
       previewAssetFilename: 'atm-machine-preview.png',
@@ -468,7 +468,7 @@ export const projects: Project[] = [
       verificationTesting:
         'OOP model verification testing member circulation limits, container insertions, and stream-based book serialization.',
       currentStatusNote:
-        'Completed console application in verified local codebase.',
+        'Completed console application in active local codebase.',
       lessonsLearned:
         'Sound object-oriented design requires drawing clear boundaries between domain state, relational associations, and input/output formatting.',
       previewAssetFilename: 'library-system-preview.png',
@@ -568,7 +568,7 @@ export const projects: Project[] = [
       verificationTesting:
         'Bench testing and hardware-in-the-loop validation conducted on physical RP2040 breadboards and quadcopter frames.',
       currentStatusNote:
-        'Hardware prototype in active testing. Firmware stabilization and receiver communication logic verified on test bench.',
+        'Hardware prototype in active testing. Firmware stabilization and receiver communication logic validated on test bench.',
       lessonsLearned:
         'Embedded development demands strict separation between hard real-time control loops and asynchronous I/O to guarantee deterministic system safety.',
     },

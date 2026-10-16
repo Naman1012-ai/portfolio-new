@@ -1,5 +1,6 @@
 export * from './asset.test'
 export * from './caseStudy.test'
+export * from './cinematicIntro.test'
 export * from './content.test'
 export * from './designSystem.test'
 export * from './experience.test'

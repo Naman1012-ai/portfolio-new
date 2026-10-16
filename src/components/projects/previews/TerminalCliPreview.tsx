@@ -82,7 +82,7 @@ export function TerminalCliPreview({
         <div className="px-4 py-2 bg-neutral-900 border-t border-neutral-800 text-xs text-neutral-400 flex items-center justify-between">
           <span className="truncate mr-2">{project.evidence.caption}</span>
           <span className="text-[10px] text-emerald-400 shrink-0 uppercase tracking-wider">
-            VERIFIED_CONSOLE_SESSION
+            CONSOLE_SESSION
           </span>
         </div>
       )}

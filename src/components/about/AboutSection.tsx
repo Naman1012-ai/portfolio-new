@@ -6,7 +6,7 @@ import { Section } from '@/components/common/Section'
 import { Text } from '@/components/common/Text'
 import { useProjectTransition } from '@/components/projects'
 import { aboutData, aboutLenses, siteProfile } from '@/data'
-import { Link } from '@/router'
+import { Link, useRouter } from '@/router'
 import { resolveSafeAssetUrl } from '@/utils'
 
 export interface AboutSectionProps {
@@ -33,6 +33,7 @@ type LensId = 'building-toward' | 'how-i-learn' | 'whats-next'
 export function AboutSection({ className = '' }: AboutSectionProps) {
   const [activeLensId, setActiveLensId] = useState<LensId>('building-toward')
   const { enterProject } = useProjectTransition()
+  const { navigate } = useRouter()
   const profileUrl = resolveSafeAssetUrl(aboutData.portrait.assetFilename)
 
   const activeLens = aboutLenses.find((lens) => lens.id === activeLensId) || aboutLenses[0]
@@ -52,11 +53,15 @@ export function AboutSection({ className = '' }: AboutSectionProps) {
       return
     }
 
-    if (anchorHref && anchorHref.startsWith('#')) {
+    if (anchorHref) {
       e.preventDefault()
-      const target = document.querySelector(anchorHref)
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' })
+      if (anchorHref.startsWith('#')) {
+        const target = document.querySelector(anchorHref)
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' })
+        }
+      } else {
+        navigate(anchorHref)
       }
     }
   }

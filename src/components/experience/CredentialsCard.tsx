@@ -24,9 +24,6 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
           <Badge variant="subtle" size="sm">
             DOCUMENTATION
           </Badge>
-          <span className="text-[11px] font-mono font-medium text-neutral-600 bg-neutral-100 px-2 py-0.5 rounded-xs border border-neutral-200/60">
-            PRIMARY EVIDENCE
-          </span>
         </div>
         <span className="text-xs font-mono text-neutral-400">
           The NorthCap University · InAmigos Foundation · Source Repositories
@@ -36,10 +33,10 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
       {/* Narrative Header */}
       <div className="space-y-1">
         <Heading as="h4" variant="h4" className="text-base font-bold text-neutral-900">
-          Verification Records & Sources
+          Institutional & Project Records
         </Heading>
         <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-600 leading-relaxed max-w-3xl">
-          Academic performance, internship experience, and engineering claims are grounded in institutional records, verified organization profiles, and inspectable codebases.
+          Academic performance, internship experience, and engineering projects are grounded in institutional coursework, industry internships, and inspectable codebases.
         </Text>
       </div>
 
@@ -69,14 +66,14 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
             <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 font-semibold">
               02 / Internship
             </span>
-            <Badge variant="subtle" size="sm">VERIFIED</Badge>
+            <Badge variant="subtle" size="sm">ORGANIZATION</Badge>
           </div>
           <div>
             <span className="text-xs font-bold text-neutral-950 block">
               InAmigos Foundation
             </span>
             <span className="text-[11px] text-neutral-600 block mt-0.5 leading-normal">
-              Completed Web Development internship verified through registered organization documentation.
+              Completed Web Development internship with registered organization documentation.
             </span>
           </div>
         </div>

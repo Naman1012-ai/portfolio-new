@@ -38,12 +38,12 @@ export function InteractiveFeatureInspector({
               validator: 'Pydantic v2 / Strict JSON Schema',
               runtime_exceptions: 0,
             },
-            verified_competencies: [
+            analyzed_competencies: [
               { skill: 'React / TypeScript', weight: 0.35, match: '100%' },
               { skill: 'FastAPI / Python APIs', weight: 0.35, match: '95%' },
               { skill: 'SQL & Database Schemas', weight: 0.30, match: '80%' },
             ],
-            missing_gap: 'Distributed Message Broker (Kafka) experience unverified',
+            missing_gap: 'Distributed Message Broker (Kafka) experience not present in source',
           })
         }, 300)
       }, 300)

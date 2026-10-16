@@ -21,7 +21,7 @@ export function CapabilityLedger({ className = '' }: CapabilityLedgerProps) {
             CAPABILITY LEDGER
           </Text>
           <Heading as="h2" variant="h1" className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950">
-            Verified Technical Proficiencies
+            Technical Proficiencies & Systems
           </Heading>
         </div>
         <Text variant="caption" tone="muted" className="text-xs font-mono max-w-md">

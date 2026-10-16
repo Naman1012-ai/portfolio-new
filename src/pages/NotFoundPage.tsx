@@ -75,11 +75,11 @@ export function NotFoundPage({ className = '' }: NotFoundPageProps) {
               variant="secondary"
               size="md"
               rightIcon={<Icon name="arrow-down" size="sm" />}
-              onClick={() => navigate('/#projects')}
-              aria-label="Explore project universe on homepage"
+              onClick={() => navigate('/projects')}
+              aria-label="Explore Project Universe"
               className="w-full sm:w-auto justify-center"
             >
-              Explore Projects
+              Explore Project Universe
             </Button>
           </div>
 

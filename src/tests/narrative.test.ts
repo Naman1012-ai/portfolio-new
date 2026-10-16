@@ -190,10 +190,15 @@ export function verifyPersonalNarrativeAndCredibility(): { passed: boolean; mess
 
   // 6. Navigation Anchors & Section ID Integrity
   const navHrefs = navigationItems.map((n) => n.href)
-  if (!navHrefs.includes('#about') || !navHrefs.includes('#projects') || !navHrefs.includes('#experience') || !navHrefs.includes('#contact')) {
+  if (
+    !navHrefs.includes('#about') ||
+    (!navHrefs.includes('#projects') && !navHrefs.includes('/projects')) ||
+    !navHrefs.includes('#experience') ||
+    !navHrefs.includes('#contact')
+  ) {
     return {
       passed: false,
-      message: 'navigationItems must contain #about, #projects, #experience, and #contact anchors',
+      message: 'navigationItems must contain #about, /projects, #experience, and #contact',
     }
   }
 

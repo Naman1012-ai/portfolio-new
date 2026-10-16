@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-export type RouteName = 'home' | 'project-detail' | 'not-found'
+export type RouteName = 'home' | 'projects' | 'project-detail' | 'not-found'
 
 export interface RouteState {
   path: string
@@ -20,7 +20,7 @@ export const RouterContext = createContext<RouterContextValue | null>(null)
  * hash-based route fallback (#/projects/:slug), and deep link extraction.
  */
 export function parsePath(pathname: string, hash: string = ''): RouteState {
-  // Check if hash has a route like #/projects/convia
+  // Check if hash has a route like #/projects/convia or #/projects
   if (hash.startsWith('#/')) {
     const hashPath = hash.slice(1) // remove '#'
     return parsePath(hashPath, '')
@@ -28,6 +28,15 @@ export function parsePath(pathname: string, hash: string = ''): RouteState {
 
   // Normalize pathname (strip trailing slashes unless root)
   const cleanPath = pathname.replace(/\/+$/, '') || '/'
+
+  // Match /projects (exact)
+  if (cleanPath === '/projects') {
+    return {
+      path: '/projects',
+      route: 'projects',
+      hash,
+    }
+  }
 
   // Match /projects/:slug
   const projectMatch = cleanPath.match(/^\/projects\/([^/]+)$/)

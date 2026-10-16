@@ -28,11 +28,11 @@ export function ExperienceSection({ className = '' }: ExperienceSectionProps) {
           EXPERIENCE & ACADEMIC FOUNDATIONS
         </Text>
         <Heading as="h2" variant="h1" className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mb-4">
-          Engineering Discipline & Verified Milestones
+          Engineering Foundations & Milestones
         </Heading>
         <Text variant="body" tone="secondary" className="leading-relaxed text-neutral-700 text-sm sm:text-base">
           Pursuing a Bachelor of Technology in Computer Science & Engineering at The NorthCap University
-          with an emphasis on Artificial Intelligence and Machine Learning. Committed to verified codebases,
+          with an emphasis on Artificial Intelligence and Machine Learning. Committed to robust codebases,
           disciplined testing, and systems that combine algorithmic rigor with clean product execution.
         </Text>
       </div>

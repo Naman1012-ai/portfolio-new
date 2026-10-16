@@ -7,6 +7,14 @@ import type { AssetManifestEntry } from '@/types'
  */
 export const assetManifest: AssetManifestEntry[] = [
   {
+    filename: 'naman-portrait.png',
+    category: 'branding',
+    label: 'Naman Prajapati Profile Portrait',
+    isAvailable: true,
+    mimeType: 'image/png',
+    description: 'Authentic verified profile photograph of Naman Prajapati for cinematic identity introduction.',
+  },
+  {
     filename: 'convia-logo.png',
     category: 'branding',
     label: 'Convia Platform Logo',

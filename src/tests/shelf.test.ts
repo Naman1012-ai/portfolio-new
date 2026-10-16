@@ -2,7 +2,7 @@ import * as React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { getFeaturedProjects, getRoboticsTrackProject } from '@/data'
 import { ProjectShelf } from '@/components/projects'
-import { HomePage } from '@/pages'
+import { HomePage, ProjectsPage } from '@/pages'
 import { RouterProvider } from '@/router'
 
 // Ensure React is present on globalThis for tsx runtime evaluation of JSX in Node
@@ -203,7 +203,7 @@ export function verifyShelfSystem(): { passed: boolean; message: string } {
     }
   }
 
-  // 8c. Verify zero duplicate or orphaned Convia cards on full HomePage
+  // 8c. Verify zero duplicate or orphaned Convia cards on HomePage and ProjectsPage
   const homeMarkup = renderToStaticMarkup(
     React.createElement(
       RouterProvider,
@@ -211,11 +211,26 @@ export function verifyShelfSystem(): { passed: boolean; message: string } {
       React.createElement(HomePage, null)
     )
   )
-  const conviaOccurrences = homeMarkup.match(/data-project-slug="convia"/g)
-  if (!conviaOccurrences || conviaOccurrences.length !== 1) {
+  const conviaHomeOccurrences = homeMarkup.match(/data-project-slug="convia"/g)
+  if (!conviaHomeOccurrences || conviaHomeOccurrences.length !== 1) {
     return {
       passed: false,
-      message: `Convia flagship presentation must appear exactly once on HomePage to prevent duplication, found ${conviaOccurrences?.length ?? 0}`,
+      message: `Convia flagship presentation must appear exactly once on HomePage gateway to prevent duplication, found ${conviaHomeOccurrences?.length ?? 0}`,
+    }
+  }
+
+  const projectsMarkup = renderToStaticMarkup(
+    React.createElement(
+      RouterProvider,
+      null,
+      React.createElement(ProjectsPage, null)
+    )
+  )
+  const conviaProjectsOccurrences = projectsMarkup.match(/data-project-slug="convia"/g)
+  if (!conviaProjectsOccurrences || conviaProjectsOccurrences.length !== 1) {
+    return {
+      passed: false,
+      message: `Convia flagship presentation must appear exactly once on ProjectsPage to prevent duplication, found ${conviaProjectsOccurrences?.length ?? 0}`,
     }
   }
 

@@ -1,7 +1,7 @@
 import { CommandPalette, Layout } from '@/components'
 import { PerspectiveProvider, usePerspective } from '@/context'
 import { ProjectTransitionProvider } from '@/components/projects'
-import { HomePage, NotFoundPage, ProjectDetailPage } from '@/pages'
+import { HomePage, NotFoundPage, ProjectDetailPage, ProjectsPage } from '@/pages'
 import { RouterProvider, useRouter } from '@/router'
 
 function AppContent() {
@@ -12,6 +12,8 @@ function AppContent() {
     <Layout>
       {route === 'project-detail' ? (
         <ProjectDetailPage />
+      ) : route === 'projects' ? (
+        <ProjectsPage />
       ) : route === 'not-found' ? (
         <NotFoundPage />
       ) : (

@@ -26,14 +26,11 @@ export function ExperienceCard({ experience, className = '' }: ExperienceCardPro
       <div className="flex items-center justify-between gap-2 border-b border-neutral-100 pb-3">
         <div className="flex items-center gap-2">
           <Badge variant="subtle" size="sm">
-            COMPLETED EXPERIENCE
+            EXPERIENCE
           </Badge>
-          <span className="text-[11px] font-mono font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-xs border border-emerald-200/60">
-            VERIFIED
-          </span>
         </div>
         <span className="text-xs font-mono text-neutral-400">
-          Internship Record
+          Internship
         </span>
       </div>
 

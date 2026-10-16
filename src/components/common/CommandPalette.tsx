@@ -3,6 +3,7 @@ import { Icon } from './Icon'
 import { usePerspective } from '@/context'
 import { useProjectTransition } from '@/components/projects'
 import { siteProfile } from '@/data'
+import { useRouter } from '@/router'
 
 export interface CommandPaletteProps {
   isOpen: boolean
@@ -25,6 +26,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null)
   const { setPerspective } = usePerspective()
   const { enterProject } = useProjectTransition()
+  const { route, navigate } = useRouter()
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -32,9 +34,13 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
 
   const navigateToHash = (hash: string) => {
     onClose()
-    const target = document.querySelector(hash)
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
+    if (route !== 'home') {
+      navigate('/' + hash)
+    } else {
+      const target = document.querySelector(hash)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+      }
     }
   }
 
@@ -114,11 +120,14 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
     },
     {
       id: 'nav-projects',
-      title: 'Project Universe (Shelves)',
-      subtitle: 'Browse all 9 engineering platforms and tools',
+      title: 'Project Universe',
+      subtitle: 'Browse all engineering platforms, tools, and research tracks',
       category: 'Navigation',
       shortcut: 'G P',
-      perform: () => navigateToHash('#projects'),
+      perform: () => {
+        navigate('/projects')
+        onClose()
+      },
     },
     {
       id: 'nav-about',
