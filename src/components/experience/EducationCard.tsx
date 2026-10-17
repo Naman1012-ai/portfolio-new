@@ -18,7 +18,7 @@ export function EducationCard({ education, className = '' }: EducationCardProps)
     <Card
       variant="outlined"
       padding="md"
-      className={`space-y-5 bg-white/95 border-slate-200/90 shadow-[0_2px_8px_-2px_rgba(15,23,42,0.04)] hover:border-slate-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-2xl motion-reduce:transform-none motion-reduce:transition-none ${className}`}
+      className={`space-y-5 bg-white border-slate-200/90 shadow-elevated hover:border-slate-300 hover:shadow-cinematic hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-2xl motion-reduce:transform-none motion-reduce:transition-none ${className}`}
     >
       {/* Header Badges */}
       <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
@@ -27,14 +27,14 @@ export function EducationCard({ education, className = '' }: EducationCardProps)
             EDUCATION
           </Badge>
         </div>
-        <span className="text-xs font-mono text-slate-400">
+        <span className="text-xs font-mono text-slate-500">
           The NorthCap University
         </span>
       </div>
 
       {/* Institution & Degree */}
       <div className="space-y-1.5">
-        <Heading as="h3" variant="h3" className="text-lg font-bold text-slate-950">
+        <Heading as="h3" variant="h3" className="text-lg font-bold text-slate-900">
           {education.institution}
         </Heading>
         <Text variant="bodySm" tone="secondary" className="font-semibold text-slate-800 text-sm">
@@ -54,12 +54,12 @@ export function EducationCard({ education, className = '' }: EducationCardProps)
 
       {/* Verified Academic Standing Box */}
       {education.grade && (
-        <div className="p-4 bg-slate-50/90 border border-slate-200/80 rounded-xl shadow-xs transition-all duration-200 hover:border-slate-300">
+        <div className="p-4 bg-gradient-to-br from-indigo-50/80 via-white to-slate-50 border border-indigo-200/80 rounded-xl shadow-xs transition-all duration-200 hover:border-indigo-300">
           <div className="flex items-baseline justify-between gap-2 mb-1.5">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-indigo-700 font-semibold">
               Academic Standing
             </span>
-            <span className="text-[11px] font-mono text-slate-400 font-medium">
+            <span className="text-[11px] font-mono text-slate-500 font-medium">
               First Year
             </span>
           </div>

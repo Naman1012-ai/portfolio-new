@@ -22,11 +22,11 @@ const variantClasses: Record<TextVariant, string> = {
 }
 
 const toneClasses: Record<TextTone, string> = {
-  primary: 'text-neutral-900',
-  secondary: 'text-neutral-600',
-  muted: 'text-neutral-500',
-  faint: 'text-neutral-400',
-  accent: 'text-neutral-900 font-medium',
+  primary: 'text-slate-950',
+  secondary: 'text-slate-700',
+  muted: 'text-slate-600',
+  faint: 'text-slate-400',
+  accent: 'text-indigo-600 font-medium',
 }
 
 export function Text({

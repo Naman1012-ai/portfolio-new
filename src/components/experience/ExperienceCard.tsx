@@ -20,7 +20,7 @@ export function ExperienceCard({ experience, className = '' }: ExperienceCardPro
     <Card
       variant="outlined"
       padding="md"
-      className={`space-y-5 bg-white/95 border-slate-200/90 shadow-[0_2px_8px_-2px_rgba(15,23,42,0.04)] hover:border-slate-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-2xl motion-reduce:transform-none motion-reduce:transition-none ${className}`}
+      className={`space-y-5 bg-white border-slate-200/90 shadow-elevated hover:border-slate-300 hover:shadow-cinematic hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-2xl motion-reduce:transform-none motion-reduce:transition-none ${className}`}
     >
       {/* Header Badges */}
       <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
@@ -29,14 +29,14 @@ export function ExperienceCard({ experience, className = '' }: ExperienceCardPro
             EXPERIENCE
           </Badge>
         </div>
-        <span className="text-xs font-mono text-slate-400">
+        <span className="text-xs font-mono text-slate-500">
           Internship
         </span>
       </div>
 
       {/* Organization & Role */}
       <div className="space-y-1.5">
-        <Heading as="h3" variant="h3" className="text-lg font-bold text-slate-950">
+        <Heading as="h3" variant="h3" className="text-lg font-bold text-slate-900">
           {experience.organization}
         </Heading>
         <Text variant="bodySm" tone="secondary" className="font-semibold text-slate-800 text-sm">
@@ -45,15 +45,15 @@ export function ExperienceCard({ experience, className = '' }: ExperienceCardPro
       </div>
 
       {/* Actual Work Context */}
-      <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+      <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-600 leading-relaxed">
         Hands-on web development internship, structuring and building responsive web interfaces, styling page layouts, and implementing client-side interactions with core HTML, CSS, and JavaScript.
       </Text>
 
       {/* Internship Project Deliverable */}
       {experience.projectRepoUrl && (
-        <div className="p-3.5 bg-slate-50/90 border border-slate-200/80 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs hover:border-slate-300 transition-colors group">
+        <div className="p-3.5 bg-slate-50/80 border border-slate-200/90 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs hover:border-slate-300 transition-colors group">
           <div className="min-w-0">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-0.5">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-indigo-700 font-semibold block mb-0.5">
               Internship Project Deliverable
             </span>
             <span className="text-xs sm:text-sm font-semibold text-slate-900 block">
@@ -67,7 +67,7 @@ export function ExperienceCard({ experience, className = '' }: ExperienceCardPro
             href={experience.projectRepoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium text-slate-900 bg-white border border-slate-200 rounded-full shadow-2xs hover:bg-slate-50 transition-colors shrink-0 self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium text-slate-800 bg-white border border-slate-200/90 hover:bg-slate-100 rounded-full shadow-2xs transition-colors shrink-0 self-start sm:self-auto"
             aria-label="View InAmigos Foundation website prototype repository on GitHub (opens in new tab)"
           >
             <span>Repository</span>
@@ -81,7 +81,7 @@ export function ExperienceCard({ experience, className = '' }: ExperienceCardPro
       {/* Core Tools */}
       {experience.technologies && experience.technologies.length > 0 && (
         <div className="space-y-2">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">
+          <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold block">
             Core Tools
           </span>
           <div className="flex flex-wrap gap-1.5">

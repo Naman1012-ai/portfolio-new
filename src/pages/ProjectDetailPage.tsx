@@ -7,7 +7,6 @@ import {
   Icon,
   Section,
   Text,
-  TextLink,
 } from '@/components/common'
 import {
   InteractiveFeatureInspector,
@@ -45,18 +44,18 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
     return (
       <div className="py-16 sm:py-24">
         <Container size="md">
-          <Card variant="outlined" padding="lg" className="text-center max-w-xl mx-auto space-y-6">
-            <div className="w-12 h-12 rounded-full bg-neutral-100 flex items-center justify-center mx-auto text-neutral-500">
+          <Card variant="outlined" padding="lg" className="text-center max-w-xl mx-auto space-y-6 bg-white border-slate-200/90 shadow-elevated rounded-2xl">
+            <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-500">
               <Icon name="terminal" size="md" />
             </div>
 
             <div className="space-y-2">
-              <Heading as="h1" variant="h2" className="text-2xl font-bold text-neutral-950">
+              <Heading as="h1" variant="h2" className="text-2xl font-bold text-slate-900">
                 Project Not Found
               </Heading>
-              <Text variant="body" tone="secondary" className="text-sm text-neutral-600">
+              <Text variant="body" tone="secondary" className="text-sm text-slate-600">
                 {slug ? (
-                  <>The project slug <code className="px-1.5 py-0.5 font-mono text-xs bg-neutral-100 rounded-xs text-neutral-800">{slug}</code> does not match any project in this portfolio.</>
+                  <>The project slug <code className="px-1.5 py-0.5 font-mono text-xs bg-slate-100 rounded-xs text-slate-800">{slug}</code> does not match any project in this portfolio.</>
                 ) : (
                   <>The requested project does not match any project in this portfolio.</>
                 )}
@@ -82,8 +81,8 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             </div>
 
             {/* Quick jump to verified projects */}
-            <div className="pt-6 border-t border-neutral-200/80 text-left">
-              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider block mb-3 text-[11px]">
+            <div className="pt-6 border-t border-slate-100 text-left">
+              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider block mb-3 text-[11px] text-slate-500">
                 Available Project Case Studies:
               </Text>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -91,7 +90,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                   <Link
                     key={p.slug}
                     to={`/projects/${p.slug}`}
-                    className="p-2 text-xs font-mono text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 rounded-xs transition-colors flex items-center justify-between"
+                    className="p-2 text-xs font-mono text-slate-700 hover:text-slate-950 hover:bg-slate-50 rounded-lg transition-colors flex items-center justify-between"
                   >
                     <span>{p.title}</span>
                     <Icon name="arrow-right" size="xs" className="opacity-50" />
@@ -122,7 +121,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
     project.maturity === 'production'
       ? 'bg-emerald-500'
       : project.maturity === 'completed'
-        ? 'bg-neutral-600'
+        ? 'bg-slate-400'
         : 'bg-amber-400'
 
   return (
@@ -132,7 +131,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
         <div className="mb-8">
           <Link
             to={project.track === 'robotics-autonomous' ? '/projects#robotics' : '/projects'}
-            className="group inline-flex items-center gap-2 text-xs font-mono font-medium text-slate-500 hover:text-slate-950 px-3 py-1 rounded-full bg-slate-100/80 hover:bg-slate-200/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 shadow-xs"
+            className="group inline-flex items-center gap-2 text-xs font-mono font-medium text-slate-700 hover:text-slate-950 px-3 py-1 rounded-full bg-white hover:bg-slate-50 border border-slate-200/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 shadow-2xs"
             aria-label={project.track === 'robotics-autonomous' ? 'Back to Robotics & Autonomous Systems track' : 'Back to Project Universe'}
           >
             <Icon name="arrow-left" size="xs" className="transition-transform duration-150 group-hover:-translate-x-0.5 motion-reduce:transform-none" />
@@ -161,84 +160,17 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
           </div>
 
           {/* Project Title & Tagline */}
-          <Heading as="h1" variant="display" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-950 mb-4">
+          <Heading as="h1" variant="display" className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-950 mb-4">
             {project.title}
           </Heading>
-          <Text variant="lead" tone="secondary" className="max-w-3xl text-slate-700 leading-relaxed mb-8">
+          <Text variant="lead" tone="secondary" className="max-w-3xl text-slate-600 leading-relaxed">
             {project.tagline}
           </Text>
-
-          {/* Key Specifications Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-6 bg-white/95 border border-slate-200/90 rounded-2xl shadow-[0_2px_8px_-2px_rgba(15,23,42,0.04)] hover:border-slate-300 transition-colors duration-200">
-            <div>
-              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] block mb-1">
-                Engineering Role
-              </Text>
-              <Text variant="bodySm" tone="primary" className="font-medium text-xs sm:text-sm">
-                {project.role}
-              </Text>
-            </div>
-
-            <div>
-              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] block mb-1">
-                Project Maturity
-              </Text>
-              <div className="flex items-center gap-1.5">
-                <span className={`w-2 h-2 rounded-full ${dotColor}`} aria-hidden="true" />
-                <Text variant="bodySm" tone="primary" className="font-medium text-xs sm:text-sm capitalize">
-                  {project.maturity.replace('-', ' ')}
-                </Text>
-              </div>
-            </div>
-
-            <div>
-              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] block mb-1">
-                Attribution
-              </Text>
-              <Text variant="bodySm" tone="primary" className="font-medium text-xs sm:text-sm">
-                {isTeam ? 'Collaborative Team' : 'Independent Project'}
-              </Text>
-            </div>
-
-            <div>
-              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] block mb-1">
-                Repository & Source
-              </Text>
-              {hasRepo ? (
-                <TextLink
-                  href={project.links!.repo!}
-                  external
-                  showExternalIcon
-                  variant="accent"
-                  className="text-xs sm:text-sm font-medium"
-                >
-                  GitHub Repository
-                </TextLink>
-              ) : (
-                <span className="text-xs font-mono text-neutral-500">
-                  Local Implementation
-                </span>
-              )}
-              {project.links?.live && (
-                <div className="mt-1">
-                  <TextLink
-                    href={project.links.live}
-                    external
-                    showExternalIcon
-                    variant="accent"
-                    className="text-xs font-mono font-medium text-emerald-700 hover:text-emerald-900"
-                  >
-                    Live Deployment
-                  </TextLink>
-                </div>
-              )}
-            </div>
-          </div>
         </Section>
 
         {/* Visual Evidence Showcase Frame — Cinematic Presentation */}
         <div className="mb-14 animate-cinematic-expand">
-          <div className="group/hero-preview rounded-2xl border border-slate-200/90 overflow-hidden bg-neutral-950 shadow-[0_16px_36px_-6px_rgba(15,23,42,0.12),0_6px_14px_-4px_rgba(15,23,42,0.04)] transition-all duration-300">
+          <div className="group/hero-preview rounded-2xl border border-slate-200/90 overflow-hidden bg-slate-900 shadow-cinematic transition-all duration-300">
             <ProjectPreview project={project} variant="case-study" />
           </div>
         </div>
@@ -249,13 +181,13 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
           <div className="lg:col-span-2 space-y-12">
             {/* 1. Project Overview */}
             <section aria-labelledby="section-overview">
-              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px]">
+              <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px] text-indigo-600 font-semibold">
                 01 / OVERVIEW
               </Text>
-              <Heading as="h2" variant="h2" id="section-overview" className="text-2xl font-bold text-slate-950 mb-4">
+              <Heading as="h2" variant="h2" id="section-overview" className="text-2xl font-bold text-slate-900 mb-4">
                 Executive Summary
               </Heading>
-              <Text variant="body" tone="secondary" className="leading-relaxed text-slate-700 text-base">
+              <Text variant="body" tone="secondary" className="leading-relaxed text-slate-600 text-base">
                 {caseStudy?.overview || project.summary}
               </Text>
             </section>
@@ -263,13 +195,13 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             {/* 2. Problem & Real-World Context */}
             {caseStudy?.problemContext && (
               <section aria-labelledby="section-problem">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px]">
+                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px] text-indigo-600 font-semibold">
                   02 / PROBLEM & CONTEXT
                 </Text>
-                <Heading as="h2" variant="h2" id="section-problem" className="text-2xl font-bold text-slate-950 mb-4">
+                <Heading as="h2" variant="h2" id="section-problem" className="text-2xl font-bold text-slate-900 mb-4">
                   The Problem Space
                 </Heading>
-                <Text variant="body" tone="secondary" className="leading-relaxed text-slate-700 text-base">
+                <Text variant="body" tone="secondary" className="leading-relaxed text-slate-600 text-base">
                   {caseStudy.problemContext}
                 </Text>
               </section>
@@ -278,13 +210,13 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             {/* 3. Technical Architecture & Approach */}
             {(caseStudy?.approachArchitecture || project.description) && (
               <section aria-labelledby="section-approach">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px]">
+                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px] text-indigo-600 font-semibold">
                   03 / ARCHITECTURE & APPROACH
                 </Text>
-                <Heading as="h2" variant="h2" id="section-approach" className="text-2xl font-bold text-slate-950 mb-4">
+                <Heading as="h2" variant="h2" id="section-approach" className="text-2xl font-bold text-slate-900 mb-4">
                   Engineering Architecture
                 </Heading>
-                <Text variant="body" tone="secondary" className="leading-relaxed text-slate-700 text-base mb-6">
+                <Text variant="body" tone="secondary" className="leading-relaxed text-slate-600 text-base mb-6">
                   {caseStudy?.approachArchitecture || project.description}
                 </Text>
 
@@ -296,21 +228,21 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             {/* 4. Core Capabilities & Implemented Features */}
             {caseStudy?.keyFeatures && caseStudy.keyFeatures.length > 0 && (
               <section aria-labelledby="section-features">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px]">
+                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px] text-indigo-600 font-semibold">
                   04 / CAPABILITIES
                 </Text>
-                <Heading as="h2" variant="h2" id="section-features" className="text-2xl font-bold text-slate-950 mb-6">
+                <Heading as="h2" variant="h2" id="section-features" className="text-2xl font-bold text-slate-900 mb-6">
                   Core Implementation Features
                 </Heading>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {caseStudy.keyFeatures.map((feature, idx) => (
                     <div
                       key={idx}
-                      className="p-4 rounded-xl border border-slate-200/80 bg-white/95 shadow-xs hover:shadow-md transition-all space-y-1.5"
+                      className="p-4 rounded-xl border border-slate-200/90 bg-white shadow-subtle hover:border-slate-300 transition-all space-y-1.5"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-900 shrink-0" aria-hidden="true" />
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" aria-hidden="true" />
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                           Feature 0{idx + 1}
                         </span>
                       </div>
@@ -329,19 +261,19 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             {/* 5. Key Technical Decisions */}
             {caseStudy?.technicalDecisions && caseStudy.technicalDecisions.length > 0 && (
               <section aria-labelledby="section-decisions">
-                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px]">
+                <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block text-[11px] text-indigo-600 font-semibold">
                   05 / TECHNICAL DECISIONS
                 </Text>
-                <Heading as="h2" variant="h2" id="section-decisions" className="text-2xl font-bold text-slate-950 mb-4">
+                <Heading as="h2" variant="h2" id="section-decisions" className="text-2xl font-bold text-slate-900 mb-4">
                   Architectural Choices & Rationale
                 </Heading>
                 <div className="space-y-3">
                   {caseStudy.technicalDecisions.map((decision, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3.5 p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition-all text-xs sm:text-sm text-slate-800 leading-relaxed"
+                      className="flex items-start gap-3.5 p-4 rounded-xl bg-white border border-slate-200/90 shadow-subtle hover:border-slate-300 transition-all text-xs sm:text-sm text-slate-700 leading-relaxed"
                     >
-                      <span className="font-mono text-[10px] font-semibold text-slate-700 bg-slate-100 border border-slate-200/80 px-2.5 py-0.5 rounded-full mt-0.5 shrink-0 shadow-2xs">
+                      <span className="font-mono text-[10px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 rounded-full mt-0.5 shrink-0 shadow-2xs">
                         Decision 0{idx + 1}
                       </span>
                       <span className="pt-0.5">{decision}</span>
@@ -355,12 +287,12 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
           {/* Right Column: Sticky Technical HUD Sidebar */}
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start" aria-label="Project details sidebar">
             {/* Technology Stack Card */}
-            <div className="p-5 bg-white/95 border border-slate-200/90 rounded-2xl shadow-xs space-y-4">
+            <div className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-subtle space-y-4">
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                 <Heading as="h3" variant="h3" className="text-sm font-semibold text-slate-900">
                   Technologies & Tools
                 </Heading>
-                <span className="text-[11px] font-mono text-slate-400">
+                <span className="text-[11px] font-mono text-slate-500">
                   {project.technologies.length} Stack Components
                 </span>
               </div>
@@ -368,7 +300,7 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 text-xs font-mono text-slate-800 bg-slate-100/90 border border-slate-200/80 rounded-full shadow-2xs hover:bg-slate-200/80 transition-colors"
+                    className="px-3 py-1 text-xs font-mono text-slate-700 bg-slate-100 border border-slate-200/80 rounded-full shadow-2xs hover:bg-slate-200 transition-colors"
                   >
                     {tech}
                   </span>
@@ -378,10 +310,10 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
 
             {/* Current Status Note */}
             {caseStudy?.currentStatusNote && (
-              <div className="p-5 bg-white/95 border border-slate-200/90 rounded-2xl shadow-xs space-y-2">
+              <div className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-subtle space-y-2">
                 <div className="flex items-center gap-2">
                   <span className={`w-2 h-2 rounded-full ${dotColor}`} aria-hidden="true" />
-                  <Heading as="h4" variant="h4" className="text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold">
+                  <Heading as="h4" variant="h4" className="text-xs font-mono uppercase tracking-wider text-slate-800 font-semibold">
                     Current Status
                   </Heading>
                 </div>
@@ -393,8 +325,8 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
 
             {/* Team Collaboration Note */}
             {isTeam && (
-              <div className="p-5 bg-white/95 border border-slate-200/90 rounded-2xl shadow-xs space-y-2">
-                <Heading as="h4" variant="h4" className="text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold">
+              <div className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-subtle space-y-2">
+                <Heading as="h4" variant="h4" className="text-xs font-mono uppercase tracking-wider text-slate-800 font-semibold">
                   Collaboration Attribution
                 </Heading>
                 <Text variant="bodySm" tone="secondary" className="text-xs text-slate-600 leading-relaxed">
@@ -472,10 +404,10 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
           <section aria-labelledby="section-engineering-rigor" className="mb-16 pt-8 border-t border-slate-200/80">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                <span className="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold">
                   06 — 08 / Engineering Rigor & Learnings
                 </span>
-                <span className="text-slate-300 font-mono text-xs">·</span>
+                <span className="text-slate-400 font-mono text-xs">·</span>
                 <span className="text-xs font-mono text-slate-500">
                   Constraints, Verification & Engineering Judgement
                 </span>
@@ -485,15 +417,15 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
               {/* Card 06: Challenges & Trade-offs */}
               {caseStudy?.challengesTradeoffs && (
-                <div className="flex flex-col justify-between p-5 rounded-2xl bg-white border border-amber-200/80 shadow-xs hover:shadow-md transition-all">
+                <div className="flex flex-col justify-between p-5 rounded-2xl bg-amber-50/60 border border-amber-200/80 shadow-subtle hover:border-amber-300 transition-all">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase font-semibold tracking-wider bg-amber-50 text-amber-800 border border-amber-200/60 shadow-2xs">
+                      <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase font-semibold tracking-wider bg-amber-100 text-amber-800 border border-amber-200 shadow-2xs">
                         06 / Trade-offs
                       </span>
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true" />
                     </div>
-                    <h3 className="font-bold text-sm sm:text-base text-slate-950 mb-2">
+                    <h3 className="font-bold font-display text-sm sm:text-base text-slate-900 mb-2">
                       Technical Constraints & Compromises
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
@@ -505,15 +437,15 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
 
               {/* Card 07: Verification & Testing Rigor */}
               {caseStudy?.verificationTesting && (
-                <div className="flex flex-col justify-between p-5 rounded-2xl bg-white border border-emerald-200/80 shadow-xs hover:shadow-md transition-all">
+                <div className="flex flex-col justify-between p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 shadow-subtle hover:border-emerald-300 transition-all">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase font-semibold tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/60 shadow-2xs">
+                      <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase font-semibold tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-2xs">
                         07 / Verification
                       </span>
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
                     </div>
-                    <h3 className="font-bold text-sm sm:text-base text-slate-950 mb-2">
+                    <h3 className="font-bold font-display text-sm sm:text-base text-slate-900 mb-2">
                       Validation & Reliability
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
@@ -525,15 +457,15 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
 
               {/* Card 08: Key Engineering Takeaways */}
               {caseStudy?.lessonsLearned && (
-                <div className="flex flex-col justify-between p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md transition-all">
+                <div className="flex flex-col justify-between p-5 rounded-2xl bg-indigo-50/60 border border-indigo-200/80 shadow-subtle hover:border-indigo-300 transition-all">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase font-semibold tracking-wider bg-slate-100 text-slate-800 border border-slate-200/80 shadow-2xs">
+                      <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] uppercase font-semibold tracking-wider bg-indigo-100 text-indigo-800 border border-indigo-200 shadow-2xs">
                         08 / Takeaways
                       </span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-slate-900" aria-hidden="true" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" aria-hidden="true" />
                     </div>
-                    <h3 className="font-bold text-sm sm:text-base text-slate-950 mb-2">
+                    <h3 className="font-bold font-display text-sm sm:text-base text-slate-900 mb-2">
                       Key Engineering Takeaways
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
@@ -553,14 +485,14 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
               {previous ? (
                 <Link
                   to={`/projects/${previous.slug}`}
-                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-xs hover:shadow-md hover:-translate-y-0.5 motion-reduce:transform-none"
+                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-subtle hover:shadow-cinematic hover:-translate-y-0.5 motion-reduce:transform-none"
                   aria-label={`Previous project: ${previous.title}`}
                 >
-                  <span className="text-[11px] font-mono uppercase text-slate-400 block mb-1 flex items-center gap-1.5">
+                  <span className="text-[11px] font-mono uppercase text-slate-500 block mb-1 flex items-center gap-1.5">
                     <Icon name="arrow-left" size="xs" className="transition-transform duration-150 group-hover:-translate-x-0.5 motion-reduce:transform-none" />
                     <span>Previous Case Study</span>
                   </span>
-                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-slate-700 transition-colors block">
+                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors block">
                     {previous.title}
                   </span>
                   <span className="text-xs text-slate-500 block mt-0.5 line-clamp-1 font-mono">
@@ -570,14 +502,14 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
               ) : (
                 <Link
                   to="/projects"
-                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-xs hover:shadow-md hover:-translate-y-0.5 motion-reduce:transform-none"
+                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-subtle hover:shadow-cinematic hover:-translate-y-0.5 motion-reduce:transform-none"
                   aria-label="Explore Project Universe"
                 >
-                  <span className="text-[11px] font-mono uppercase text-slate-400 block mb-1 flex items-center gap-1.5">
+                  <span className="text-[11px] font-mono uppercase text-slate-500 block mb-1 flex items-center gap-1.5">
                     <Icon name="arrow-left" size="xs" className="transition-transform duration-150 group-hover:-translate-x-0.5 motion-reduce:transform-none" />
                     <span>Project Universe</span>
                   </span>
-                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-slate-700 transition-colors block">
+                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors block">
                     All Case Studies & Systems
                   </span>
                   <span className="text-xs text-slate-500 block mt-0.5 line-clamp-1 font-mono">
@@ -589,14 +521,14 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
               {next ? (
                 <Link
                   to={`/projects/${next.slug}`}
-                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-xs hover:shadow-md hover:-translate-y-0.5 motion-reduce:transform-none text-left sm:text-right"
+                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-subtle hover:shadow-cinematic hover:-translate-y-0.5 motion-reduce:transform-none text-left sm:text-right"
                   aria-label={`Next project: ${next.title}`}
                 >
-                  <span className="text-[11px] font-mono uppercase text-slate-400 block mb-1 flex items-center justify-start sm:justify-end gap-1.5">
+                  <span className="text-[11px] font-mono uppercase text-slate-500 block mb-1 flex items-center justify-start sm:justify-end gap-1.5">
                     <span>Next Case Study</span>
                     <Icon name="arrow-right" size="xs" className="transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transform-none" />
                   </span>
-                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-slate-700 transition-colors block">
+                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors block">
                     {next.title}
                   </span>
                   <span className="text-xs text-slate-500 block mt-0.5 line-clamp-1 font-mono">
@@ -606,14 +538,14 @@ export function ProjectDetailPage({ slug: propSlug }: ProjectDetailPageProps) {
               ) : (
                 <Link
                   to="/projects"
-                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-xs hover:shadow-md hover:-translate-y-0.5 motion-reduce:transform-none text-left sm:text-right"
+                  className="group p-5 border border-slate-200/90 hover:border-slate-300 rounded-2xl transition-all duration-200 bg-white shadow-subtle hover:shadow-cinematic hover:-translate-y-0.5 motion-reduce:transform-none text-left sm:text-right"
                   aria-label="Return to Project Universe"
                 >
-                  <span className="text-[11px] font-mono uppercase text-slate-400 block mb-1 flex items-center justify-start sm:justify-end gap-1.5">
+                  <span className="text-[11px] font-mono uppercase text-slate-500 block mb-1 flex items-center justify-start sm:justify-end gap-1.5">
                     <span>Project Universe</span>
                     <Icon name="arrow-right" size="xs" className="transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transform-none" />
                   </span>
-                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-slate-700 transition-colors block">
+                  <span className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors block">
                     All Case Studies & Systems
                   </span>
                   <span className="text-xs text-slate-500 block mt-0.5 line-clamp-1 font-mono">

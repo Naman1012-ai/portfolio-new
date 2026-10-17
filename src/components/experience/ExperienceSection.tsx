@@ -27,11 +27,11 @@ export function ExperienceSection({ className = '' }: ExperienceSectionProps) {
         <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider mb-2 block">
           EXPERIENCE & ACADEMIC FOUNDATIONS
         </Text>
-        <Heading as="h2" variant="h1" className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mb-4">
+        <Heading as="h2" variant="h1" className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-slate-900 mb-4">
           Engineering Foundations & Milestones
         </Heading>
-        <Text variant="body" tone="secondary" className="leading-relaxed text-slate-700 text-sm sm:text-base">
-          Computer Science undergraduate at The NorthCap University, specializing in Artificial Intelligence and Machine Learning, with hands-on experience building software projects and web applications.
+        <Text variant="body" tone="secondary" className="leading-relaxed text-slate-600 text-sm sm:text-base">
+          Academic foundations, verified institutional coursework, and completed software engineering deliverables.
         </Text>
       </div>
 

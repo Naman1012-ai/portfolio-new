@@ -5,10 +5,10 @@
   --color-surface: #ffffff;
   --color-surface-subdued: #f1f5f9;
   --color-surface-hover: #f8fafc;
-  --color-surface-obsidian: #090d16;
+  --color-surface-obsidian: #ffffff;
 
   --color-ink-primary: #090d16;
-  --color-ink-secondary: #475569;
+  --color-ink-secondary: #334155;
   --color-ink-muted: #64748b;
   --color-ink-faint: #94a3b8;
 
@@ -16,25 +16,26 @@
   --color-line-default: #e2e8f0;
   --color-line-strong: #cbd5e1;
 
-  --color-accent: #090d16;
-  --color-accent-subtle: #f1f5f9;
-  --color-focus: #090d16;
+  --color-accent: #4f46e5;
+  --color-accent-subtle: #eef2ff;
+  --color-focus: #6366f1;
 
   --color-brand-lavender: #7c3aed;
   --color-brand-lavender-subtle: #f5f3ff;
   --color-brand-lavender-border: #ddd6fe;
   --color-brand-lavender-muted: #6d28d9;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
 
-  --shadow-micro: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
-  --shadow-subtle: 0 2px 6px -1px rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
-  --shadow-elevated: 0 10px 25px -4px rgba(15, 23, 42, 0.06), 0 4px 10px -4px rgba(15, 23, 42, 0.03);
-  --shadow-cinematic: 0 16px 36px -6px rgba(15, 23, 42, 0.08), 0 6px 14px -4px rgba(15, 23, 42, 0.03);
-  --shadow-cinematic-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
-  --shadow-glow: 0 0 25px -2px rgba(99, 102, 241, 0.12);
-  --shadow-obsidian: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-micro: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-subtle: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  --shadow-elevated: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-cinematic: 0 20px 40px -15px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+  --shadow-cinematic-lg: 0 30px 60px -12px rgba(15, 23, 42, 0.15), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 10px 30px -5px rgba(79, 70, 229, 0.15);
+  --shadow-obsidian: 0 20px 40px -15px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(15, 23, 42, 0.06);
 }
 
 :root {
@@ -51,9 +52,9 @@ body {
   min-height: 100vh;
   background-color: var(--color-canvas);
   background-image: 
-    radial-gradient(at 10% 0%, rgba(99, 102, 241, 0.035) 0px, transparent 50%),
-    radial-gradient(at 90% 10%, rgba(14, 165, 233, 0.035) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.02) 0px, transparent 60%);
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.04) 0px, transparent 60%);
   color: var(--color-ink-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -214,7 +215,7 @@ body {
 /* Restrained horizontal shelf scrollbar */
 .shelf-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #e4e4e7 transparent;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
 .shelf-scrollbar::-webkit-scrollbar {
@@ -226,12 +227,12 @@ body {
 }
 
 .shelf-scrollbar::-webkit-scrollbar-thumb {
-  background: #e4e4e7;
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 
 .shelf-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #d4d4d8;
+  background: #94a3b8;
 }
 
 /* Project Selection Transition & Depth Utilities */

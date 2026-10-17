@@ -29,7 +29,7 @@ export function PerspectiveSwitcher({
           return (
             <span key={mode} className="inline-flex items-center">
               {index > 0 && (
-                <span className="mx-2 text-neutral-300 font-normal select-none" aria-hidden="true">
+                <span className="mx-2 text-slate-600 font-normal select-none" aria-hidden="true">
                   ·
                 </span>
               )}
@@ -39,10 +39,10 @@ export function PerspectiveSwitcher({
                   setPerspective(mode)
                   onSelect?.(mode)
                 }}
-                className={`relative py-1 px-1.5 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 rounded-xs ${
+                className={`relative py-1 px-1.5 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500 rounded-xs ${
                   isActive
-                    ? 'font-semibold text-neutral-950'
-                    : 'font-normal text-neutral-500 hover:text-neutral-900'
+                    ? 'font-semibold text-slate-950'
+                    : 'font-normal text-slate-500 hover:text-slate-900'
                 }`}
                 aria-pressed={isActive}
                 title={`${item.label} — ${item.description}`}
@@ -50,7 +50,7 @@ export function PerspectiveSwitcher({
                 <span>{item.shortLabel}</span>
                 {isActive && (
                   <span
-                    className="absolute bottom-0 left-1 right-1 h-0.5 bg-neutral-950 rounded-full"
+                    className="absolute bottom-0 left-1 right-1 h-0.5 bg-indigo-600 shadow-[0_0_8px_rgba(79,70,229,0.4)] rounded-full"
                     aria-hidden="true"
                   />
                 )}
@@ -61,16 +61,16 @@ export function PerspectiveSwitcher({
       </div>
 
       {variant === 'inline' && perspective !== 'explore' && (
-        <div className="flex items-center justify-between gap-3 px-3 py-1.5 bg-neutral-50 text-neutral-800 rounded-xs border border-neutral-200/80 text-[11px] font-mono animate-fade-in">
+        <div className="flex items-center justify-between gap-3 px-3 py-1.5 bg-white text-slate-800 rounded-xl border border-slate-200 text-[11px] font-mono shadow-xs animate-fade-in">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 shrink-0" aria-hidden="true" />
-            <span className="font-semibold text-neutral-950">{info.badge}:</span>
-            <span className="text-neutral-600 hidden sm:inline">{info.focusHeadline}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 shrink-0" aria-hidden="true" />
+            <span className="font-semibold text-slate-950">{info.badge}:</span>
+            <span className="text-slate-500 hidden sm:inline">{info.focusHeadline}</span>
           </div>
           <button
             type="button"
             onClick={() => setPerspective('explore')}
-            className="text-[10px] text-neutral-500 hover:text-neutral-950 underline cursor-pointer shrink-0"
+            className="text-[10px] text-slate-500 hover:text-slate-900 underline cursor-pointer shrink-0"
           >
             Reset to Explore
           </button>

@@ -136,8 +136,8 @@ export function InteractiveFeatureInspector({
                 onClick={() => setPaperFormat(fmt)}
                 className={`px-2 py-1 rounded-xs border transition-colors ${
                   paperFormat === fmt
-                    ? 'bg-white text-neutral-950 border-white font-bold'
-                    : 'bg-neutral-800 text-neutral-300 border-neutral-700 hover:border-neutral-500'
+                    ? 'bg-cyan-400 text-slate-950 border-cyan-300 font-bold shadow-[0_0_8px_rgba(34,211,238,0.4)]'
+                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:border-slate-500'
                 }`}
               >
                 {fmt}
@@ -154,8 +154,8 @@ export function InteractiveFeatureInspector({
                 onClick={() => setMargin(m)}
                 className={`px-2 py-1 rounded-xs border transition-colors ${
                   margin === m
-                    ? 'bg-white text-neutral-950 border-white font-bold'
-                    : 'bg-neutral-800 text-neutral-300 border-neutral-700 hover:border-neutral-500'
+                    ? 'bg-cyan-400 text-slate-950 border-cyan-300 font-bold shadow-[0_0_8px_rgba(34,211,238,0.4)]'
+                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:border-slate-500'
                 }`}
               >
                 {m}mm

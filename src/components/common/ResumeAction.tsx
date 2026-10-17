@@ -105,7 +105,7 @@ export function ResumeAction({
           data-variant="header"
           className={
             className ||
-            'inline-flex items-center gap-1 px-2.5 py-1 text-xs font-mono font-medium text-neutral-900 bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 rounded-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900'
+            'inline-flex items-center gap-1 px-2.5 py-1 text-xs font-mono font-medium text-slate-800 bg-white hover:bg-slate-50 border border-slate-200/90 rounded-sm shadow-xs transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500'
           }
           aria-label="View Curriculum Vitae PDF (opens in new tab)"
         >
@@ -193,7 +193,7 @@ export function ResumeAction({
         data-variant="header"
         className={
           className ||
-          'inline-flex items-center gap-1 px-2.5 py-1 text-xs font-mono font-medium text-neutral-400 bg-neutral-100/50 border border-dashed border-neutral-200 rounded-sm select-none cursor-not-allowed'
+          'inline-flex items-center gap-1 px-2.5 py-1 text-xs font-mono font-medium text-slate-500 bg-slate-900/40 border border-dashed border-slate-800 rounded-sm select-none cursor-not-allowed'
         }
       >
         Resume coming soon
@@ -207,7 +207,7 @@ export function ResumeAction({
         aria-disabled="true"
         data-testid="resume-action-fallback"
         data-variant="contact"
-        className={`inline-flex items-center justify-center h-11 px-5 text-base gap-2 rounded-md border border-neutral-200 bg-neutral-100/70 text-neutral-400 font-medium select-none cursor-not-allowed ${
+        className={`inline-flex items-center justify-center h-11 px-5 text-base gap-2 rounded-md border border-slate-800 bg-slate-900/40 text-slate-500 font-medium select-none cursor-not-allowed ${
           className || 'w-full sm:w-auto'
         }`}
       >
@@ -223,7 +223,7 @@ export function ResumeAction({
       aria-disabled="true"
       data-testid="resume-action-fallback"
       data-variant="hero"
-      className={`inline-flex items-center justify-center h-11 px-5 text-base gap-2 rounded-md border border-neutral-200 bg-neutral-100/70 text-neutral-400 font-medium whitespace-nowrap select-none cursor-not-allowed ${
+      className={`inline-flex items-center justify-center h-11 px-5 text-base gap-2 rounded-md border border-slate-800 bg-slate-900/40 text-slate-500 font-medium whitespace-nowrap select-none cursor-not-allowed ${
         className || 'inline-flex w-full sm:w-auto'
       }`}
     >

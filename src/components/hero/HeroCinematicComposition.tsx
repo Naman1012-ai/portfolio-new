@@ -70,11 +70,11 @@ export function HeroCinematicComposition() {
           transition: parallaxTransition,
         }}
       >
-        {/* Tilted dot grid — restrained, violet, -12° rotation */}
+        {/* Tilted dot grid — restrained, slate-300, -12° rotation */}
         <svg
           width="100%"
           height="100%"
-          className="absolute inset-0 opacity-[0.16]"
+          className="absolute inset-0 opacity-[0.25]"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
@@ -88,27 +88,27 @@ export function HeroCinematicComposition() {
               patternUnits="userSpaceOnUse"
               patternTransform="rotate(-12 0 0)"
             >
-              <circle cx="1.5" cy="1.5" r="1.5" fill="#7c3aed" />
+              <circle cx="1.5" cy="1.5" r="1.5" fill="#94a3b8" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill={`url(#${patternId})`} />
         </svg>
 
-        {/* Primary lavender bloom — top-right, warm and restrained */}
+        {/* Primary luminous bloom — top-right, soft indigo/cyan glow */}
         <div
           className="absolute -top-20 -right-20 w-[460px] h-[460px] rounded-full pointer-events-none animate-bloom-in animation-delay-200"
           style={{
-            background: 'radial-gradient(circle at 58% 38%, #ede9fe 0%, #ddd6fe 28%, transparent 68%)',
-            opacity: 0.32,
+            background: 'radial-gradient(circle at 58% 38%, rgba(99,102,241,0.12) 0%, rgba(6,182,212,0.06) 35%, transparent 70%)',
+            opacity: 0.9,
           }}
         />
 
-        {/* Secondary neutral bloom — lower-left, very faint tonal anchor */}
+        {/* Secondary neon bloom — lower-left, soft lavender/indigo glow */}
         <div
           className="absolute -bottom-24 -left-12 w-[340px] h-[340px] rounded-full pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at 40% 62%, #f5f3ff 0%, #ede9fe 38%, transparent 68%)',
-            opacity: 0.18,
+            background: 'radial-gradient(circle at 40% 62%, rgba(167,139,250,0.12) 0%, rgba(99,102,241,0.05) 40%, transparent 70%)',
+            opacity: 0.8,
           }}
         />
       </div>
@@ -142,9 +142,9 @@ export function HeroCinematicComposition() {
             }}
           >
             <div
-              className="relative rounded-lg overflow-hidden border border-neutral-200/70 bg-white"
+              className="relative rounded-xl overflow-hidden border border-slate-200/90 bg-white"
               style={{
-                boxShadow: '0 14px 32px -6px rgba(0,0,0,0.09), 0 4px 12px -2px rgba(0,0,0,0.04)',
+                boxShadow: '0 16px 36px -6px rgba(15,23,42,0.12), 0 0 1px 1px rgba(15,23,42,0.04)',
               }}
             >
               <div className="relative">
@@ -165,17 +165,17 @@ export function HeroCinematicComposition() {
                 <div
                   className="absolute inset-0 pointer-events-none transition-opacity duration-300"
                   style={{
-                    background: `radial-gradient(circle at ${50 + x * 25}% ${45 + y * 25}%, rgba(255,255,255,0.22) 0%, transparent 65%)`,
+                    background: `radial-gradient(circle at ${50 + x * 25}% ${45 + y * 25}%, rgba(255,255,255,0.4) 0%, transparent 65%)`,
                     opacity: isActive ? 0.9 : 0.2,
                   }}
                 />
               </div>
 
-              <div className="px-3 py-2 border-t border-neutral-100 bg-white/95 backdrop-blur-xs flex items-center justify-between">
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider">
+              <div className="px-3 py-2 border-t border-slate-100 bg-white/95 backdrop-blur-md flex items-center justify-between">
+                <span className="text-[10px] font-mono text-slate-600 uppercase tracking-wider font-medium">
                   BioLynk · Healthcare
                 </span>
-                <span className="w-2 h-2 rounded-full bg-violet-400 shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-violet-600 shrink-0 shadow-[0_0_6px_rgba(124,58,237,0.5)]" />
               </div>
             </div>
           </div>
@@ -211,9 +211,9 @@ export function HeroCinematicComposition() {
             }}
           >
             <div
-              className="relative rounded-lg overflow-hidden border border-neutral-200/80 bg-white"
+              className="relative rounded-xl overflow-hidden border border-slate-200/90 bg-white"
               style={{
-                boxShadow: '0 26px 54px -10px rgba(15, 23, 42, 0.14), 0 10px 20px -4px rgba(124, 58, 237, 0.06)',
+                boxShadow: '0 25px 50px -10px rgba(15,23,42,0.18), 0 0 1px 1px rgba(15,23,42,0.04)',
               }}
             >
               <div className="relative">
@@ -230,31 +230,23 @@ export function HeroCinematicComposition() {
                   />
                 </picture>
 
-                {/* Inner gradient anchors the lower card edge */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-10 pointer-events-none"
-                  style={{
-                    background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.3))',
-                  }}
-                />
-
                 {/* Subtle dynamic specular glare reflection */}
                 <div
                   className="absolute inset-0 pointer-events-none transition-opacity duration-300"
                   style={{
-                    background: `radial-gradient(circle at ${50 + x * 35}% ${40 + y * 35}%, rgba(255, 255, 255, 0.28) 0%, transparent 65%)`,
+                    background: `radial-gradient(circle at ${50 + x * 35}% ${40 + y * 35}%, rgba(255, 255, 255, 0.45) 0%, transparent 65%)`,
                     opacity: isActive ? 1 : 0.25,
                   }}
                 />
               </div>
 
-              <div className="px-3 py-2 border-t border-neutral-100 bg-white/95 backdrop-blur-xs flex items-center justify-between">
-                <span className="text-[10px] font-mono text-neutral-600 font-medium uppercase tracking-wider">
+              <div className="px-3 py-2 border-t border-slate-100 bg-white/95 backdrop-blur-md flex items-center justify-between">
+                <span className="text-[10px] font-mono text-slate-800 font-semibold uppercase tracking-wider">
                   Convia · Workspace Platform
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest hidden sm:inline">LIVE</span>
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+                  <span className="text-[9px] font-mono text-emerald-700 font-semibold uppercase tracking-widest hidden sm:inline">LIVE</span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 shadow-[0_0_6px_rgba(16,185,129,0.7)]" />
                 </div>
               </div>
             </div>
@@ -277,12 +269,12 @@ export function HeroCinematicComposition() {
         }}
       >
         <div className="flex items-center gap-2">
-          <div className="w-px h-8 bg-neutral-300" />
+          <div className="w-px h-8 bg-slate-300" />
           <div className="flex flex-col">
-            <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-[0.2em]">
+            <span className="text-[9px] font-mono text-slate-500 uppercase tracking-[0.2em] font-semibold">
               Selected Work
             </span>
-            <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-[0.2em]">
+            <span className="text-[9px] font-mono text-slate-400 uppercase tracking-[0.2em]">
               2024 — 2025
             </span>
           </div>
@@ -295,8 +287,8 @@ export function HeroCinematicComposition() {
         style={{ zIndex: 4 }}
       >
         <div className="flex items-end gap-1.5">
-          <div className="w-px h-6 bg-neutral-300" />
-          <div className="w-6 h-px bg-neutral-300" />
+          <div className="w-px h-6 bg-slate-300" />
+          <div className="w-6 h-px bg-slate-300" />
         </div>
       </div>
     </div>

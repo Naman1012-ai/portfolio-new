@@ -36,7 +36,7 @@ export function Section({
   'aria-labelledby': ariaLabelledby,
 }: SectionProps) {
   const { ref, isRevealed } = useScrollReveal<HTMLElement>({ disabled: !reveal })
-  const borderClass = bordered ? 'border-b border-neutral-200' : ''
+  const borderClass = bordered ? 'border-b border-slate-800/80' : ''
   const revealClass = reveal ? `scroll-reveal ${isRevealed ? 'is-revealed' : ''}` : ''
 
   return (

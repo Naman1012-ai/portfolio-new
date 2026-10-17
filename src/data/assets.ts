@@ -7,6 +7,14 @@ import type { AssetManifestEntry } from '@/types'
  */
 export const assetManifest: AssetManifestEntry[] = [
   {
+    filename: 'og-preview.png',
+    category: 'branding',
+    label: 'Portfolio Social Preview Card (Open Graph / Twitter)',
+    isAvailable: true,
+    mimeType: 'image/png',
+    description: 'High-resolution 1200x630 Open Graph preview card for social sharing across WhatsApp, LinkedIn, Twitter, and messaging apps.',
+  },
+  {
     filename: 'naman-portrait.png',
     category: 'branding',
     label: 'Naman Prajapati Profile Portrait',

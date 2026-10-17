@@ -169,7 +169,7 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
   }
 
   // Check Open Graph and Twitter image tags
-  const expectedImageUrl = `${expectedSiteUrl}/assets/convia-preview.png`
+  const expectedImageUrl = `${expectedSiteUrl}/assets/og-preview.png`
   if (!indexHtml.includes(`property="og:image" content="${expectedImageUrl}"`)) {
     return {
       passed: false,
@@ -182,10 +182,22 @@ export function verifyProductionDeployment(): { passed: boolean; message: string
       message: `index.html must include meta name="twitter:image" content="${expectedImageUrl}"`,
     }
   }
-  if (!indexHtml.includes('property="og:image:width" content="1618"') || !indexHtml.includes('property="og:image:height" content="972"')) {
+  if (!indexHtml.includes('property="og:image:width" content="1200"') || !indexHtml.includes('property="og:image:height" content="630"')) {
     return {
       passed: false,
-      message: 'index.html must include og:image:width and og:image:height matching verified asset dimensions',
+      message: 'index.html must include og:image:width="1200" and og:image:height="630" matching verified asset dimensions',
+    }
+  }
+  if (!indexHtml.includes('property="og:image:alt" content="Naman Prajapati — Software & AI Engineer Portfolio"')) {
+    return {
+      passed: false,
+      message: 'index.html must include proper og:image:alt describing Naman Prajapati portfolio',
+    }
+  }
+  if (!fs.existsSync(path.resolve(cwd, 'public/assets/og-preview.png'))) {
+    return {
+      passed: false,
+      message: 'public/assets/og-preview.png must exist for social crawlers',
     }
   }
 

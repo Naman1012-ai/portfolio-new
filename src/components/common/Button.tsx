@@ -13,13 +13,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-gradient-to-b from-neutral-800 to-neutral-950 text-white hover:from-neutral-700 hover:to-neutral-900 active:from-neutral-950 active:to-neutral-950 shadow-md hover:shadow-lg border border-neutral-700/60 active:border-neutral-950 ring-1 ring-white/10',
+    'bg-slate-950 text-white hover:bg-slate-800 active:bg-black shadow-[0_4px_14px_0_rgba(15,23,42,0.18)] hover:shadow-[0_6px_20px_rgba(15,23,42,0.25)] border border-slate-900',
   secondary:
-    'bg-white/95 text-slate-900 border border-slate-200/90 hover:bg-slate-50 hover:border-slate-300 active:bg-slate-100 shadow-xs hover:shadow-sm active:shadow-none backdrop-blur-xs',
+    'bg-white text-slate-800 border border-slate-200/90 hover:bg-slate-50 hover:text-slate-950 hover:border-slate-300 active:bg-slate-100 shadow-xs backdrop-blur-md',
   outline:
-    'bg-transparent text-slate-800 border border-slate-300 hover:bg-slate-100/80 hover:border-slate-400 active:bg-slate-200/80',
+    'bg-transparent text-slate-700 border border-slate-300 hover:bg-slate-100/80 hover:text-slate-900 hover:border-slate-400 active:bg-slate-200',
   ghost:
-    'bg-transparent text-slate-700 hover:bg-slate-100/80 hover:text-slate-950 active:bg-slate-200 border border-transparent',
+    'bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 active:bg-slate-200 border border-transparent',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -47,7 +47,7 @@ export function Button({
     <button
       type={type}
       disabled={disabled}
-      className={`group inline-flex items-center justify-center font-medium whitespace-nowrap transition-all duration-150 ease-out select-none cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-reduce:transition-none motion-reduce:active:scale-100 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`group inline-flex items-center justify-center font-medium whitespace-nowrap transition-all duration-150 ease-out select-none cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white motion-reduce:transition-none motion-reduce:active:scale-100 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       {...props}
     >
       {leftIcon && (

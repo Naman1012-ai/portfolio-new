@@ -142,7 +142,7 @@ export function SystemArchitectureFlow({
 
   return (
     <div
-      className={`rounded-2xl border border-slate-200/90 bg-white/95 p-5 sm:p-6 shadow-sm ${className}`}
+      className={`rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-elevated ${className}`}
     >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-200/80">
@@ -151,9 +151,9 @@ export function SystemArchitectureFlow({
             <Badge variant="subtle" size="sm" className="font-mono text-[10px] uppercase tracking-wider rounded-full">
               System Architecture Flow
             </Badge>
-            <span className="text-xs font-mono text-slate-400">· Interactive Data Pipeline</span>
+            <span className="text-xs font-mono text-slate-500">· Interactive Data Pipeline</span>
           </div>
-          <h4 className="font-bold text-base text-slate-950">{flow.title}</h4>
+          <h4 className="font-bold font-display text-base text-slate-900">{flow.title}</h4>
         </div>
         <span className="text-xs font-mono text-slate-500 hidden md:inline max-w-xs text-right">
           Click any stage node to inspect architectural constraints
@@ -169,25 +169,25 @@ export function SystemArchitectureFlow({
               key={node.id}
               type="button"
               onClick={() => setActiveNodeId(node.id)}
-              className={`p-3.5 rounded-xl border text-left transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 relative ${
+              className={`p-3.5 rounded-xl border text-left transition-all duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 relative ${
                 isActive
-                  ? 'border-slate-900 bg-white shadow-md ring-1 ring-slate-900/10'
-                  : 'border-slate-200/80 bg-slate-50/60 hover:bg-white hover:border-slate-300 hover:shadow-xs'
+                  ? 'border-indigo-500/80 bg-indigo-50/70 shadow-sm ring-1 ring-indigo-500/20'
+                  : 'border-slate-200/90 bg-slate-50/60 hover:bg-slate-100/80 hover:border-slate-300'
               }`}
               aria-pressed={isActive}
             >
               <div className="flex items-center justify-between gap-1 mb-1.5">
-                <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider">
+                <span className={`font-mono text-[10px] uppercase tracking-wider ${isActive ? 'text-indigo-600 font-semibold' : 'text-slate-500'}`}>
                   Stage 0{idx + 1}
                 </span>
                 {isActive && (
                   <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" aria-hidden="true" />
                 )}
               </div>
-              <div className="font-bold text-xs sm:text-sm text-slate-950 leading-tight mb-1">
+              <div className={`font-bold font-display text-xs sm:text-sm leading-tight mb-1 ${isActive ? 'text-slate-950' : 'text-slate-900'}`}>
                 {node.label}
               </div>
-              <div className="text-[11px] font-mono text-slate-500 truncate">
+              <div className={`text-[11px] font-mono truncate ${isActive ? 'text-indigo-700' : 'text-slate-500'}`}>
                 {node.role}
               </div>
             </button>

@@ -12,9 +12,9 @@ export interface TextLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const variantClasses: Record<TextLinkVariant, string> = {
-  subtle: 'text-neutral-600 hover:text-neutral-900 decoration-transparent hover:underline underline-offset-4',
-  underline: 'text-neutral-900 underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900',
-  accent: 'text-neutral-900 font-medium hover:text-neutral-700 decoration-transparent hover:underline underline-offset-4',
+  subtle: 'text-slate-600 hover:text-slate-900 decoration-transparent hover:underline underline-offset-4',
+  underline: 'text-slate-800 hover:text-slate-950 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-800',
+  accent: 'text-indigo-600 hover:text-indigo-700 font-medium decoration-transparent hover:underline underline-offset-4',
 }
 
 /**
@@ -40,7 +40,7 @@ export function TextLink({
   return (
     <a
       href={href}
-      className={`inline-flex items-center gap-1 transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-xs ${variantClasses[variant]} ${className}`}
+      className={`inline-flex items-center gap-1 transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-xs ${variantClasses[variant]} ${className}`}
       {...externalProps}
       {...props}
     >

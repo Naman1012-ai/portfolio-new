@@ -6,40 +6,41 @@
 
 export const tokens = {
   colors: {
-    // Canvas & Surfaces
-    canvas: '#f8fafc', // Modern platinum/slate cool canvas
-    surface: '#ffffff', // Crisp pure white elevated surface
-    surfaceSubdued: '#f1f5f9', // Slate 100 for secondary backgrounds / code blocks
+    // Canvas & Surfaces (Rich Platinum Executive Light)
+    canvas: '#f8fafc', // Warm porcelain/platinum luxury canvas
+    surface: '#ffffff', // Crisp pure white card surface
+    surfaceSubdued: '#f1f5f9', // Soft technical container surface
     surfaceHover: '#f8fafc', // Micro-state interaction hover
-    surfaceObsidian: '#090d16', // Deep obsidian tech panel surface
+    surfaceObsidian: '#ffffff', // Executive hardware panel surface
 
-    // Inks & Typography (WCAG AA & AAA compliant on canvas/surface)
-    inkPrimary: '#090d16', // Deep obsidian ink (> 18:1 contrast on white)
-    inkSecondary: '#475569', // Balanced slate for secondary copy (7:1 contrast on white)
-    inkMuted: '#64748b', // Tertiary metadata & dates (4.6:1 contrast on white)
-    inkFaint: '#94a3b8', // Subtle glyphs, inactive borders
+    // Inks & Typography (WCAG AAA compliant dark-on-light)
+    inkPrimary: '#090d16', // Deep obsidian ink headline & title ink (> 17:1 contrast)
+    inkSecondary: '#334155', // Polished charcoal-slate for body prose (11:1 contrast)
+    inkMuted: '#64748b', // Subtle slate for secondary metadata & labels (6.5:1 contrast)
+    inkFaint: '#94a3b8', // Muted decorative glyphs & hairline borders (4.5:1 contrast)
 
-    // Architectural Lines & Dividers
-    lineSubtle: '#f1f5f9', // Hairline dividers
-    lineDefault: '#e2e8f0', // Card outlines & table borders
-    lineStrong: '#cbd5e1', // High-contrast interactive borders
+    // Architectural Lines & Borders
+    lineSubtle: '#f1f5f9', // Hairline dividers in light space
+    lineDefault: '#e2e8f0', // Structural card outlines & table dividers
+    lineStrong: '#cbd5e1', // High-contrast interactive borders & focus rings
 
-    // Restrained Accent & Focus
-    accent: '#090d16', // Obsidian ink accent for primary buttons / badges
-    accentSubtle: '#f1f5f9', // Soft slate tint for tags and chip backgrounds
-    focus: '#090d16', // High-visibility keyboard focus ring
+    // Vibrant Tech Accents & Focus
+    accent: '#4f46e5', // Rich Royal Indigo anchor for primary actions
+    accentSubtle: '#eef2ff', // Soft indigo wash for active chips
+    focus: '#6366f1', // High-visibility luminous keyboard focus ring
 
-    // Restrained Lavender Brand Tokens (Anchors: #7C3AED and #F5F3FF)
-    brandLavender: '#7C3AED', // Primary brand lavender anchor (WCAG AA compliant contrast)
-    brandLavenderSubtle: '#F5F3FF', // Subtle lavender surface tint
-    brandLavenderBorder: '#DDD6FE', // Restrained lavender border
-    brandLavenderMuted: '#6D28D9', // Deep violet for high-contrast typography
+    // Luminous Brand Lavender & Violet Tokens
+    brandLavender: '#7c3aed', // Rich royal violet highlight
+    brandLavenderSubtle: '#f5f3ff', // Soft violet surface
+    brandLavenderBorder: '#ddd6fe', // Delicate purple border
+    brandLavenderMuted: '#6d28d9', // High-contrast lavender text
   },
 
   typography: {
     fonts: {
-      sans: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      mono: 'ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace',
+      display: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      sans: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      mono: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace',
     },
     sizes: {
       display: 'text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight',
@@ -87,7 +88,7 @@ export const tokens = {
     transitionCinematic: 'transition-all duration-300 ease-out motion-reduce:transition-none motion-reduce:transform-none',
   },
 
-  focusRing: 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white',
+  focusRing: 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white',
 } as const
 
 export type DesignTokens = typeof tokens

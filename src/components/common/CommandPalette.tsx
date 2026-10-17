@@ -252,35 +252,35 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
       role="dialog"
       aria-modal="true"
       aria-label="Command palette quick navigation"
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/40 backdrop-blur-xs animate-fade-in"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-900/40 backdrop-blur-md animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-xl bg-white rounded-md border border-neutral-300 shadow-cinematic overflow-hidden flex flex-col max-h-[80vh] animate-fade-in-up"
+        className="w-full max-w-xl bg-white rounded-2xl border border-slate-200/90 shadow-[0_25px_50px_-12px_rgba(15,23,42,0.25)] overflow-hidden flex flex-col max-h-[80vh] animate-fade-in-up"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleKeyDown}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-neutral-200/90 bg-neutral-50/60">
-          <Icon name="terminal" size="sm" className="text-neutral-500 shrink-0" />
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-100 bg-slate-50/80">
+          <Icon name="terminal" size="sm" className="text-indigo-600 shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={search}
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder="Type a command or search (e.g. Convia, Engineering, Product)..."
-            className="w-full text-sm font-sans bg-transparent border-none text-neutral-900 placeholder:text-neutral-400 focus:outline-none"
+            className="w-full text-sm font-sans bg-transparent border-none text-slate-900 placeholder:text-slate-400 focus:outline-none"
             aria-autocomplete="list"
           />
-          <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-neutral-400 bg-neutral-100 border border-neutral-300/80 rounded-xs">
+          <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-slate-500 bg-slate-200/70 border border-slate-300/80 rounded-xs">
             ESC
           </kbd>
         </div>
 
         {/* Results List */}
-        <div className="overflow-y-auto p-2 divide-y divide-neutral-100 divide-dashed" role="listbox">
+        <div className="overflow-y-auto p-2 divide-y divide-slate-100 divide-dashed" role="listbox">
           {filteredActions.length === 0 ? (
-            <div className="py-8 text-center text-xs font-mono text-neutral-500">
+            <div className="py-8 text-center text-xs font-mono text-slate-500">
               No matching commands or projects found.
             </div>
           ) : (
@@ -293,21 +293,21 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                   aria-selected={isSelected}
                   onClick={() => action.perform()}
                   onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-sm cursor-pointer transition-colors ${
-                    isSelected ? 'bg-neutral-900 text-white' : 'text-neutral-800 hover:bg-neutral-50'
+                  className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-colors ${
+                    isSelected ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <span className={`text-xs font-semibold ${isSelected ? 'text-white' : 'text-neutral-950'}`}>
+                      <span className={`text-xs font-semibold ${isSelected ? 'text-white' : 'text-slate-900 font-display'}`}>
                         {action.title}
                       </span>
                       {action.badge && (
                         <span
                           className={`text-[9px] font-mono px-1.5 py-0.2 rounded-xs uppercase tracking-wider ${
                             isSelected
-                              ? 'bg-neutral-800 text-neutral-300'
-                              : 'bg-neutral-100 text-neutral-600 border border-neutral-200'
+                              ? 'bg-indigo-700 text-white border border-indigo-400/40'
+                              : 'bg-slate-100 text-slate-600 border border-slate-200'
                           }`}
                         >
                           {action.badge}
@@ -316,7 +316,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                     </div>
                     <span
                       className={`text-[11px] block truncate mt-0.5 ${
-                        isSelected ? 'text-neutral-300' : 'text-neutral-500'
+                        isSelected ? 'text-indigo-100' : 'text-slate-500'
                       }`}
                     >
                       {action.subtitle}
@@ -328,14 +328,14 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                       <kbd
                         className={`text-[10px] font-mono px-1.5 py-0.5 rounded-xs ${
                           isSelected
-                            ? 'bg-neutral-800 text-neutral-300'
-                            : 'bg-neutral-100 text-neutral-500 border border-neutral-200'
+                            ? 'bg-indigo-700 text-white border border-indigo-400/40'
+                            : 'bg-slate-100 text-slate-600 border border-slate-200'
                         }`}
                       >
                         {action.shortcut}
                       </kbd>
                     )}
-                    <span className={`text-xs ${isSelected ? 'text-neutral-400' : 'text-neutral-300'}`}>
+                    <span className={`text-xs ${isSelected ? 'text-indigo-200' : 'text-slate-400'}`}>
                       ↵
                     </span>
                   </div>
@@ -346,13 +346,13 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Footer Shortcut Hints */}
-        <div className="flex items-center justify-between px-4 py-2 bg-neutral-50 border-t border-neutral-200 text-[11px] font-mono text-neutral-500">
+        <div className="flex items-center justify-between px-4 py-2 bg-slate-50 border-t border-slate-100 text-[11px] font-mono text-slate-500">
           <div className="flex items-center gap-3">
             <span>↑↓ Navigate</span>
             <span>↵ Select</span>
             <span>ESC Close</span>
           </div>
-          <span>Naman Prajapati · Studio</span>
+          <span className="text-slate-400">Naman Prajapati · Studio</span>
         </div>
       </div>
     </div>

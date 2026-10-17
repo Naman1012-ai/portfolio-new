@@ -39,7 +39,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-slate-200/80 bg-white/70 backdrop-blur-md py-10 text-slate-500 text-sm">
+    <footer className="border-t border-slate-200/80 bg-white/80 backdrop-blur-md py-10 text-slate-500 text-sm">
       <Container size="lg">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <BrandLockup

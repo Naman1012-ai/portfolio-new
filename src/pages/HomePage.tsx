@@ -8,7 +8,6 @@ import {
   Icon,
   InstagramIcon,
   LinkedInIcon,
-  ResumeAction,
   Section,
   Text,
 } from '@/components/common'
@@ -42,7 +41,7 @@ export function HomePage() {
       <div className="py-8 sm:py-12 space-y-16 animate-fade-in">
         {/* 1. Hero Section: Split Composition (Narrative + Live Telemetry + 3D Composition) */}
         <Container size="lg">
-        <Section id="hero" spacing="md" className="pt-4 sm:pt-6 overflow-hidden rounded-2xl bg-white/95 border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06),0_20px_48px_-12px_rgba(15,23,42,0.04)] backdrop-blur-md p-6 sm:p-8 lg:p-10 relative">
+        <Section id="hero" spacing="md" className="pt-4 sm:pt-6 overflow-hidden rounded-3xl bg-white/80 border border-slate-200/80 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.08),0_1px_3px_0_rgba(15,23,42,0.04)] backdrop-blur-xl p-6 sm:p-8 lg:p-10 relative">
           {/* Subtle ambient highlight glow inside hero */}
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
@@ -58,20 +57,20 @@ export function HomePage() {
                     {siteProfile.status}
                   </span>
                 </Badge>
-                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-slate-600 bg-slate-50 border border-slate-200/80 shadow-xs">
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-slate-700 bg-white/90 border border-slate-200 shadow-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
                   <span>Gurgaon, IN (IST) · Active Build Cycle</span>
                 </span>
               </div>
 
               {/* Core Positioning Headline */}
-              <Heading as="h1" variant="display" className="tracking-tight text-neutral-950 font-bold mb-6 animate-fade-in-up animation-delay-100">
+              <Heading as="h1" variant="display" className="tracking-tight text-slate-950 font-extrabold mb-6 animate-fade-in-up animation-delay-100">
                 Building full-stack web platforms, practical AI tools, and systems prototypes.
               </Heading>
 
               {/* Concise Supporting Introduction */}
-              <Text variant="lead" tone="secondary" className="max-w-2xl text-neutral-600 mb-8 leading-relaxed animate-fade-in-up animation-delay-200">
-                Computer Science & Engineering undergraduate at The NorthCap University. Focused on end-to-end web architecture, structured LLM workflows, and test-validated software execution.
+              <Text variant="lead" tone="secondary" className="max-w-2xl text-slate-700 mb-8 leading-relaxed animate-fade-in-up animation-delay-200">
+                Full-stack software developer and AI engineer focused on robust web architecture, structured LLM pipelines, and test-validated system execution.
               </Text>
 
               {/* Calls to Action */}
@@ -97,8 +96,6 @@ export function HomePage() {
                 >
                   Get in Touch
                 </Button>
-
-                <ResumeAction variant="hero" className="inline-flex w-full sm:w-auto shrink-0" />
               </div>
             </div>{/* end left column */}
 
@@ -147,7 +144,7 @@ export function HomePage() {
           <Card
             variant="elevated"
             padding="lg"
-            className="border-slate-200/80 bg-gradient-to-b from-white via-white to-slate-50/80 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06),0_20px_48px_-12px_rgba(15,23,42,0.04)] text-center max-w-3xl mx-auto rounded-2xl"
+            className="border-slate-200/90 bg-white shadow-[0_20px_50px_-12px_rgba(15,23,42,0.08),0_1px_3px_0_rgba(15,23,42,0.04)] text-center max-w-3xl mx-auto rounded-3xl backdrop-blur-xl"
           >
             <div className="inline-flex items-center mb-3">
               <Badge variant="accent" size="sm">
@@ -176,8 +173,6 @@ export function HomePage() {
                   Connect on LinkedIn
                 </Button>
               </a>
-
-              <ResumeAction variant="contact" />
             </div>
 
             {/* Secondary Social Channels */}
@@ -187,9 +182,9 @@ export function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub profile (opens in new tab)"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center gap-2 px-4 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:text-slate-950 hover:bg-slate-100/90 rounded-full border border-slate-200/90 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 shadow-xs"
+                className="group min-h-[44px] min-w-[44px] inline-flex items-center justify-center gap-2 px-4 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-full transition-all duration-200 shadow-xs hover:shadow-md hover:-translate-y-0.5 motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
-                <GitHubIcon size="sm" brandColor />
+                <GitHubIcon size="sm" className="text-slate-900 fill-slate-900 group-hover:scale-110 transition-transform duration-150" />
                 <span>GitHub</span>
               </a>
 
@@ -198,9 +193,9 @@ export function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram profile (opens in new tab)"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center gap-2 px-4 py-2 text-xs sm:text-sm font-medium text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100/80 rounded-sm border border-neutral-200/90 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
+                className="group min-h-[44px] min-w-[44px] inline-flex items-center justify-center gap-2 px-4 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-full transition-all duration-200 shadow-xs hover:shadow-md hover:-translate-y-0.5 motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
-                <InstagramIcon size="sm" brandColor />
+                <InstagramIcon size="sm" brandColor className="group-hover:scale-110 transition-transform duration-150" />
                 <span>Instagram</span>
               </a>
             </div>

@@ -50,7 +50,7 @@ export function Header() {
   }
 
   return (
-    <header className="border-b border-slate-200/80 bg-white/85 backdrop-blur-xl sticky top-0 z-50 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.03)] transition-colors">
+    <header className="border-b border-slate-200/80 bg-white/85 backdrop-blur-xl sticky top-0 z-50 shadow-[0_1px_3px_0_rgba(15,23,42,0.05),0_10px_25px_-5px_rgba(15,23,42,0.03)] transition-colors">
       <Container size="lg">
         <div className="flex h-16 items-center justify-between gap-2 sm:gap-4 relative">
           <BrandLockup
@@ -60,54 +60,67 @@ export function Header() {
             className="shrink-0"
           />
 
-          {/* Navigation Links (Permanently visible) + Actions + Hamburger Menu */}
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            <nav
-              aria-label="Main Navigation"
-              className="flex items-center"
-            >
-              <ul className="flex items-center gap-2 sm:gap-3 md:gap-5 text-xs sm:text-sm font-medium text-slate-600">
-                {navigationItems.map((item) => {
-                  const resolvedHref = item.href.startsWith('/')
+          {/* Desktop Navigation Links + Actions (>= 768px) */}
+          <nav
+            aria-label="Main Navigation"
+            className="hidden md:flex items-center"
+          >
+            <ul className="flex items-center gap-2 sm:gap-3 md:gap-5 text-xs sm:text-sm font-medium text-slate-600">
+              {navigationItems.map((item) => {
+                const resolvedHref = item.href.startsWith('/')
+                  ? item.href
+                  : route === 'home'
                     ? item.href
-                    : route === 'home'
-                      ? item.href
-                      : `/${item.href}`
+                    : `/${item.href}`
 
-                  return (
-                    <li key={item.label}>
-                      <a
-                        href={resolvedHref}
-                        onClick={(e) => handleNavClick(item.href, e)}
-                        className="hover:text-slate-950 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-xs px-1 py-0.5 whitespace-nowrap"
-                      >
-                        {item.label}
-                      </a>
-                    </li>
-                  )
-                })}
+                return (
+                  <li key={item.label}>
+                    <a
+                      href={resolvedHref}
+                      onClick={(e) => handleNavClick(item.href, e)}
+                      className="hover:text-slate-950 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-xs px-1 py-0.5 whitespace-nowrap"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                )
+              })}
 
-                <li>
-                  <button
-                    type="button"
-                    onClick={openCommandPalette}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono text-slate-700 hover:text-white bg-slate-100 hover:bg-neutral-900 border border-slate-200/90 hover:border-neutral-900 transition-all duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-900 cursor-pointer shadow-xs"
-                    title="Open Command Palette (⌘K / Ctrl+K)"
-                    aria-label="Open command palette"
-                  >
-                    <span className="font-semibold">⌘K</span>
-                  </button>
-                </li>
-                <li>
-                  <ResumeAction variant="header" />
-                </li>
-              </ul>
-            </nav>
+              <li>
+                <button
+                  type="button"
+                  onClick={openCommandPalette}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono text-slate-700 hover:text-slate-950 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 hover:border-slate-300 transition-all duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500 cursor-pointer shadow-xs"
+                  title="Open Command Palette (⌘K / Ctrl+K)"
+                  aria-label="Open command palette"
+                >
+                  <span className="font-semibold">⌘K</span>
+                </button>
+              </li>
+              <li>
+                <ResumeAction variant="header" />
+              </li>
+            </ul>
+          </nav>
+
+          {/* Mobile Actions Container (< 768px) */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              type="button"
+              onClick={openCommandPalette}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[11px] font-mono text-slate-700 hover:text-slate-950 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 hover:border-slate-300 transition-all duration-150 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500 cursor-pointer shadow-xs"
+              title="Open Command Palette (⌘K / Ctrl+K)"
+              aria-label="Open command palette"
+            >
+              <span className="font-semibold">⌘K</span>
+            </button>
 
             <MobileMenu
               isOpen={isMenuOpen}
               onToggle={() => setIsMenuOpen((prev) => !prev)}
               onClose={() => setIsMenuOpen(false)}
+              onNavClick={handleNavClick}
+              currentRoute={route}
             />
           </div>
         </div>

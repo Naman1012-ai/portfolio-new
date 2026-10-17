@@ -87,10 +87,10 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
               {howIBuildData.badge}
             </Badge>
           </div>
-          <Heading as="h2" variant="h1" className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 mb-3 tracking-tight">
+          <Heading as="h2" variant="h1" className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-950 mb-3 tracking-tight">
             {howIBuildData.heading}
           </Heading>
-          <Text variant="lead" tone="secondary" className="text-neutral-600 leading-relaxed text-sm sm:text-base max-w-2xl">
+          <Text variant="lead" tone="secondary" className="text-slate-600 leading-relaxed text-sm sm:text-base max-w-2xl">
             {howIBuildData.subheading}
           </Text>
         </div>
@@ -100,7 +100,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
           <button
             type="button"
             onClick={isAllExpanded ? collapseAll : expandAll}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-slate-700 hover:text-slate-950 border border-slate-200 bg-white hover:bg-slate-50 shadow-xs transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-slate-700 hover:text-slate-950 border border-slate-200 bg-white hover:bg-slate-50 shadow-xs transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             aria-label={isAllExpanded ? 'Collapse all decision records' : 'Expand all decision records'}
           >
             <Icon
@@ -117,7 +117,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
       <div className="relative">
         {/* Continuous Left Spine Connector */}
         <div
-          className="absolute left-[19px] sm:left-[23px] top-6 bottom-8 w-0.5 bg-slate-200/80 -z-0"
+          className="absolute left-[19px] sm:left-[23px] top-6 bottom-8 w-0.5 bg-slate-200 -z-0"
           aria-hidden="true"
         />
 
@@ -140,12 +140,12 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                 <button
                   type="button"
                   onClick={() => toggleRecord(entry.id)}
-                  className={`shrink-0 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full font-mono text-xs font-semibold flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
+                  className={`shrink-0 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full font-mono text-xs font-semibold flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
                     isTargetedByPerspective
-                      ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-neutral-200'
+                      ? 'bg-indigo-600 text-white shadow-elevated ring-4 ring-indigo-500/20'
                       : isExpanded
-                        ? 'bg-neutral-950 text-white shadow-elevated ring-4 ring-slate-100'
-                        : 'bg-white text-slate-500 border border-slate-200/90 hover:border-slate-400 hover:text-slate-900 shadow-xs'
+                        ? 'bg-indigo-600 text-white shadow-elevated ring-4 ring-slate-100'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:text-slate-950 shadow-xs'
                   }`}
                   aria-label={`Toggle decision record 0${index + 1}: ${entry.decisionTitle || entry.projectTitle}`}
                 >
@@ -156,12 +156,12 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                 <Card
                   variant="outlined"
                   padding="none"
-                  className={`flex-1 bg-white/95 transition-all duration-300 overflow-hidden rounded-2xl ${
+                  className={`flex-1 bg-white transition-all duration-300 overflow-hidden rounded-2xl ${
                     isTargetedByPerspective
-                      ? 'border-neutral-900 ring-2 ring-neutral-950/20 shadow-elevated'
+                      ? 'border-indigo-600 ring-2 ring-indigo-500/20 shadow-elevated'
                       : isExpanded
-                        ? 'border-slate-300/90 shadow-[0_12px_32px_-6px_rgba(15,23,42,0.1)] ring-1 ring-neutral-900/5'
-                        : 'border-slate-200/90 shadow-[0_2px_8px_-2px_rgba(15,23,42,0.05)] hover:border-slate-300'
+                        ? 'border-slate-300 shadow-elevated ring-1 ring-slate-900/5'
+                        : 'border-slate-200/90 shadow-subtle hover:border-slate-300'
                   }`}
                 >
                   {/* Collapsed/Header Action Trigger */}
@@ -173,23 +173,23 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                           <Link
                             to={`/projects/${entry.projectSlug}`}
                             onClick={(e) => handleProjectLink(e, entry.projectSlug!)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900 text-white text-xs font-mono font-medium hover:bg-neutral-800 transition-colors shadow-xs"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-600 text-white text-xs font-mono font-medium hover:bg-indigo-500 transition-colors shadow-xs"
                             aria-label={`Open ${entry.projectTitle} case study`}
                           >
                             <span>{entry.projectTitle}</span>
                             <Icon name="arrow-up-right" size="xs" className="opacity-70" />
                           </Link>
                         ) : (
-                          <span className="px-2.5 py-1 rounded-xs bg-neutral-900 text-white text-xs font-mono font-medium">
+                          <span className="px-2.5 py-1 rounded-xs bg-indigo-600 text-white text-xs font-mono font-medium">
                             {entry.projectTitle}
                           </span>
                         )}
 
-                        <span className="text-xs font-mono text-neutral-400 hidden sm:inline">
+                        <span className="text-xs font-mono text-slate-300 hidden sm:inline">
                           /
                         </span>
 
-                        <span className="text-xs font-mono text-neutral-600">
+                        <span className="text-xs font-mono text-slate-500">
                           {entry.context}
                         </span>
 
@@ -205,7 +205,7 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                           {entry.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-neutral-600 bg-neutral-100 rounded-xs border border-neutral-200/60"
+                              className="px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider text-slate-600 bg-slate-100 rounded-full border border-slate-200/80"
                             >
                               {tag}
                             </span>
@@ -219,19 +219,19 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                       <button
                         type="button"
                         onClick={() => toggleRecord(entry.id)}
-                        className="text-left w-full cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 rounded-xs"
+                        className="text-left w-full cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-xs"
                         aria-expanded={isExpanded}
                         aria-controls={`decision-content-${entry.id}`}
                       >
                         <Heading
                           as="h3"
                           variant="h3"
-                          className="text-base sm:text-lg font-bold text-neutral-950 group-hover:text-neutral-700 transition-colors mb-2 leading-snug"
+                          className="text-base sm:text-lg font-bold text-slate-950 group-hover:text-indigo-600 transition-colors mb-2 leading-snug"
                         >
                           {entry.decisionTitle || entry.projectTitle}
                         </Heading>
 
-                        <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-600 leading-relaxed line-clamp-2">
+                        <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
                           {entry.problem}
                         </Text>
                       </button>
@@ -240,32 +240,32 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                       <button
                         type="button"
                         onClick={() => toggleRecord(entry.id)}
-                        className="shrink-0 p-2 rounded-sm text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+                        className="shrink-0 p-2 rounded-full text-slate-500 hover:text-slate-950 hover:bg-slate-100 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                         aria-label={isExpanded ? 'Collapse decision record' : 'Expand decision record'}
                       >
                         <Icon
                           name="chevron-right"
                           size="sm"
                           className={`transition-transform duration-300 motion-reduce:transform-none ${
-                            isExpanded ? '-rotate-90 text-neutral-950' : 'rotate-90 text-neutral-600'
+                            isExpanded ? '-rotate-90 text-slate-950' : 'rotate-90 text-slate-500'
                           }`}
                         />
                       </button>
                     </div>
 
                     {/* Bottom Status / Toggle Affordance */}
-                    <div className="pt-3 mt-3 border-t border-neutral-100/80 flex items-center justify-between text-xs font-mono text-neutral-500">
+                    <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
                       <button
                         type="button"
                         onClick={() => toggleRecord(entry.id)}
-                        className="inline-flex items-center gap-1.5 font-medium hover:text-neutral-900 transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1.5 font-medium hover:text-slate-950 transition-colors cursor-pointer"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
                         <span>{isExpanded ? 'Hide Decision Breakdown' : 'Inspect Architectural Record'}</span>
                         <Icon name="arrow-right" size="xs" className={isExpanded ? 'rotate-90 transition-transform' : ''} />
                       </button>
 
-                      <span className="text-[11px] text-neutral-400">
+                      <span className="text-[11px] text-slate-400">
                         Record 0{index + 1} of 0{howIBuildData.entries.length}
                       </span>
                     </div>
@@ -278,32 +278,32 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                     aria-hidden={!isExpanded}
                   >
                     <div className="decision-expand-content">
-                      <div className="p-5 sm:p-7 md:p-8 bg-neutral-50/40 space-y-6 border-t border-neutral-100">
+                      <div className="p-5 sm:p-7 md:p-8 bg-slate-50/70 space-y-6 border-t border-slate-100">
                         {/* 1. Problem & Real-World Constraints */}
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" aria-hidden="true" />
-                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold">
+                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold text-slate-700">
                               01 / The Challenge & Constraints
                             </Text>
                           </div>
 
-                          <div className="p-4 rounded-sm bg-white border border-neutral-200/80 space-y-2.5 shadow-micro">
+                          <div className="p-4 rounded-xl bg-white border border-slate-200/80 space-y-2.5 shadow-micro">
                             <div>
-                              <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider block mb-1">
+                              <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block mb-1">
                                 Technical Tension
                               </span>
-                              <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-800 leading-relaxed">
+                              <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                                 {entry.problem}
                               </Text>
                             </div>
 
                             {entry.constraints && (
-                              <div className="pt-2 border-t border-neutral-100">
-                                <span className="text-[11px] font-mono text-amber-700 font-semibold uppercase tracking-wider block mb-1">
+                              <div className="pt-2 border-t border-slate-100">
+                                <span className="text-[11px] font-mono text-amber-600 font-semibold uppercase tracking-wider block mb-1">
                                   Operating Constraint
                                 </span>
-                                <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-700 leading-relaxed">
+                                <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                                   {entry.constraints}
                                 </Text>
                               </div>
@@ -315,21 +315,21 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0" aria-hidden="true" />
-                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold">
+                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold text-slate-700">
                               02 / Alternatives Evaluated & Rejected
                             </Text>
                           </div>
 
-                          <div className="p-4 rounded-sm bg-white border border-neutral-200/80 space-y-3 shadow-micro">
+                          <div className="p-4 rounded-xl bg-white border border-slate-200/80 space-y-3 shadow-micro">
                             {entry.optionsConsidered && entry.optionsConsidered.length > 0 && (
                               <div>
-                                <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider block mb-2">
+                                <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block mb-2">
                                   Candidate Solutions
                                 </span>
                                 <ul className="space-y-2">
                                   {entry.optionsConsidered.map((opt, i) => (
-                                    <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 leading-relaxed">
-                                      <span className="font-mono text-[10px] text-neutral-400 font-semibold bg-neutral-100 px-1 py-0.5 rounded-xs mt-0.5 shrink-0">
+                                    <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                      <span className="font-mono text-[10px] text-indigo-700 font-semibold bg-indigo-50 border border-indigo-200/80 px-1 py-0.5 rounded-xs mt-0.5 shrink-0">
                                         OPT {i + 1}
                                       </span>
                                       <span>{opt}</span>
@@ -339,11 +339,11 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                               </div>
                             )}
 
-                            <div className="pt-2.5 border-t border-neutral-100">
-                              <span className="text-[11px] font-mono text-rose-700 font-semibold uppercase tracking-wider block mb-1">
+                            <div className="pt-2.5 border-t border-slate-100">
+                              <span className="text-[11px] font-mono text-rose-600 font-semibold uppercase tracking-wider block mb-1">
                                 Why Alternatives Were Rejected
                               </span>
-                              <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-700 leading-relaxed">
+                              <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                                 {entry.rejectedAlternative}
                               </Text>
                             </div>
@@ -354,13 +354,13 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" aria-hidden="true" />
-                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold">
+                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold text-slate-700">
                               03 / Architectural Decision Implemented
                             </Text>
                           </div>
 
-                          <div className="p-4 rounded-sm bg-emerald-50/40 border border-emerald-200/80 shadow-micro">
-                            <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-emerald-950 font-medium leading-relaxed">
+                          <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-300 text-emerald-950 shadow-micro">
+                            <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-emerald-900 font-medium leading-relaxed">
                               {entry.decision}
                             </Text>
                           </div>
@@ -369,33 +369,33 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                         {/* 4. Trade-Off Analysis: What was Gained vs Sacrificed */}
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-brand-lavender shrink-0" aria-hidden="true" />
-                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold">
+                            <span className="w-2 h-2 rounded-full bg-purple-500 shrink-0" aria-hidden="true" />
+                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold text-slate-700">
                               04 / Trade-Off Analysis
                             </Text>
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div className="p-3.5 rounded-sm bg-white border border-neutral-200/80 shadow-micro">
+                            <div className="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200 text-emerald-950 shadow-micro">
                               <div className="flex items-center gap-1.5 mb-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                                 <span className="text-[11px] font-mono font-semibold text-emerald-800 uppercase tracking-wider">
                                   What Was Gained
                                 </span>
                               </div>
-                              <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-700 leading-relaxed">
+                              <Text variant="bodySm" tone="secondary" className="text-xs text-emerald-900 leading-relaxed">
                                 {entry.tradeoff?.gained || entry.outcome}
                               </Text>
                             </div>
 
-                            <div className="p-3.5 rounded-sm bg-white border border-neutral-200/80 shadow-micro">
+                            <div className="p-3.5 rounded-xl bg-amber-50/60 border border-amber-200 text-amber-950 shadow-micro">
                               <div className="flex items-center gap-1.5 mb-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
                                 <span className="text-[11px] font-mono font-semibold text-amber-800 uppercase tracking-wider">
                                   What Was Sacrificed
                                 </span>
                               </div>
-                              <Text variant="bodySm" tone="secondary" className="text-xs text-neutral-700 leading-relaxed">
+                              <Text variant="bodySm" tone="secondary" className="text-xs text-amber-900 leading-relaxed">
                                 {entry.tradeoff?.sacrificed || entry.rejectedAlternative}
                               </Text>
                             </div>
@@ -405,28 +405,28 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
                         {/* 5. Verified Outcome & Engineering Takeaway */}
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-neutral-900 shrink-0" aria-hidden="true" />
-                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold">
+                            <span className="w-2 h-2 rounded-full bg-indigo-600 shrink-0" aria-hidden="true" />
+                            <Text variant="caption" tone="muted" className="font-mono uppercase tracking-wider text-[11px] font-semibold text-slate-700">
                               05 / Outcome & Carry-Forward Lesson
                             </Text>
                           </div>
 
-                          <div className="p-4 rounded-sm bg-white border border-neutral-200/80 space-y-2.5 shadow-micro">
+                          <div className="p-4 rounded-xl bg-white border border-slate-200/80 space-y-2.5 shadow-micro">
                             <div>
-                              <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider block mb-1">
+                              <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block mb-1">
                                 Outcome & Result
                               </span>
-                              <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-800 leading-relaxed">
+                              <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                                 {entry.outcome}
                               </Text>
                             </div>
 
                             {entry.lesson && (
-                              <div className="pt-2 border-t border-neutral-100">
-                                <span className="text-[11px] font-mono text-brand-lavender font-semibold uppercase tracking-wider block mb-1">
+                              <div className="pt-2 border-t border-slate-100">
+                                <span className="text-[11px] font-mono text-purple-700 font-semibold uppercase tracking-wider block mb-1">
                                   Engineering Principle Learned
                                 </span>
-                                <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-800 leading-relaxed">
+                                <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                                   {entry.lesson}
                                 </Text>
                               </div>
@@ -436,16 +436,16 @@ export function HowIBuildSection({ className = '' }: HowIBuildSectionProps) {
 
                         {/* 6. Reciprocal Evidence Link: Decision → Project Universe */}
                         {hasValidSlug && (
-                          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-neutral-200/70">
-                            <div className="text-xs font-mono text-neutral-500">
+                          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-200/80">
+                            <div className="text-xs font-mono text-slate-600">
                               <span>Origin Project: </span>
-                              <span className="font-semibold text-neutral-900">{entry.projectTitle}</span>
+                              <span className="font-semibold text-slate-900">{entry.projectTitle}</span>
                             </div>
 
                             <Link
                               to={`/projects/${entry.projectSlug}`}
                               onClick={(e) => handleProjectLink(e, entry.projectSlug!)}
-                              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-mono font-medium transition-colors shadow-micro self-start sm:self-auto cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+                              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-mono font-medium transition-colors shadow-xs self-start sm:self-auto cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                             >
                               <span>Inspect {entry.projectTitle} Case Study</span>
                               <Icon name="arrow-right" size="xs" />

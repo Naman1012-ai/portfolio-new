@@ -26,16 +26,16 @@ export function IdentityReveal({
       }`}
     >
       {/* Category track mark */}
-      <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-neutral-400 mb-2 sm:mb-3">
+      <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-neutral-400/80 mb-2 sm:mb-3">
         SOFTWARE &bull; SYSTEMS &bull; AI/ML
       </div>
 
-      {/* Monumental two-line editorial name */}
-      <div className="flex flex-col items-center justify-center leading-none tracking-[0.16em] sm:tracking-[0.24em] lg:tracking-[0.28em] font-black uppercase font-sans text-white">
-        <span className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl drop-shadow-xl">
+      {/* Monumental two-line editorial name with increased transparency for background visibility */}
+      <div className="flex flex-col items-center justify-center leading-none tracking-[0.16em] sm:tracking-[0.24em] lg:tracking-[0.28em] font-black uppercase font-sans">
+        <span className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-white/65 drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
           NAMAN
         </span>
-        <span className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl mt-1 sm:mt-2 text-neutral-200 drop-shadow-xl">
+        <span className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl mt-1 sm:mt-2 text-white/55 drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
           PRAJAPATI
         </span>
       </div>

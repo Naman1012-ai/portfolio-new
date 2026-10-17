@@ -151,7 +151,7 @@ export function verifyStickyHeaderAndMobileMenu(): { passed: boolean; message: s
     return { passed: false, message: 'Open MobileMenu must render the dropdown panel with id="header-mobile-menu-panel"' }
   }
 
-  // C. Verify MobileMenu contains ONLY the perspective buttons (Explore, Engineering, Product)
+  // C. Verify MobileMenu contains the perspective buttons (Explore, Engineering, Product)
   const expectedPerspectiveButtons = ['Explore', 'Engineering', 'Product']
   for (const btn of expectedPerspectiveButtons) {
     if (!openMenuMarkup.includes(btn)) {
@@ -162,14 +162,19 @@ export function verifyStickyHeaderAndMobileMenu(): { passed: boolean; message: s
     }
   }
 
-  // Verify MobileMenu does NOT contain page links (these are kept permanently in header nav)
+  // D. Verify MobileMenu contains all navigation items for mobile accessibility
   for (const item of navigationItems) {
-    if (openMenuMarkup.includes(`href="${item.href}"`)) {
+    if (!openMenuMarkup.includes(`href="${item.href}"`) || !openMenuMarkup.includes(item.label)) {
       return {
         passed: false,
-        message: `MobileMenu dropdown panel must not contain page link for ${item.label}; nav links must be permanent in header`,
+        message: `MobileMenu dropdown panel must contain mobile navigation link for ${item.label}`,
       }
     }
+  }
+
+  // E. Verify MobileMenu contains ResumeAction
+  if (!openMenuMarkup.includes('data-testid="resume-action"')) {
+    return { passed: false, message: 'Open MobileMenu must contain ResumeAction' }
   }
 
   // --- 4. Task 4: Header sticky positioning, height preservation & permanent nav links ---

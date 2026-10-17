@@ -129,17 +129,17 @@ export function ProjectShelf({
                 {badgeText}
               </Badge>
             )}
-            <span className="text-xs font-mono text-neutral-400">
+            <span className="text-xs font-mono text-slate-500">
               {projects.length} {projects.length === 1 ? 'Project' : 'Projects'}
             </span>
           </div>
 
-          <Heading as="h3" variant="h2" id={`shelf-heading-${id}`} className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
+          <Heading as="h3" variant="h2" id={`shelf-heading-${id}`} className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {title}
           </Heading>
 
           {subtitle && (
-            <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+            <Text variant="bodySm" tone="secondary" className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               {subtitle}
             </Text>
           )}
@@ -160,7 +160,7 @@ export function ProjectShelf({
               disabled={!canScrollLeft}
               aria-label={`Scroll ${title} left`}
               data-testid={`shelf-prev-${id}`}
-              className="p-2 rounded-sm border border-neutral-200 bg-white text-neutral-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 disabled:opacity-30 disabled:cursor-not-allowed hover:not-disabled:bg-neutral-100 hover:not-disabled:text-neutral-900 hover:not-disabled:border-neutral-300 shadow-micro cursor-pointer"
+              className="p-2 rounded-full border border-slate-200/90 bg-white text-slate-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed hover:not-disabled:bg-slate-50 hover:not-disabled:text-slate-950 hover:not-disabled:border-slate-300 shadow-xs cursor-pointer"
             >
               <Icon name="chevron-left" size="sm" />
             </button>
@@ -171,7 +171,7 @@ export function ProjectShelf({
               disabled={!canScrollRight}
               aria-label={`Scroll ${title} right`}
               data-testid={`shelf-next-${id}`}
-              className="p-2 rounded-sm border border-neutral-200 bg-white text-neutral-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 disabled:opacity-30 disabled:cursor-not-allowed hover:not-disabled:bg-neutral-100 hover:not-disabled:text-neutral-900 hover:not-disabled:border-neutral-300 shadow-micro cursor-pointer"
+              className="p-2 rounded-full border border-slate-200/90 bg-white text-slate-700 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed hover:not-disabled:bg-slate-50 hover:not-disabled:text-slate-950 hover:not-disabled:border-slate-300 shadow-xs cursor-pointer"
             >
               <Icon name="chevron-right" size="sm" />
             </button>
@@ -190,7 +190,7 @@ export function ProjectShelf({
           data-testid={`shelf-track-${id}`}
           data-can-scroll-left={canScrollLeft}
           data-can-scroll-right={canScrollRight}
-          className="flex gap-5 sm:gap-6 overflow-x-auto pb-5 pt-1 px-1 shelf-scrollbar scroll-smooth motion-reduce:scroll-auto focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-400/50 rounded-sm"
+          className="flex gap-5 sm:gap-6 overflow-x-auto pb-5 pt-1 px-1 shelf-scrollbar scroll-smooth motion-reduce:scroll-auto focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400/50 rounded-sm"
         >
           {projects.map((project) => (
             <div key={project.id} className={`${cardWidthClass} flex flex-col`}>
@@ -199,7 +199,7 @@ export function ProjectShelf({
           ))}
         </div>
       ) : (
-        <div className="p-8 text-center bg-white border border-neutral-200 rounded-sm text-neutral-500 font-mono text-xs">
+        <div className="p-8 text-center bg-white border border-slate-200/80 rounded-xl text-slate-600 font-mono text-xs shadow-subtle">
           {emptyMessage}
         </div>
       )}

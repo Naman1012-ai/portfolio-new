@@ -18,7 +18,7 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
     <Card
       variant="outlined"
       padding="md"
-      className={`border-slate-200/90 bg-white/95 shadow-xs rounded-2xl space-y-5 ${className}`}
+      className={`border-slate-200/90 bg-white shadow-elevated rounded-2xl space-y-5 ${className}`}
     >
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
@@ -39,17 +39,17 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
         {/* 1. Academic Record */}
         <div className="flex flex-col justify-between p-4 bg-slate-50/80 border border-slate-200/80 rounded-xl space-y-3 transition-colors duration-200 hover:border-slate-300">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold block mb-1">
               01 / Academic Record
             </span>
-            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-950">
+            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-900">
               The NorthCap University
             </Heading>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
               9.4 first-year CGPA in Computer Science & Engineering (AI & ML).
             </p>
           </div>
-          <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between">
+          <div className="pt-2 border-t border-slate-200/80 flex items-center justify-between">
             <span className="text-[11px] font-mono text-slate-500">
               Record available on request
             </span>
@@ -59,22 +59,22 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
         {/* 2. Industry Internship */}
         <div className="flex flex-col justify-between p-4 bg-slate-50/80 border border-slate-200/80 rounded-xl space-y-3 transition-colors duration-200 hover:border-slate-300 group">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold block mb-1">
               02 / Internship
             </span>
-            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-950">
+            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-900">
               InAmigos Foundation
             </Heading>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
               Web Development Internship: developed responsive NGO dummy portal and documentation.
             </p>
           </div>
-          <div className="pt-2 border-t border-slate-200/60 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <div className="pt-2 border-t border-slate-200/80 flex flex-wrap items-center gap-x-3 gap-y-1">
             <a
               href="https://github.com/Naman1012-ai/Foundation_dummy_website"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-slate-700 hover:text-slate-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-xs"
+              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-indigo-600 hover:text-indigo-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-xs"
               aria-label="View InAmigos Foundation website prototype repository (opens in new tab)"
             >
               <span>Deliverable code</span>
@@ -84,12 +84,12 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
                 className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
               />
             </a>
-            <span className="text-slate-300 text-xs">·</span>
+            <span className="text-slate-400 text-xs">·</span>
             <a
               href="https://inamigosfoundation.org.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-slate-700 hover:text-slate-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-xs"
+              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-slate-500 hover:text-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-xs"
               aria-label="Visit InAmigos Foundation organization website (opens in new tab)"
             >
               <span>Organization website</span>
@@ -105,22 +105,22 @@ export function CredentialsCard({ className = '' }: CredentialsCardProps) {
         {/* 3. Source Repositories */}
         <div className="flex flex-col justify-between p-4 bg-slate-50/80 border border-slate-200/80 rounded-xl space-y-3 transition-colors duration-200 hover:border-slate-300 group">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold block mb-1">
               03 / Source Code
             </span>
-            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-950">
+            <Heading as="h4" variant="h4" className="text-sm font-bold text-slate-900">
               GitHub Repositories
             </Heading>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
               Public project repositories, commit histories, tests, and documentation.
             </p>
           </div>
-          <div className="pt-2 border-t border-slate-200/60">
+          <div className="pt-2 border-t border-slate-200/80">
             <a
               href="https://github.com/Naman1012-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-700 group-hover:text-slate-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-xs"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-indigo-600 group-hover:text-indigo-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-xs"
               aria-label="View Naman Prajapati's GitHub repositories (opens in new tab)"
             >
               <span>View repositories</span>

@@ -12,18 +12,21 @@ export function PortraitReveal({ phase = 'identity', isTransforming = false }: P
   const isDistorting = phase === 'distortion'
   const isEarlyIdentity = phase === 'identity' || phase === 'portrait'
 
-  let opacityClass = 'opacity-20'
-  let filterClass = 'brightness-75 contrast-105'
+  let opacityClass = 'opacity-85'
+  let filterClass = 'brightness-100 contrast-105'
 
   if (isTransforming) {
     opacityClass = 'opacity-0'
     filterClass = 'brightness-50 blur-sm'
+  } else if (phase === 'silence' || phase === 'signal') {
+    opacityClass = 'opacity-0'
+    filterClass = 'brightness-75'
   } else if (isEarlyIdentity) {
-    opacityClass = 'opacity-35'
-    filterClass = 'brightness-85 contrast-110'
+    opacityClass = 'opacity-75'
+    filterClass = 'brightness-95 contrast-105'
   } else if (isDistorting) {
-    opacityClass = 'opacity-50'
-    filterClass = 'brightness-95 contrast-125'
+    opacityClass = 'opacity-90'
+    filterClass = 'brightness-105 contrast-125'
   }
 
   return (
@@ -32,10 +35,10 @@ export function PortraitReveal({ phase = 'identity', isTransforming = false }: P
       aria-hidden="true"
     >
       {/* Aspect-controlled portrait frame */}
-      <div className="relative w-[280px] h-[360px] sm:w-[340px] sm:h-[440px] md:w-[400px] md:h-[500px] max-w-[90vw] max-h-[75vh]">
+      <div className="relative w-[300px] h-[380px] sm:w-[380px] sm:h-[480px] md:w-[440px] md:h-[560px] max-w-[92vw] max-h-[80vh]">
         
-        {/* Base Layer: Authentic photograph with gentle editorial vignette */}
-        <div className={`w-full h-full relative overflow-hidden rounded-md border border-white/5 ${filterClass}`}>
+        {/* Base Layer: Authentic photograph with clear editorial lighting */}
+        <div className={`w-full h-full relative overflow-hidden rounded-2xl border border-white/10 ${filterClass}`}>
           <img
             src={portraitUrl}
             alt=""
@@ -43,8 +46,8 @@ export function PortraitReveal({ phase = 'identity', isTransforming = false }: P
             loading="eager"
           />
 
-          {/* Deep dark gradient overlay around edges to blend naturally with #050505 */}
-          <div className="absolute inset-0 bg-radial from-transparent via-black/45 to-[#050505]" />
+          {/* Gentle vignette around outer boundary only, keeping face crisp and clear */}
+          <div className="absolute inset-0 bg-radial from-transparent via-transparent to-[#050505]/60" />
         </div>
 
         {/* Cinematic Horizontal Slices (active during distortion pulse) */}

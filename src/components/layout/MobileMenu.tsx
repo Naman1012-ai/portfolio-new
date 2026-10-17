@@ -4,6 +4,8 @@ import {
   type MouseEvent,
 } from 'react'
 import { PerspectiveSwitcher } from '@/components/common/PerspectiveSwitcher'
+import { ResumeAction } from '@/components/common/ResumeAction'
+import { navigationItems } from '@/data'
 
 export interface MobileMenuProps {
   isOpen: boolean
@@ -19,6 +21,9 @@ export function MobileMenu({
   isOpen,
   onToggle,
   onClose,
+  onNavClick,
+  currentRoute = 'home',
+  isResumeAvailableOverride,
   className = '',
 }: MobileMenuProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -81,8 +86,8 @@ export function MobileMenu({
         aria-expanded={isOpen}
         aria-controls="header-mobile-menu-panel"
         onClick={onToggle}
-        className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xs text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 cursor-pointer"
-        title={isOpen ? 'Close perspective menu' : 'Open perspective menu'}
+        className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-slate-700 hover:text-slate-950 bg-slate-100 hover:bg-slate-200/90 border border-slate-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 cursor-pointer shadow-xs"
+        title={isOpen ? 'Close mobile menu' : 'Open mobile menu'}
       >
         {isOpen ? (
           /* Close Icon */
@@ -118,19 +123,70 @@ export function MobileMenu({
         )}
       </button>
 
-      {/* Anchored Dropdown Panel containing ONLY the buttons from the image */}
+      {/* Anchored Dropdown Panel containing Navigation, Resume, and Perspective */}
       {isOpen && (
         <div
           id="header-mobile-menu-panel"
           ref={panelRef}
           role="region"
-          aria-label="Perspective Menu"
-          className="absolute right-0 top-full mt-2 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-elevated rounded-md p-1.5 z-50 animate-fade-in motion-reduce:animate-none"
+          aria-label="Navigation and Perspective Menu"
+          className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-white/95 backdrop-blur-2xl border border-slate-200/90 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.15)] rounded-2xl p-4 z-50 animate-fade-in motion-reduce:animate-none space-y-4"
         >
-          <PerspectiveSwitcher
-            variant="header"
-            onSelect={onClose}
-          />
+          {/* Section 1: Navigation Links */}
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-2 px-2">
+              Navigation
+            </div>
+            <ul className="flex flex-col gap-1 text-sm font-medium text-slate-700">
+              {navigationItems.map((item) => {
+                const resolvedHref = item.href.startsWith('/')
+                  ? item.href
+                  : currentRoute === 'home'
+                    ? item.href
+                    : `/${item.href}`
+
+                return (
+                  <li key={item.label}>
+                    <a
+                      href={resolvedHref}
+                      onClick={(e) => {
+                        onNavClick?.(item.href, e)
+                        onClose()
+                      }}
+                      className="flex items-center justify-between w-full px-3 py-2.5 rounded-xl hover:bg-slate-100 hover:text-slate-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                    >
+                      <span>{item.label}</span>
+                      <span className="text-slate-400 text-xs font-mono">→</span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+
+          {/* Section 2: Resume Action */}
+          <div className="pt-3 border-t border-slate-200 flex flex-col gap-1.5">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500 px-2">
+              Credentials
+            </div>
+            <ResumeAction
+              variant="header"
+              isAvailableOverride={isResumeAvailableOverride}
+              className="w-full justify-center py-2.5"
+            />
+          </div>
+
+          {/* Section 3: Perspective Lenses */}
+          <div className="pt-3 border-t border-slate-200">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-2 px-2">
+              Audience Lens
+            </div>
+            <PerspectiveSwitcher
+              variant="header"
+              onSelect={onClose}
+              className="w-full justify-between"
+            />
+          </div>
         </div>
       )}
     </div>
